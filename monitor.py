@@ -5,9 +5,10 @@
 관심 단지의 신규 거래를 감지해 텔레그램으로 알리고 state.json에 누적 기록한다.
 
 사용법:
-    python monitor.py              # 조회 → 신규 감지 → 알림 → state/대시보드 갱신
-    python monitor.py --dry-run    # 알림/저장 없이 감지 결과만 출력
-    python monitor.py --no-notify  # 알림 없이 저장만
+    python monitor.py                # 조회 → 신규 감지 → 알림 → state/대시보드 갱신
+    python monitor.py --dry-run      # 알림/저장 없이 감지 결과만 출력
+    python monitor.py --no-notify    # 알림 없이 저장만
+    python monitor.py --backfill 24  # 과거 24개월치 데이터를 한 번에 수집(알림 없음)
 """
 import argparse
 import json
@@ -286,6 +287,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true", help="알림/저장 없이 감지만")
     ap.add_argument("--no-notify", action="store_true", help="알림 없이 저장만")
+    ap.add_argument("--backfill", type=int, metavar="N",
+                    help="이번 달 포함 과거 N개월치를 한 번에 수집 (알림 없음)")
     args = ap.parse_args()
 
     load_env()
@@ -294,7 +297,10 @@ def main():
         sys.exit("MOLIT_API_KEY가 없습니다. .env 또는 환경변수로 설정하세요.")
 
     cfg = load_config()
-    months = target_months(datetime.now(KST), int(cfg["options"].get("months_back", 1)))
+    months_back = args.backfill if args.backfill else int(cfg["options"].get("months_back", 1))
+    months = target_months(datetime.now(KST), months_back)
+    if args.backfill:
+        print(f"백필 모드: {months[-1]} ~ {months[0]} ({len(months)}개월) 수집, 알림 없음")
 
     first_run = not STATE_PATH.exists()
     state = {"deals": {}}
@@ -347,6 +353,8 @@ def main():
 
     if first_run:
         print("ℹ 최초 실행: 기존 거래를 기준선으로 저장만 하고 알림은 보내지 않습니다.")
+    elif args.backfill:
+        print(f"ℹ 백필: 신규 {len(new_deals)}건을 알림 없이 저장합니다.")
     elif messages and not (args.dry_run or args.no_notify):
         send_telegram(messages)
     elif messages:
