@@ -3,14 +3,18 @@
 # match: 단지명 부분일치 키워드 / areas: 전용면적 ㎡ 정수 대역(생략 시 전체)
 
 complexes:
-  - name: "수지삼성2차(28평)"
-    region: "경기도 용인시 수지구"
-    match: ["수지삼성2차"]
-    areas: [95]
   - name: "신정7단지상록(24평)"
     region: "경기도 용인시 수지구"
     match: ["신정7단지상록"]
     areas: [81]
+  - name: "수지삼성2차(28평)"
+    region: "경기도 용인시 수지구"
+    match: ["수지삼성2차"]
+    areas: [95]
+  - name: "이매삼성(27평)"
+    region: "경기도 성남시 분당구"
+    match: ["이매삼성"]
+    areas: [91]
 
 options:
   months_back: 1
