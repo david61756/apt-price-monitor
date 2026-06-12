@@ -46,7 +46,10 @@ complexes:
   전국 시군구 매핑은 [sgg_codes.json](sgg_codes.json)에 내장되어 있습니다(행정표준코드관리시스템 기준).
 - 같은 이름의 시군구가 여러 곳이면(예: 고성군) 시도명을 포함해 쓰거나 `lawd_cd`를 직접 지정하세요.
 
-## 3. 텔레그램 봇 토큰 / chat_id 발급법
+## 3. (선택) 텔레그램 봇 토큰 / chat_id 발급법
+
+> 텔레그램 알림이 필요 없으면 이 섹션은 건너뛰어도 됩니다.
+> 토큰을 설정하지 않으면 알림 없이 기록·대시보드 갱신만 수행합니다.
 
 ### 봇 토큰 발급
 
@@ -68,13 +71,13 @@ complexes:
 ## 4. GitHub Actions 자동 실행 설정
 
 1. 이 폴더를 GitHub 저장소로 푸시
-2. 저장소 **Settings → Secrets and variables → Actions → New repository secret**에서 3개 등록:
+2. 저장소 **Settings → Secrets and variables → Actions → New repository secret**에서 등록:
 
-   | Secret 이름 | 값 |
-   |---|---|
-   | `MOLIT_API_KEY` | 공공데이터포털 일반 인증키(Decoding) |
-   | `TELEGRAM_BOT_TOKEN` | 봇 토큰 |
-   | `TELEGRAM_CHAT_ID` | chat_id |
+   | Secret 이름 | 값 | 필수 |
+   |---|---|---|
+   | `MOLIT_API_KEY` | 공공데이터포털 일반 인증키(Decoding) | ✅ |
+   | `TELEGRAM_BOT_TOKEN` | 봇 토큰 | 선택 |
+   | `TELEGRAM_CHAT_ID` | chat_id | 선택 |
 
 3. **Actions 탭**에서 워크플로를 한 번 수동 실행(`Run workflow`)해 기준선을 만들어 두면 좋습니다
 4. 이후 매일 **오전 9시(KST)** 자동 실행됩니다
