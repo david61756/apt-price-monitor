@@ -7,6 +7,10 @@ complexes:
     region: "경기도 용인시 수지구"
     match: ["수지삼성2차"]
     areas: [95]
+  - name: "신정7단지상록(24평)"
+    region: "경기도 용인시 수지구"
+    match: ["신정7단지상록"]
+    areas: [81]
 
 options:
   months_back: 1
