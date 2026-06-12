@@ -1,24 +1,21 @@
-# 관심 단지 설정
-#
-# 각 단지 항목:
-#   name:    표시용 이름 (필수)
-#   region:  시군구명 — 법정동코드 5자리로 자동 변환 (예: "인천 연수구", "서울 종로구")
-#   lawd_cd: 법정동코드 5자리 직접 지정 (region 대신 사용 가능)
-#   match:   단지명(aptNm) 부분일치 키워드 목록. 생략하면 name으로 매칭
-#   areas:   전용면적 필터(㎡ 정수 대역). [84]면 84.0~84.99㎡만. 생략하면 전체 면적
+# 관심 단지 설정 — 대시보드 '단지 관리' 탭에서 생성됨
+# region: 시군구명(자동 변환) / lawd_cd: 법정동코드 5자리 직접 지정
+# match: 단지명 부분일치 키워드 / areas: 전용면적 ㎡ 정수 대역(생략 시 전체)
 
 complexes:
-  - name: 송도더샵 (전용 84)
-    region: 인천 연수구
-    match: ["송도더샵"]        # "송도더샵파크애비뉴", "송도더샵마스터뷰..." 등 모두 매칭
-    areas: [84]
-
-  # 예시 — 필요 시 주석 해제/수정해서 추가
-  # - name: 잠실엘스
-  #   region: 서울 송파구
-  #   match: ["잠실엘스"]
-  #   areas: [59, 84]
+  - name: "신정7단지상록(24평)"
+    region: "경기도 용인시 수지구"
+    match: ["신정7단지상록"]
+    areas: [81]
+  - name: "수지삼성2차(28평)"
+    region: "경기도 용인시 수지구"
+    match: ["수지삼성2차"]
+    areas: [95]
+  - name: "이매삼성(27평)"
+    region: "경기도 성남시 분당구"
+    match: ["이매삼성"]
+    areas: [91]
 
 options:
-  months_back: 1            # 이번 달 + 과거 N개월 조회 (신고 지연 대비)
-  notify_cancellations: true  # 거래 해제(취소)도 알림
+  months_back: 1
+  notify_cancellations: true
