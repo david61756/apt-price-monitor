@@ -30,14 +30,15 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 130000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2630029679": {
    "article_no": "2630029679",
@@ -68,14 +69,15 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 115000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2627079155": {
    "article_no": "2627079155",
@@ -106,14 +108,15 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 130000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2630216899": {
    "article_no": "2630216899",
@@ -144,14 +147,15 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 120000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2627693874": {
    "article_no": "2627693874",
@@ -182,14 +186,15 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 120000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2631709328": {
    "article_no": "2631709328",
@@ -220,14 +225,15 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 175000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2631777768": {
    "article_no": "2631777768",
@@ -258,14 +264,15 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 175000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2631636006": {
    "article_no": "2631636006",
@@ -296,14 +303,15 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 175000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2631268826": {
    "article_no": "2631268826",
@@ -334,14 +342,15 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 175000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2630774895": {
    "article_no": "2630774895",
@@ -372,14 +381,15 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 175000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2630542431": {
    "article_no": "2630542431",
@@ -410,14 +420,15 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 175000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2630159843": {
    "article_no": "2630159843",
@@ -448,14 +459,15 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 175000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2630427659": {
    "article_no": "2630427659",
@@ -486,14 +498,15 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 175000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2630036730": {
    "article_no": "2630036730",
@@ -524,14 +537,15 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 175000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2629848883": {
    "article_no": "2629848883",
@@ -562,14 +576,15 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 175000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2629499406": {
    "article_no": "2629499406",
@@ -600,14 +615,15 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 175000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2627799193": {
    "article_no": "2627799193",
@@ -638,14 +654,15 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 175000
     }
-   ]
+   ],
+   "last_miss_date": null
   },
   "2627742362": {
    "article_no": "2627742362",
@@ -676,30 +693,31 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-14T00:53:50+09:00",
+   "last_seen": "2026-06-14T01:35:28+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-06-14",
      "price": 175000
     }
-   ]
+   ],
+   "last_miss_date": null
   }
  },
  "collected": {
   "신정7단지(상록) 전용59㎡(24평)": {
-   "last_ok": "2026-06-14T00:53:50+09:00",
+   "last_ok": "2026-06-14T01:35:28+09:00",
    "active_cnt": 0
   },
   "이매촌삼성 전용73㎡(27평)": {
-   "last_ok": "2026-06-14T00:53:50+09:00",
+   "last_ok": "2026-06-14T01:35:28+09:00",
    "active_cnt": 13
   },
   "수지삼성2차 전용74㎡(28평)": {
-   "last_ok": "2026-06-14T00:53:50+09:00",
+   "last_ok": "2026-06-14T01:35:28+09:00",
    "active_cnt": 5
   }
  },
  "tracking_since": "2026-06-14",
- "last_run": "2026-06-14T00:53:50+09:00"
+ "last_run": "2026-06-14T01:35:28+09:00"
 }

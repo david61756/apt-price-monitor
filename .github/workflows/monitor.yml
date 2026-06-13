@@ -44,5 +44,6 @@ jobs:
             echo "변경 없음 — 커밋 생략"
           else
             git commit -m "chore: 실거래 데이터 갱신 ($(TZ=Asia/Seoul date +'%Y-%m-%d %H:%M KST'))"
-            git push
+            # 로컬 호가 커밋과의 경쟁(non-fast-forward) 대비 재시도
+            git push || { git pull --rebase --autostash && git push; }
           fi

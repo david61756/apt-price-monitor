@@ -43,5 +43,5 @@ jobs:
             echo "변경 없음 — 커밋 생략"
           else
             git commit -m "chore: 과거 ${{ github.event.inputs.months }}개월 데이터 백필"
-            git push
+            git push || { git pull --rebase --autostash && git push; }
           fi

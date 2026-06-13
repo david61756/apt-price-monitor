@@ -120,14 +120,29 @@ chk("부분 0건 -> EMPTY_SUSPECT", any(e[0] == "EMPTY_SUSPECT" for e in ev2))
 chk("부분 0건 -> B 매물 보존(miss 안 올림)",
     quotes2["B1"]["status"] == "active" and quotes2["B1"]["miss_count"] == 0)
 
-# 9) 전역 차단 가드: 직전 active 10건인데 이번 1건(<20%) -> BLOCKED_SUSPECT, 저장 None
+# 9) 전역 차단 가드: 직전 active 10건인데 이번 전체 0건 -> BLOCKED_SUSPECT, 저장 None
 stG = {"schema": 1, "quotes": {}, "collected": {}}
 many = pf([raw(f"G{i}", "13억", floor=str(i)) for i in range(10)], COMPLEXES[0])
 q.reconcile(stG, {COMPLEXES[0]["name"]: many}, {COMPLEXES[0]["name"]}, t0)
-res, ev3 = q.reconcile(
-    stG, {COMPLEXES[0]["name"]: pf([raw("G0", "13억", floor="0")], COMPLEXES[0])},
-    {COMPLEXES[0]["name"]}, t0 + timedelta(days=1))
-chk("급감 -> BLOCKED_SUSPECT & None", res is None and ev3[0][0] == "BLOCKED_SUSPECT")
-chk("급감 시 기존 10건 보존", len(stG["quotes"]) == 10)
+res, ev3 = q.reconcile(stG, {COMPLEXES[0]["name"]: []},
+                       {COMPLEXES[0]["name"]}, t0 + timedelta(days=1))
+chk("전체 0건 -> BLOCKED_SUSPECT & None", res is None and ev3[0][0] == "BLOCKED_SUSPECT")
+chk("전체 0건 시 기존 10건 보존", len(stG["quotes"]) == 10)
+
+# 9b) 부분 급감(10->1)은 차단하지 않고, 미관측분은 하루 miss=1 -> 아직 GONE 아님(2일 디바운스)
+stP = {"schema": 1, "quotes": {}, "collected": {}}
+q.reconcile(stP, {COMPLEXES[0]["name"]:
+            pf([raw(f"G{i}", "13억", floor=str(i)) for i in range(10)], COMPLEXES[0])},
+            {COMPLEXES[0]["name"]}, t0)
+res2, _ = q.reconcile(stP, {COMPLEXES[0]["name"]: pf([raw("G0", "13억", floor="0")], COMPLEXES[0])},
+                      {COMPLEXES[0]["name"]}, t0 + timedelta(days=1))
+chk("부분급감은 차단 안 함(저장 진행)", res2 is not None)
+chk("부분급감 미관측분 miss=1·active 유지",
+    stP["quotes"]["G5"]["status"] == "active" and stP["quotes"]["G5"]["miss_count"] == 1)
+
+# 9c) 같은 날 두 번 실행해도 miss는 1만 증가(날짜 단위 집계)
+q.reconcile(stP, {COMPLEXES[0]["name"]: pf([raw("G0", "13억", floor="0")], COMPLEXES[0])},
+            {COMPLEXES[0]["name"]}, t0 + timedelta(days=1, hours=2))
+chk("같은 날 재실행 miss 그대로 1", stP["quotes"]["G5"]["miss_count"] == 1)
 
 print("\n✅ 모든 테스트 통과")

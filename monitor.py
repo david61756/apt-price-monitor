@@ -149,8 +149,11 @@ def _parse_item(item, lawd_cd):
 
     try:
         amount = int(g("dealAmount").replace(",", "") or 0)
-        date = "{:04d}-{:02d}-{:02d}".format(
-            int(g("dealYear")), int(g("dealMonth")), int(g("dealDay")))
+        if amount <= 0:                       # 빈/0원 신고 → 드롭(0 분모 ZeroDivision 방지)
+            return None
+        # datetime으로 달력상 유효성까지 검증('2025-01-32' 같은 무효 날짜 드롭)
+        date = datetime(int(g("dealYear")), int(g("dealMonth")),
+                        int(g("dealDay"))).strftime("%Y-%m-%d")
         area = float(g("excluUseAr") or 0)
     except ValueError:
         return None
@@ -198,7 +201,7 @@ def find_prev_deal(all_deals, rec):
         and not d.get("cancelled")
         and d["date"] < rec["date"]
     ]
-    return max(candidates, key=lambda d: d["date"]) if candidates else None
+    return max(candidates, key=lambda d: (d["date"], d["amount"])) if candidates else None
 
 
 # -------------------------------------------------------------- 알림 포맷

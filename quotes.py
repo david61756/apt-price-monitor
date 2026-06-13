@@ -91,7 +91,7 @@ def parse_article(raw, complex_name, lawd_cd):
         "confirm_ymd": raw.get("articleConfirmYmd") or "",
         "same_addr_cnt": int(raw.get("sameAddrCnt") or 1),
     }
-    if not rec["article_no"]:
+    if not rec["article_no"] or rec["area"] <= 0:    # 식별불가/면적결측 매물 드롭
         return None
     rec["unit_key"], rec["unit_key_confident"] = make_unit_key(rec)
     return rec
@@ -113,7 +113,7 @@ def guess_relist(rec, quotes):
     for an, q in quotes.items():
         if (q.get("unit_key") == rec["unit_key"]
                 and q.get("article_no") != rec["article_no"]
-                and q.get("status") in ("gone", "active")
+                and q.get("status") == "gone"        # 내려간 매물만 재등록 후보(동시중복 오태깅 방지)
                 and abs(q["price"] - rec["price"]) <= q["price"] * RELIST_PRICE_TOL):
             return an
     return None
@@ -148,16 +148,17 @@ def reconcile(qstate, fetched_by_complex, scanned_complexes, now):
     total_fetched = sum(len(v) for v in fetched_by_complex.values())
     prev_active = sum(1 for q in quotes.values() if q.get("status") == "active")
 
-    # (E-3) 전역 차단 가드: 직전 active가 있는데 전체 수집이 급감 → 저장 스킵
-    if prev_active and total_fetched < prev_active * DROP_GUARD:
+    # (E-3) 전역 차단 가드: 직전 active가 있는데 이번 전체가 0건 → 세션만료 강력의심, 저장 스킵.
+    #  (부분 결손/급감은 아래 단지별 가드 + GONE 2일 디바운스가 처리하므로 전역은 '완전 붕괴'만)
+    if prev_active and total_fetched == 0:
         return None, [("BLOCKED_SUSPECT", prev_active, total_fetched)]
 
     scanned = set(scanned_complexes)
     for complex_name, recs in fetched_by_complex.items():
-        # (E-2) 직전 active≥1인데 이번 0건 → 세션만료 의심, 이 단지 GONE 판정 스킵
-        had_active = any(q.get("complex") == complex_name and q.get("status") == "active"
-                         for q in quotes.values())
-        if had_active and not recs:
+        # (E-2) 직전 active≥1인데 이번 0건 → 그 단지만 GONE 판정 제외(다른 정상 단지는 영향 없음)
+        prev_active_c = sum(1 for q in quotes.values()
+                            if q.get("complex") == complex_name and q.get("status") == "active")
+        if prev_active_c and not recs:
             scanned.discard(complex_name)
             events.append(("EMPTY_SUSPECT", complex_name))
             continue
@@ -168,7 +169,7 @@ def reconcile(qstate, fetched_by_complex, scanned_complexes, now):
             prev = quotes.get(an)
             if prev is None:                         # ── 신규 매물
                 rec.update(
-                    status="active", miss_count=0, relisted_count=0,
+                    status="active", miss_count=0, last_miss_date=None, relisted_count=0,
                     relist_of=guess_relist(rec, quotes),
                     first_seen=iso, last_seen=iso, gone_date=None,
                     price_history=[{"date": today, "price": rec["price"]}],
@@ -178,6 +179,7 @@ def reconcile(qstate, fetched_by_complex, scanned_complexes, now):
             else:                                    # ── 기존 매물
                 prev["last_seen"] = iso
                 prev["miss_count"] = 0
+                prev["last_miss_date"] = None
                 if prev.get("status") == "gone":     # 재등장
                     prev["status"] = "active"
                     prev["gone_date"] = None
@@ -198,8 +200,11 @@ def reconcile(qstate, fetched_by_complex, scanned_complexes, now):
             continue
         if an in seen:
             continue
+        if q.get("last_miss_date") == today:     # 같은 날 여러 번 실행돼도 하루 1회만 집계
+            continue
         q["miss_count"] = q.get("miss_count", 0) + 1
-        if q["miss_count"] >= GONE_THRESHOLD:
+        q["last_miss_date"] = today
+        if q["miss_count"] >= GONE_THRESHOLD:     # 서로 다른 날 GONE_THRESHOLD회 미관측 시
             q["status"] = "gone"
             q["gone_date"] = today
             events.append(("GONE", q))
