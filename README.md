@@ -216,10 +216,37 @@ python quotes_monitor.py --dry-run  # 저장 없이 감지 결과만
 ```
 
 - 처음 실행은 기준선으로 저장만 합니다. 이후 실행부터 신규/인하/소멸을 감지·알림(텔레그램 선택)합니다.
-- 결과는 `quotes_state.json`에 누적되고 대시보드 **🏷️ 호가** 탭에 표시됩니다.
-- **세션 만료·차단 방어**: 매물이 갑자기 0건이거나 급감하면 기존 데이터를 지우지 않고
-  경고만 띄웁니다(세션을 갱신하고 다시 실행).
-- 데이터를 웹 대시보드에도 반영하려면 `git add quotes_state.json docs/index.html && git commit && git push`.
+- 결과는 `quotes_state.json`에 누적되고 대시보드 **🏷️ 호가** 탭에 표시됩니다(매매 탭 카드에도 🏷️로 구분 표시).
+- **세션 만료·차단 방어**: 매물이 갑자기 0건이거나 급감하면 기존 데이터를 지우지 않고 경고만 띄웁니다.
+
+**언제 실행?** 호가는 과거 조회가 안 되고 스냅샷만 쌓이므로 **하루 1회 정도** 꾸준히 돌리는 게 좋습니다
+(자주 볼수록 변동 추적이 촘촘해짐). 아래 자동 스케줄을 걸면 신경 쓸 필요가 없습니다.
+
+**주피터에서 실행:** Playwright는 주피터의 이벤트 루프와 충돌하므로 함수를 직접 부르지 말고
+**셀에서 `!` 로 별도 프로세스 실행**하세요:
+```python
+!cd ~/apt-price-monitor && python quotes_monitor.py
+```
+(`!`를 붙이면 노트북과 분리된 프로세스로 돌아 충돌이 없습니다. 매매도 `!python monitor.py` 동일)
+
+### 7-5. 자동 스케줄 (macOS launchd) — 매일 자동 수집
+
+`run_quotes.sh`(수집→커밋→푸시)를 매일 자동 실행하도록 launchd에 등록되어 있습니다.
+
+- 스케줄 정의: `~/Library/LaunchAgents/com.aptmonitor.quotes.plist` (**매일 오전 9:10**)
+- 로그: `logs/quotes.log` (수집 결과), `logs/launchd.*.log`
+- Mac이 그 시각에 꺼져/잠들어 있었으면 **깨어난 뒤 한 번** 실행됩니다.
+
+| 작업 | 명령 |
+|---|---|
+| 지금 즉시 한 번 실행 | `launchctl start com.aptmonitor.quotes` |
+| 등록 확인 | `launchctl list \| grep aptmonitor` |
+| 시간 변경 | plist의 `Hour`/`Minute` 수정 후 아래 재등록 |
+| 끄기 | `launchctl unload ~/Library/LaunchAgents/com.aptmonitor.quotes.plist` |
+| 켜기(재등록) | `launchctl load -w ~/Library/LaunchAgents/com.aptmonitor.quotes.plist` |
+
+> 매매는 **GitHub Actions(클라우드)** 가 09:00에, 호가는 **내 Mac(launchd)** 이 09:10에 갱신합니다.
+> 둘 다 같은 `docs/index.html` 대시보드를 업데이트하며 서로 안 부딪치게 `git pull --rebase` 후 커밋합니다.
 
 ### 호가 탭 구성
 
