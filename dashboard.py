@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 
 from matching import matching_complex_name
+from quotes import quote_in_config
 
 _SGG_PATH = Path(__file__).resolve().parent / "sgg_codes.json"
 
@@ -852,7 +853,7 @@ def render_dashboard(state, cfg, out_path, quotes_state=None):
     # 호가: 현재 config에 매칭되는 매물만 표시 (관심단지에서 빠진 매물 숨김)
     qs = quotes_state or {}
     visible_quotes = [q for q in qs.get("quotes", {}).values()
-                      if matching_complex_name(q, complexes) is not None]
+                      if quote_in_config(q, complexes) is not None]
     quotes_meta = {
         "tracking_since": qs.get("tracking_since", ""),
         "last_run": qs.get("last_run", ""),

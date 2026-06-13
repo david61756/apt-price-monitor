@@ -2,6 +2,7 @@
 from datetime import datetime, timedelta, timezone
 
 import quotes as q
+from matching import match_complex
 
 KST = timezone(timedelta(hours=9))
 COMPLEXES = [{
@@ -45,7 +46,7 @@ def parse_filter(raws):
     out = []
     for rw in raws:
         rec = q.parse_article(rw, COMPLEXES[0]["name"], "41135")
-        if rec and q.match_complex(rec, COMPLEXES[0]):
+        if rec and match_complex(rec, COMPLEXES[0]):
             out.append(rec)
     return out
 
@@ -103,7 +104,7 @@ def pf(raws, cfg):
     out = []
     for rw in raws:
         rec = q.parse_article(rw, cfg["name"], cfg["lawd_cd"])
-        if rec and q.match_complex(rec, cfg):
+        if rec and match_complex(rec, cfg):
             out.append(rec)
     return out
 st2 = {"schema": 1, "quotes": {}, "collected": {}}

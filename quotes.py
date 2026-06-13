@@ -11,8 +11,6 @@ import json
 import re
 from pathlib import Path
 
-from matching import match_complex
-
 GONE_THRESHOLD = 2          # 연속 미관측 N회 이상이면 gone
 RELIST_PRICE_TOL = 0.10     # 재등록 추정 시 허용 가격 오차(±10%)
 DROP_GUARD = 0.20           # 전체 수집 수가 직전 active의 이 비율 미만이면 '차단 의심'
@@ -218,10 +216,24 @@ def reconcile(qstate, fetched_by_complex, scanned_complexes, now):
     return quotes, events
 
 
+def quote_in_config(q, complexes):
+    """호가가 현재 config의 어떤 관심단지에 속하는지(있으면 그 이름).
+
+    호가는 naver_id로 수집 시 단지를 특정해 complex 이름을 박아두므로,
+    단지명 텍스트 매칭(매매와 네이버 등록명이 다름)이 아니라
+    '그 complex 이름이 아직 config에 있고 + 전용면적이 areas에 맞는가'로 판정한다.
+    """
+    for c in complexes:
+        if q.get("complex") == c["name"]:
+            if not c["areas"] or int(float(q.get("area") or 0)) in c["areas"]:
+                return c["name"]
+    return None
+
+
 def prune_quotes(quotes, complexes):
-    """현재 config에 매칭 안 되는(관심단지에서 빠진) 매물 제거 — 매매 prune과 동형."""
+    """관심단지에서 빠졌거나 면적이 안 맞는 매물 제거 — 매매 prune과 동형."""
     return {an: q for an, q in quotes.items()
-            if any(match_complex(q, c) for c in complexes)}
+            if quote_in_config(q, complexes) is not None}
 
 
 # --------------------------------------------------------------------- state IO

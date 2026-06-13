@@ -9,9 +9,13 @@
 """
 import time
 
-import requests
+try:
+    from curl_cffi import requests as creq   # 크롬 TLS 지문 위장 (네이버 anti-bot 우회에 필요)
+    _HAS_CFFI = True
+except ImportError:
+    import requests as creq
+    _HAS_CFFI = False
 
-from matching import match_complex
 from quotes import parse_article
 
 # 단지별 매물 목록 (new.land REST). 페이지가 fin.land로 보여도 백엔드 API는 이 경로를 쓴다.
@@ -24,15 +28,65 @@ MAX_PAGES = 30          # 단지·거래유형당 안전 상한 (1page=20건)
 REQUEST_GAP = 0.7       # 요청 간 간격(초) — 예의상 저속
 
 
-def build_session():
-    """.env/환경변수에서 네이버 세션 헤더 구성. 없으면 (None, 사유)."""
+CURL_PATH = __import__("pathlib").Path(__file__).resolve().parent / "naver_curl.txt"
+
+
+def parse_curl(text):
+    """브라우저 'Copy as cURL' 문자열에서 authorization·cookie 추출. (auth, cookie)."""
+    import re
+    auth, cookie = "", ""
+    # -H 'authorization: Bearer ...' / -H "cookie: ..."
+    for m in re.finditer(r"-H\s+(['\"])(.*?)\1", text, re.S):
+        h = m.group(2)
+        k, _, v = h.partition(":")
+        k, v = k.strip().lower(), v.strip()
+        if k == "authorization":
+            auth = v
+        elif k == "cookie":
+            cookie = v
+    # -b 'cookie' (쿠키를 별도 플래그로 주는 형태)
+    if not cookie:
+        m = re.search(r"-b\s+(['\"])(.*?)\1", text, re.S)
+        if m:
+            cookie = m.group(2).strip()
+    return auth, cookie
+
+
+def token_expiry(auth):
+    """Bearer JWT의 만료 epoch(초). 파싱 실패 시 None."""
+    import base64
+    import json
+    try:
+        payload = auth.split()[-1].split(".")[1]
+        payload += "=" * (-len(payload) % 4)
+        return json.loads(base64.urlsafe_b64decode(payload)).get("exp")
+    except Exception:
+        return None
+
+
+def build_session(log=print):
+    """네이버 세션 헤더 구성. 우선순위: .env(NAVER_AUTH) → naver_curl.txt. 없으면 (None, 사유)."""
     import os
+    import time
     auth = os.environ.get("NAVER_AUTH", "").strip()
     cookie = os.environ.get("NAVER_COOKIE", "").strip()
+    # .env에 없으면 naver_curl.txt(통째로 붙여넣은 cURL)에서 추출
+    if not auth and CURL_PATH.exists():
+        auth, cookie = parse_curl(CURL_PATH.read_text(encoding="utf-8"))
+        if auth:
+            log(f"세션: {CURL_PATH.name}에서 토큰·쿠키를 읽었습니다.")
     if not auth:
-        return None, "NAVER_AUTH(Authorization Bearer 토큰)가 .env에 없습니다."
+        return None, ("네이버 세션이 없습니다. naver_curl.txt에 'Copy as cURL'을 붙여넣거나 "
+                      ".env의 NAVER_AUTH/NAVER_COOKIE를 채우세요(README 7-2 참고).")
     if not auth.lower().startswith("bearer"):
         auth = "Bearer " + auth
+    exp = token_expiry(auth)
+    if exp and exp < time.time():
+        return None, ("네이버 토큰이 만료됐습니다. 로그인된 브라우저에서 매물 요청을 "
+                      "다시 'Copy as cURL' 해 naver_curl.txt에 붙여넣으세요.")
+    if exp:
+        mins = int((exp - time.time()) / 60)
+        log(f"세션 유효: 토큰 만료까지 약 {mins}분")
     headers = {
         "authorization": auth,
         "user-agent": os.environ.get("NAVER_UA", DEFAULT_UA),
@@ -71,8 +125,9 @@ def fetch_articles(complex_no, trade_types, session, log=print):
             params = _article_params(complex_no, tt, page)
             headers = dict(session, referer=f"https://new.land.naver.com/complexes/{complex_no}")
             try:
-                r = requests.get(url, params=params, headers=headers, timeout=20)
-            except requests.RequestException as e:
+                kw = {"impersonate": "chrome"} if _HAS_CFFI else {}
+                r = creq.get(url, params=params, headers=headers, timeout=20, **kw)
+            except Exception as e:
                 log(f"    ! 요청 실패({e})")
                 ok = False
                 break
@@ -124,7 +179,9 @@ def fetch_all(cfg, session, log=print):
         recs = []
         for raw in raws:
             rec = parse_article(raw, c["name"], c["lawd_cd"])
-            if rec and match_complex(rec, c):     # 전용면적(areas) 등 관심조건 필터
+            # naver_id로 이미 단지를 특정했으므로 단지명 매칭은 불필요(네이버 등록명이 매매와 다름).
+            # 전용면적(areas)만 필터해 원하는 평형만 남긴다.
+            if rec and (not c["areas"] or int(rec["area"]) in c["areas"]):
                 recs.append(rec)
         fetched[c["name"]] = recs
         if ok:
