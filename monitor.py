@@ -78,7 +78,12 @@ def load_config():
             sys.exit(f"config.yaml: '{c['name']}'에 region 또는 lawd_cd가 필요합니다.")
         c["match"] = c.get("match") or [c["name"]]
         c["areas"] = [int(a) for a in (c.get("areas") or [])]
+        c["naver_id"] = str(c["naver_id"]).strip() if c.get("naver_id") else None
     cfg["options"] = cfg.get("options") or {}
+    naver = cfg.get("naver") or {}
+    naver.setdefault("trade_types", ["A1"])
+    naver.setdefault("notify", True)
+    cfg["naver"] = naver
     return cfg
 
 
@@ -383,7 +388,13 @@ def main():
     STATE_PATH.write_text(
         json.dumps(state, ensure_ascii=False, indent=1), encoding="utf-8")
     DASHBOARD_PATH.parent.mkdir(exist_ok=True)
-    render_dashboard(state, cfg, DASHBOARD_PATH)
+    # 호가 데이터가 있으면 함께 렌더(읽기만 — 매매 워크플로에 영향 없음)
+    try:
+        from quotes import load_quotes_state, QUOTES_PATH
+        qstate = load_quotes_state(QUOTES_PATH) if QUOTES_PATH.exists() else None
+    except Exception:
+        qstate = None
+    render_dashboard(state, cfg, DASHBOARD_PATH, quotes_state=qstate)
     print(f"state.json 저장 (관심단지 누적 {len(known)}건), 대시보드 갱신: {DASHBOARD_PATH}")
 
 

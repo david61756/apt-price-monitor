@@ -81,7 +81,8 @@
 <div id="warnBanner"></div>
 
 <div class="tabs">
-  <button id="tabBtnDash" class="active" onclick="showTab('dash')">📊 대시보드</button>
+  <button id="tabBtnDash" class="active" onclick="showTab('dash')">📊 매매 실거래</button>
+  <button id="tabBtnQuotes" onclick="showTab('quotes')">🏷️ 호가</button>
   <button id="tabBtnManage" onclick="showTab('manage')">⚙️ 단지 관리</button>
 </div>
 
@@ -105,6 +106,49 @@
                  <th>거래금액</th><th>직전대비</th><th>비고</th></tr></thead>
       <tbody id="rows"></tbody>
     </table>
+  </div>
+</div>
+
+<div id="tab-quotes" style="display:none">
+  <div id="quotesEmpty" class="section" style="display:none">
+    <h2>🏷️ 호가 데이터가 아직 없습니다</h2>
+    <div class="legend" style="line-height:1.8">
+      네이버페이 부동산 호가는 로그인된 브라우저 세션으로 수집합니다.
+      <code>python quotes_monitor.py</code> 를 한 번 실행하면 이 탭에 매물 호가가 채워집니다.
+      (단지별 <code>naver_id</code> 설정과 <code>.env</code>의 네이버 세션이 필요 — README 참고)<br>
+      ⚠ 호가는 <b>과거 조회(백필)가 불가능</b>합니다. 수집을 시작한 날부터의 스냅샷만 쌓입니다.
+    </div>
+  </div>
+  <div id="quotesBody">
+    <div id="qWarnBanner"></div>
+    <div class="cards" id="qCards"></div>
+    <div class="section">
+      <h2>호가 추이 <span class="legend" id="qTrackSince"></span></h2>
+      <select id="qGroupSel"></select>
+      <div id="qChart"></div>
+    </div>
+    <div class="section">
+      <h2>현재 호가 <span class="legend">(동일세대 묶음 — 클릭하면 중개사별 펼침)</span></h2>
+      <div class="toolbar">
+        <select id="qAptSel"></select>
+        <label style="font-size:12px;color:var(--sub)">
+          <input type="checkbox" id="qShowGone"> 내려간 매물 포함</label>
+        <span class="cnt" id="qRowCnt"></span>
+      </div>
+      <table>
+        <thead><tr><th>상태</th><th>동·층</th><th>전용(㎡)</th><th>향</th>
+                   <th>호가</th><th>직전대비</th><th>확인일</th><th>중개사</th></tr></thead>
+        <tbody id="qRows"></tbody>
+      </table>
+    </div>
+    <div class="section">
+      <h2>호가 변동·소멸 이력 <span class="legend">(최신순)</span></h2>
+      <table>
+        <thead><tr><th>날짜</th><th>단지</th><th>동·층</th><th>전용</th>
+                   <th>변동</th><th>비고</th></tr></thead>
+        <tbody id="qHistory"></tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -148,9 +192,11 @@
 
 <script>
 const DEALS = [{"apt_nm": "이매촌(삼성)", "apt_seq": "41135-92", "umd_nm": "이매동", "area": 73.25, "floor": "2", "amount": 127000, "date": "2025-06-06", "build_year": "1994", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41135", "complex": "이매촌삼성 전용73㎡(27평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "11", "amount": 81700, "date": "2025-06-07", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "10", "amount": 81900, "date": "2025-06-07", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "15", "amount": 83000, "date": "2025-06-07", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "수지삼성2차", "apt_seq": "41465-10", "umd_nm": "풍덕천동", "area": 74.1285, "floor": "5", "amount": 78000, "date": "2025-06-14", "build_year": "1995", "dealing_gbn": "중개거래", "cancelled": true, "cancel_date": "25.06.25", "lawd_cd": "41465", "complex": "수지삼성2차 전용74㎡(28평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "이매촌(삼성)", "apt_seq": "41135-92", "umd_nm": "이매동", "area": 73.25, "floor": "6", "amount": 125500, "date": "2025-06-27", "build_year": "1994", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41135", "complex": "이매촌삼성 전용73㎡(27평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "4", "amount": 82000, "date": "2025-07-05", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "이매촌(삼성)", "apt_seq": "41135-92", "umd_nm": "이매동", "area": 73.25, "floor": "5", "amount": 125000, "date": "2025-07-21", "build_year": "1994", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41135", "complex": "이매촌삼성 전용73㎡(27평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "16", "amount": 85000, "date": "2025-07-26", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "수지삼성2차", "apt_seq": "41465-10", "umd_nm": "풍덕천동", "area": 74.1285, "floor": "6", "amount": 78100, "date": "2025-08-18", "build_year": "1995", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "수지삼성2차 전용74㎡(28평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "5", "amount": 84250, "date": "2025-08-22", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "4", "amount": 82500, "date": "2025-09-13", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "10", "amount": 86000, "date": "2025-09-13", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "이매촌(삼성)", "apt_seq": "41135-92", "umd_nm": "이매동", "area": 73.25, "floor": "14", "amount": 136000, "date": "2025-09-18", "build_year": "1994", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41135", "complex": "이매촌삼성 전용73㎡(27평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "13", "amount": 89000, "date": "2025-09-19", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "2", "amount": 80000, "date": "2025-09-25", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "6", "amount": 90000, "date": "2025-09-27", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "14", "amount": 89000, "date": "2025-09-27", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "12", "amount": 91000, "date": "2025-09-28", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "7", "amount": 92000, "date": "2025-10-02", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "18", "amount": 90000, "date": "2025-10-13", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "1", "amount": 80000, "date": "2025-10-15", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "13", "amount": 96500, "date": "2025-11-26", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "13", "amount": 99500, "date": "2025-12-18", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "이매촌(삼성)", "apt_seq": "41135-92", "umd_nm": "이매동", "area": 73.25, "floor": "8", "amount": 165000, "date": "2025-12-22", "build_year": "1994", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41135", "complex": "이매촌삼성 전용73㎡(27평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "9", "amount": 100000, "date": "2025-12-23", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "16", "amount": 91500, "date": "2025-12-25", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "19", "amount": 104500, "date": "2026-01-09", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "15", "amount": 102500, "date": "2026-01-10", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "17", "amount": 103000, "date": "2026-01-11", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "수지삼성2차", "apt_seq": "41465-10", "umd_nm": "풍덕천동", "area": 74.1285, "floor": "4", "amount": 93000, "date": "2026-01-15", "build_year": "1995", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "수지삼성2차 전용74㎡(28평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "20", "amount": 104500, "date": "2026-01-21", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "7", "amount": 111000, "date": "2026-01-24", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "이매촌(삼성)", "apt_seq": "41135-92", "umd_nm": "이매동", "area": 73.25, "floor": "14", "amount": 169000, "date": "2026-02-12", "build_year": "1994", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41135", "complex": "이매촌삼성 전용73㎡(27평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "16", "amount": 109000, "date": "2026-02-14", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "이매촌(삼성)", "apt_seq": "41135-92", "umd_nm": "이매동", "area": 73.25, "floor": "5", "amount": 175000, "date": "2026-03-14", "build_year": "1994", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41135", "complex": "이매촌삼성 전용73㎡(27평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "14", "amount": 110000, "date": "2026-03-28", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "8", "amount": 114000, "date": "2026-04-07", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "13", "amount": 111800, "date": "2026-04-08", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "11", "amount": 114000, "date": "2026-04-11", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "19", "amount": 116000, "date": "2026-04-18", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "16", "amount": 110900, "date": "2026-04-21", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "2", "amount": 103000, "date": "2026-04-30", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "신정7단지(상록)공무원", "apt_seq": "41465-17", "umd_nm": "풍덕천동", "area": 59.405, "floor": "5", "amount": 111000, "date": "2026-05-12", "build_year": "2000", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41465", "complex": "신정7단지(상록) 전용59㎡(24평)", "first_seen": "2026-06-13T21:59:21+09:00"}, {"apt_nm": "이매촌(삼성)", "apt_seq": "41135-92", "umd_nm": "이매동", "area": 73.25, "floor": "1", "amount": 155000, "date": "2026-05-13", "build_year": "1994", "dealing_gbn": "중개거래", "cancelled": false, "cancel_date": "", "lawd_cd": "41135", "complex": "이매촌삼성 전용73㎡(27평)", "first_seen": "2026-06-13T21:59:21+09:00"}];
-const CONFIG = {"complexes": [{"name": "신정7단지(상록) 전용59㎡(24평)", "region": "경기도 용인시 수지구", "match": ["신정7단지"], "areas": [59]}, {"name": "수지삼성2차 전용74㎡(28평)", "region": "경기도 용인시 수지구", "match": ["수지삼성2차"], "areas": [74]}, {"name": "이매촌삼성 전용73㎡(27평)", "region": "경기도 성남시 분당구", "match": ["이매촌(삼성)"], "areas": [73]}], "options": {"months_back": 1, "notify_cancellations": true}};
+const CONFIG = {"complexes": [{"name": "신정7단지(상록) 전용59㎡(24평)", "region": "경기도 용인시 수지구", "match": ["신정7단지"], "areas": [59], "naver_id": "11231"}, {"name": "수지삼성2차 전용74㎡(28평)", "region": "경기도 용인시 수지구", "match": ["수지삼성2차"], "areas": [74], "naver_id": "2220"}, {"name": "이매촌삼성 전용73㎡(27평)", "region": "경기도 성남시 분당구", "match": ["이매촌(삼성)"], "areas": [73], "naver_id": "2493"}], "options": {"months_back": 1, "notify_cancellations": true}};
 const SGG = {"서울특별시 종로구": "11110", "서울특별시 중구": "11140", "서울특별시 용산구": "11170", "서울특별시 성동구": "11200", "서울특별시 광진구": "11215", "서울특별시 동대문구": "11230", "서울특별시 중랑구": "11260", "서울특별시 성북구": "11290", "서울특별시 강북구": "11305", "서울특별시 도봉구": "11320", "서울특별시 노원구": "11350", "서울특별시 은평구": "11380", "서울특별시 서대문구": "11410", "서울특별시 마포구": "11440", "서울특별시 양천구": "11470", "서울특별시 강서구": "11500", "서울특별시 구로구": "11530", "서울특별시 금천구": "11545", "서울특별시 영등포구": "11560", "서울특별시 동작구": "11590", "서울특별시 관악구": "11620", "서울특별시 서초구": "11650", "서울특별시 강남구": "11680", "서울특별시 송파구": "11710", "서울특별시 강동구": "11740", "부산광역시 중구": "26110", "부산광역시 서구": "26140", "부산광역시 동구": "26170", "부산광역시 영도구": "26200", "부산광역시 부산진구": "26230", "부산광역시 동래구": "26260", "부산광역시 남구": "26290", "부산광역시 북구": "26320", "부산광역시 해운대구": "26350", "부산광역시 사하구": "26380", "부산광역시 금정구": "26410", "부산광역시 강서구": "26440", "부산광역시 연제구": "26470", "부산광역시 수영구": "26500", "부산광역시 사상구": "26530", "부산광역시 기장군": "26710", "대구광역시 중구": "27110", "대구광역시 동구": "27140", "대구광역시 서구": "27170", "대구광역시 남구": "27200", "대구광역시 북구": "27230", "대구광역시 수성구": "27260", "대구광역시 달서구": "27290", "대구광역시 달성군": "27710", "대구광역시 군위군": "27720", "인천광역시 중구": "28110", "인천광역시 동구": "28140", "인천광역시 미추홀구": "28177", "인천광역시 연수구": "28185", "인천광역시 남동구": "28200", "인천광역시 부평구": "28237", "인천광역시 계양구": "28245", "인천광역시 서구": "28260", "인천광역시 강화군": "28710", "인천광역시 옹진군": "28720", "광주광역시 동구": "29110", "광주광역시 서구": "29140", "광주광역시 남구": "29155", "광주광역시 북구": "29170", "광주광역시 광산구": "29200", "대전광역시 동구": "30110", "대전광역시 중구": "30140", "대전광역시 서구": "30170", "대전광역시 유성구": "30200", "대전광역시 대덕구": "30230", "울산광역시 중구": "31110", "울산광역시 남구": "31140", "울산광역시 동구": "31170", "울산광역시 북구": "31200", "울산광역시 울주군": "31710", "경기도 수원시": "41110", "경기도 수원시 장안구": "41111", "경기도 수원시 권선구": "41113", "경기도 수원시 팔달구": "41115", "경기도 수원시 영통구": "41117", "경기도 성남시": "41130", "경기도 성남시 수정구": "41131", "경기도 성남시 중원구": "41133", "경기도 성남시 분당구": "41135", "경기도 의정부시": "41150", "경기도 안양시": "41170", "경기도 안양시 만안구": "41171", "경기도 안양시 동안구": "41173", "경기도 부천시": "41190", "경기도 부천시 원미구 ": "41192", "경기도 부천시 소사구 ": "41194", "경기도 부천시 오정구 ": "41196", "경기도 광명시": "41210", "경기도 평택시": "41220", "경기도 동두천시": "41250", "경기도 안산시": "41270", "경기도 안산시 상록구": "41271", "경기도 안산시 단원구": "41273", "경기도 고양시": "41280", "경기도 고양시 덕양구": "41281", "경기도 고양시 일산동구": "41285", "경기도 고양시 일산서구": "41287", "경기도 과천시": "41290", "경기도 구리시": "41310", "경기도 남양주시": "41360", "경기도 오산시": "41370", "경기도 시흥시": "41390", "경기도 군포시": "41410", "경기도 의왕시": "41430", "경기도 하남시": "41450", "경기도 용인시": "41460", "경기도 용인시 처인구": "41461", "경기도 용인시 기흥구": "41463", "경기도 용인시 수지구": "41465", "경기도 파주시": "41480", "경기도 이천시": "41500", "경기도 안성시": "41550", "경기도 김포시": "41570", "경기도 화성시": "41590", "경기도 화성시 만세구": "41591", "경기도 화성시 효행구": "41593", "경기도 화성시 병점구": "41595", "경기도 화성시 동탄구": "41597", "경기도 광주시": "41610", "경기도 양주시": "41630", "경기도 포천시": "41650", "경기도 여주시": "41670", "경기도 연천군": "41800", "경기도 가평군": "41820", "경기도 양평군": "41830", "충청북도 청주시": "43110", "충청북도 청주시 상당구": "43111", "충청북도 청주시 서원구": "43112", "충청북도 청주시 흥덕구": "43113", "충청북도 청주시 청원구": "43114", "충청북도 충주시": "43130", "충청북도 제천시": "43150", "충청북도 보은군": "43720", "충청북도 옥천군": "43730", "충청북도 영동군": "43740", "충청북도 증평군": "43745", "충청북도 진천군": "43750", "충청북도 괴산군": "43760", "충청북도 음성군": "43770", "충청북도 단양군": "43800", "충청남도 천안시": "44130", "충청남도 천안시 동남구": "44131", "충청남도 천안시 서북구": "44133", "충청남도 공주시": "44150", "충청남도 보령시": "44180", "충청남도 아산시": "44200", "충청남도 서산시": "44210", "충청남도 논산시": "44230", "충청남도 계룡시": "44250", "충청남도 당진시": "44270", "충청남도 금산군": "44710", "충청남도 부여군": "44760", "충청남도 서천군": "44770", "충청남도 청양군": "44790", "충청남도 홍성군": "44800", "충청남도 예산군": "44810", "충청남도 태안군": "44825", "전라남도 목포시": "46110", "전라남도 여수시": "46130", "전라남도 순천시": "46150", "전라남도 나주시": "46170", "전라남도 광양시": "46230", "전라남도 담양군": "46710", "전라남도 곡성군": "46720", "전라남도 구례군": "46730", "전라남도 고흥군": "46770", "전라남도 보성군": "46780", "전라남도 화순군": "46790", "전라남도 장흥군": "46800", "전라남도 강진군": "46810", "전라남도 해남군": "46820", "전라남도 영암군": "46830", "전라남도 무안군": "46840", "전라남도 함평군": "46860", "전라남도 영광군": "46870", "전라남도 장성군": "46880", "전라남도 완도군": "46890", "전라남도 진도군": "46900", "전라남도 신안군": "46910", "경상북도 포항시": "47110", "경상북도 포항시 남구": "47111", "경상북도 포항시 북구": "47113", "경상북도 경주시": "47130", "경상북도 김천시": "47150", "경상북도 안동시": "47170", "경상북도 구미시": "47190", "경상북도 영주시": "47210", "경상북도 영천시": "47230", "경상북도 상주시": "47250", "경상북도 문경시": "47280", "경상북도 경산시": "47290", "경상북도 의성군": "47730", "경상북도 청송군": "47750", "경상북도 영양군": "47760", "경상북도 영덕군": "47770", "경상북도 청도군": "47820", "경상북도 고령군": "47830", "경상북도 성주군": "47840", "경상북도 칠곡군": "47850", "경상북도 예천군": "47900", "경상북도 봉화군": "47920", "경상북도 울진군": "47930", "경상북도 울릉군": "47940", "경상남도 창원시": "48120", "경상남도 창원시 의창구": "48121", "경상남도 창원시 성산구": "48123", "경상남도 창원시 마산합포구": "48125", "경상남도 창원시 마산회원구": "48127", "경상남도 창원시 진해구": "48129", "경상남도 진주시": "48170", "경상남도 통영시": "48220", "경상남도 사천시": "48240", "경상남도 김해시": "48250", "경상남도 밀양시": "48270", "경상남도 거제시": "48310", "경상남도 양산시": "48330", "경상남도 의령군": "48720", "경상남도 함안군": "48730", "경상남도 창녕군": "48740", "경상남도 고성군": "48820", "경상남도 남해군": "48840", "경상남도 하동군": "48850", "경상남도 산청군": "48860", "경상남도 함양군": "48870", "경상남도 거창군": "48880", "경상남도 합천군": "48890", "제주특별자치도 제주시": "50110", "제주특별자치도 서귀포시": "50130", "강원특별자치도 춘천시": "51110", "강원특별자치도 원주시": "51130", "강원특별자치도 강릉시": "51150", "강원특별자치도 동해시": "51170", "강원특별자치도 태백시": "51190", "강원특별자치도 속초시": "51210", "강원특별자치도 삼척시": "51230", "강원특별자치도 홍천군": "51720", "강원특별자치도 횡성군": "51730", "강원특별자치도 영월군": "51750", "강원특별자치도 평창군": "51760", "강원특별자치도 정선군": "51770", "강원특별자치도 철원군": "51780", "강원특별자치도 화천군": "51790", "강원특별자치도 양구군": "51800", "강원특별자치도 인제군": "51810", "강원특별자치도 고성군": "51820", "강원특별자치도 양양군": "51830", "전북특별자치도 전주시": "52110", "전북특별자치도 전주시 완산구": "52111", "전북특별자치도 전주시 덕진구": "52113", "전북특별자치도 군산시": "52130", "전북특별자치도 익산시": "52140", "전북특별자치도 정읍시": "52180", "전북특별자치도 남원시": "52190", "전북특별자치도 김제시": "52210", "전북특별자치도 완주군": "52710", "전북특별자치도 진안군": "52720", "전북특별자치도 무주군": "52730", "전북특별자치도 장수군": "52740", "전북특별자치도 임실군": "52750", "전북특별자치도 순창군": "52770", "전북특별자치도 고창군": "52790", "전북특별자치도 부안군": "52800"};
 const WARNINGS = [];
+const QUOTES = [];
+const QUOTES_META = {"tracking_since": "", "last_run": ""};
 
 // ============================== 공통 유틸 ==============================
 function fmtMoney(man) {
@@ -163,9 +209,11 @@ function fmtMoney(man) {
 const groupKey = d => d.apt_nm + " " + Math.floor(d.area) + "㎡";
 
 function showTab(name) {
-  document.getElementById("tab-dash").style.display = name === "dash" ? "" : "none";
-  document.getElementById("tab-manage").style.display = name === "manage" ? "" : "none";
+  for (const t of ["dash", "quotes", "manage"]) {
+    document.getElementById("tab-" + t).style.display = name === t ? "" : "none";
+  }
   document.getElementById("tabBtnDash").classList.toggle("active", name === "dash");
+  document.getElementById("tabBtnQuotes").classList.toggle("active", name === "quotes");
   document.getElementById("tabBtnManage").classList.toggle("active", name === "manage");
 }
 
@@ -319,6 +367,250 @@ function renderTable() {
 }
 aptSel.addEventListener("change", renderTable);
 renderTable();
+
+// ============================== 호가 탭 ==============================
+(function quotesTab() {
+  const hasQuotes = QUOTES.length > 0;
+  document.getElementById("quotesEmpty").style.display = hasQuotes ? "none" : "";
+  document.getElementById("quotesBody").style.display = hasQuotes ? "" : "none";
+  if (QUOTES_META.tracking_since) {
+    document.getElementById("qTrackSince").textContent =
+      "· 호가 추적 시작 " + QUOTES_META.tracking_since;
+  }
+  if (!hasQuotes) return;
+
+  const runDate = (QUOTES_META.last_run || "").slice(0, 10);
+  const dayMs = 86400000;
+  const isRecent = iso => runDate && iso &&
+    (new Date(runDate) - new Date(iso.slice(0, 10))) <= 7 * dayMs;
+  const byComplex = {};
+  QUOTES.forEach(q => (byComplex[q.complex] = byComplex[q.complex] || []).push(q));
+  const complexNames = Object.keys(byComplex).sort();
+  const activeIn = list => list.filter(q => q.status === "active");
+  // 매매 최신가 (같은 config 단지)
+  const dealLatest = {};
+  DEALS.filter(d => !d.cancelled).forEach(d => {
+    const c = dealLatest[d.complex];
+    if (!c || d.date > c.date) dealLatest[d.complex] = d;
+  });
+
+  // ---- ① 요약 카드 (config 단지별)
+  const qCardsEl = document.getElementById("qCards");
+  complexNames.forEach(name => {
+    const act = activeIn(byComplex[name]);
+    if (!act.length) return;
+    const prices = act.map(q => q.price);
+    const minP = Math.min(...prices);
+    const newCnt = act.filter(q => isRecent(q.first_seen)).length;
+    const cutCnt = act.filter(q => q.price_history && q.price_history.length >= 2 &&
+      q.price_history[q.price_history.length - 1].price < q.price_history[q.price_history.length - 2].price).length;
+    let gapHtml = "";
+    const dl = dealLatest[name];
+    if (dl) {
+      const gap = minP - dl.amount, pct = (gap / dl.amount * 100).toFixed(1);
+      const cls = gap > 0 ? "diff-up" : gap < 0 ? "diff-down" : "";
+      gapHtml = `<div class="meta">최근 실거래 ${fmtMoney(dl.amount)} (${dl.date})` +
+        ` → 최저호가 <span class="${cls}">${gap >= 0 ? "+" : ""}${fmtMoney(gap)} (${pct > 0 ? "+" : ""}${pct}%)</span></div>`;
+    } else {
+      gapHtml = `<div class="meta">실거래 기록 없음</div>`;
+    }
+    const badge = (newCnt ? `🆕${newCnt} ` : "") + (cutCnt ? `🔻${cutCnt}` : "");
+    qCardsEl.insertAdjacentHTML("beforeend", `
+      <div class="card">
+        <h3>${name}</h3>
+        <div class="band">활성 매물 ${act.length}건 ${badge ? "· " + badge : ""}</div>
+        <div class="price">${fmtMoney(minP)}원 <span class="meta">최저호가</span></div>
+        ${gapHtml}
+      </div>`);
+  });
+
+  // ---- ② 호가 추이 차트 (config 단지별: 일별 최저/평균 호가 + 실거래 오버레이)
+  const qSel = document.getElementById("qGroupSel");
+  complexNames.forEach(n => {
+    if (activeIn(byComplex[n]).length || byComplex[n].length)
+      qSel.insertAdjacentHTML("beforeend", `<option value="${n}">${n}</option>`);
+  });
+  function priceAsOf(q, d) {
+    let p = null;
+    for (const h of (q.price_history || [])) { if (h.date <= d) p = h.price; else break; }
+    return p;
+  }
+  function drawQChart(name) {
+    const list = byComplex[name] || [];
+    const el = document.getElementById("qChart");
+    const dates = new Set();
+    list.forEach(q => (q.price_history || []).forEach(h => dates.add(h.date)));
+    if (runDate) dates.add(runDate);
+    const xdates = [...dates].sort();
+    // 일별 최저/평균 호가
+    const series = xdates.map(d => {
+      const ps = [];
+      list.forEach(q => {
+        const born = (q.first_seen || "").slice(0, 10);
+        const gone = q.gone_date;
+        if (born && born > d) return;
+        if (gone && gone <= d) return;
+        const p = priceAsOf(q, d);
+        if (p != null) ps.push(p);
+      });
+      return ps.length ? { d, min: Math.min(...ps), avg: ps.reduce((a, b) => a + b, 0) / ps.length } : null;
+    }).filter(Boolean);
+    const deals = DEALS.filter(d => d.complex === name && !d.cancelled);
+    if (!series.length && !deals.length) { el.innerHTML = "<div class='legend'>데이터 없음</div>"; return; }
+    const W = 860, H = 300, P = { l: 70, r: 20, t: 16, b: 40 };
+    const allT = series.map(s => new Date(s.d).getTime())
+      .concat(deals.map(d => new Date(d.date).getTime()));
+    const allV = series.flatMap(s => [s.min, s.avg]).concat(deals.map(d => d.amount));
+    const x0 = Math.min(...allT), x1 = Math.max(...allT) || x0 + 1;
+    const vMin = Math.min(...allV), vMax = Math.max(...allV);
+    const pad = Math.max((vMax - vMin) * 0.15, vMax * 0.02, 500);
+    const y0 = vMin - pad, y1 = vMax + pad;
+    const X = t => x1 > x0 ? P.l + (t - x0) / (x1 - x0) * (W - P.l - P.r) : (P.l + W - P.r) / 2;
+    const Y = v => H - P.b - (v - y0) / (y1 - y0) * (H - P.t - P.b);
+    let s = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px">`;
+    for (let i = 0; i <= 4; i++) {
+      const v = y0 + (y1 - y0) * i / 4, y = Y(v);
+      s += `<line x1="${P.l}" y1="${y}" x2="${W - P.r}" y2="${y}" stroke="#e5e7eb"/>`
+        + `<text x="${P.l - 8}" y="${y + 4}" text-anchor="end" font-size="11" fill="#6b7280">${fmtMoney(Math.round(v))}</text>`;
+    }
+    const line = (key, color, dash) => {
+      if (series.length < 2) return "";
+      const pts = series.map(s2 => `${X(new Date(s2.d).getTime())},${Y(s2[key])}`).join(" ");
+      return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2"${dash ? ` stroke-dasharray="${dash}"` : ""}/>`;
+    };
+    s += line("min", "#0f766e", "");
+    s += line("avg", "#94a3b8", "4 3");
+    series.forEach(s2 => {
+      s += `<circle cx="${X(new Date(s2.d).getTime())}" cy="${Y(s2.min)}" r="3.5" fill="#0f766e">`
+        + `<title>${s2.d} · 최저호가 ${fmtMoney(s2.min)}원</title></circle>`;
+    });
+    deals.forEach(d => {
+      const cx = X(new Date(d.date).getTime()), cy = Y(d.amount);
+      s += `<circle cx="${cx}" cy="${cy}" r="4" fill="none" stroke="#dc2626" stroke-width="2">`
+        + `<title>실거래 ${d.date} · ${fmtMoney(d.amount)}원</title></circle>`;
+    });
+    let lastLabelX = -999;
+    series.forEach(s2 => {
+      const lx = X(new Date(s2.d).getTime());
+      if (lx - lastLabelX < 64) return;          // 라벨 최소 간격 확보(겹침 방지)
+      lastLabelX = lx;
+      s += `<text x="${lx}" y="${H - P.b + 18}" text-anchor="middle" font-size="11" fill="#6b7280">${s2.d.slice(2)}</text>`;
+    });
+    s += "</svg>";
+    el.innerHTML = s + `<div class="legend">실선=최저호가 · 점선=평균호가 · <span style="color:#dc2626">○</span>=실거래(체결). 점에 마우스를 올리면 상세.</div>`;
+  }
+  qSel.addEventListener("change", () => drawQChart(qSel.value));
+  if (qSel.options.length) { qSel.value = qSel.options[0].value; drawQChart(qSel.value); }
+
+  // ---- ③ 현재 호가 목록 (unit_key 묶음)
+  const qAptSel = document.getElementById("qAptSel");
+  qAptSel.insertAdjacentHTML("beforeend", `<option value="__all__">전체 단지</option>`);
+  complexNames.forEach(n => {
+    const cnt = activeIn(byComplex[n]).length;
+    qAptSel.insertAdjacentHTML("beforeend", `<option value="${n}">${n} (활성 ${cnt})</option>`);
+  });
+  function qChangeBadge(q) {
+    const h = q.price_history || [];
+    if (h.length < 2) return "";
+    const dv = h[h.length - 1].price - h[h.length - 2].price;
+    const pct = (dv / h[h.length - 2].price * 100).toFixed(1);
+    return dv < 0 ? `<span class="diff-down">${fmtMoney(dv)} (${pct}%)</span>`
+         : dv > 0 ? `<span class="diff-up">+${fmtMoney(dv)} (+${pct}%)</span>` : "보합";
+  }
+  function statusBadge(q) {
+    if (q.status === "gone") return `<span class="badge">내려감</span>`;
+    let b = "";
+    if (isRecent(q.first_seen)) b += `<span class="badge" style="background:#dcfce7;color:#15803d">신규</span> `;
+    if (q.relisted_count || q.relist_of) b += `<span class="badge" style="background:#e0e7ff;color:#4338ca">재등록</span> `;
+    return b || "·";
+  }
+  function qReps(list) {
+    // unit_key로 묶고 대표(최저가→확인일 최신→article_no) 선택
+    const groups = {};
+    list.forEach(q => {
+      const k = q.unit_key_confident ? q.unit_key : "solo:" + q.article_no;
+      (groups[k] = groups[k] || []).push(q);
+    });
+    return Object.values(groups).map(g => {
+      g.sort((a, b) => a.price - b.price ||
+        (b.confirm_ymd || "").localeCompare(a.confirm_ymd || "") ||
+        a.article_no.localeCompare(b.article_no));
+      return g;
+    }).sort((a, b) => a[0].price - b[0].price);
+  }
+  function renderQTable() {
+    const mode = qAptSel.value;
+    const showGone = document.getElementById("qShowGone").checked;
+    const tbody = document.getElementById("qRows");
+    tbody.innerHTML = "";
+    let list = QUOTES.filter(q => mode === "__all__" || q.complex === mode);
+    if (!showGone) list = list.filter(q => q.status === "active");
+    let shown = 0;
+    qReps(list).forEach(group => {
+      const rep = group[0], n = group.length;
+      const dongFloor = `${rep.building_name !== "?" ? rep.building_name + "동 " : ""}${rep.floor_self || "?"}층`;
+      const dupBadge = n > 1 ? ` <span class="badge" style="background:#f1f5f9;color:#475569;cursor:pointer">+${n - 1}곳</span>` : "";
+      tbody.insertAdjacentHTML("beforeend", `
+        <tr class="${rep.status === "gone" ? "cancelled" : ""}" ${n > 1 ? `style="cursor:pointer" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'"` : ""}>
+          <td>${statusBadge(rep)}</td><td>${dongFloor}${dupBadge}</td>
+          <td>${rep.area}</td><td>${rep.direction || "-"}</td>
+          <td><b>${fmtMoney(rep.price)}</b></td><td>${qChangeBadge(rep)}</td>
+          <td>${fmtYmd(rep.confirm_ymd)}</td><td>${rep.realtor || ""}</td>
+        </tr>`);
+      if (n > 1) {
+        const inner = group.slice(1).map(q =>
+          `<div style="padding:2px 0">· ${fmtMoney(q.price)}원 — ${q.realtor || "?"} (${fmtYmd(q.confirm_ymd)}) ${qChangeBadge(q)}</div>`).join("");
+        tbody.insertAdjacentHTML("beforeend",
+          `<tr style="display:none"><td></td><td colspan="7" style="color:var(--sub);font-size:12px">${inner}</td></tr>`);
+      }
+      shown += n;
+    });
+    document.getElementById("qRowCnt").textContent = `${shown}건`;
+  }
+  function fmtYmd(s) { return s && s.length === 8 ? `${s.slice(2, 4)}.${s.slice(4, 6)}.${s.slice(6)}` : "-"; }
+  qAptSel.addEventListener("change", renderQTable);
+  document.getElementById("qShowGone").addEventListener("change", renderQTable);
+  renderQTable();
+
+  // ---- ④ 호가 변동·소멸 이력
+  const hist = [];
+  QUOTES.forEach(q => {
+    const h = q.price_history || [];
+    for (let i = 1; i < h.length; i++) {
+      hist.push({ date: h[i].date, q, kind: "change", from: h[i - 1].price, to: h[i].price });
+    }
+    if (q.status === "gone" && q.gone_date) hist.push({ date: q.gone_date, q, kind: "gone" });
+  });
+  hist.sort((a, b) => b.date.localeCompare(a.date));
+  const hb = document.getElementById("qHistory");
+  hist.slice(0, 200).forEach(e => {
+    const q = e.q;
+    const dongFloor = `${q.building_name !== "?" ? q.building_name + "동 " : ""}${q.floor_self || "?"}층`;
+    let change, note;
+    if (e.kind === "gone") {
+      change = `<span style="color:#9ca3af">${fmtMoney(q.price)} → 내려감</span>`;
+      note = `<span class="badge">소멸</span>`;
+    } else {
+      const dv = e.to - e.from, pct = (dv / e.from * 100).toFixed(1);
+      const cls = dv < 0 ? "diff-down" : "diff-up";
+      change = `${fmtMoney(e.from)} → <b>${fmtMoney(e.to)}</b> <span class="${cls}">(${dv > 0 ? "+" : ""}${fmtMoney(dv)}, ${pct > 0 ? "+" : ""}${pct}%)</span>`;
+      note = dv < 0 ? "🔻 인하" : "🔺 인상";
+    }
+    hb.insertAdjacentHTML("beforeend", `
+      <tr><td>${e.date}</td><td>${q.apt_nm}</td><td>${dongFloor}</td>
+          <td>${q.area}</td><td>${change}</td><td>${note}</td></tr>`);
+  });
+  if (!hist.length) hb.insertAdjacentHTML("beforeend",
+    `<tr><td colspan="6" class="legend">아직 변동·소멸 이력이 없습니다 (스냅샷이 2회 이상 쌓이면 표시).</td></tr>`);
+
+  // ---- ⑤ 경고 배너 (조회 실패/0건 의심 단지)
+  const stale = complexNames.filter(n => activeIn(byComplex[n]).length === 0);
+  if (stale.length) {
+    document.getElementById("qWarnBanner").innerHTML =
+      `<div class="warn">⚠ 활성 호가 0건인 단지: <b>${stale.join(", ")}</b>. ` +
+      `세션 만료·매물 소진·naver_id 오류일 수 있습니다. <code>python quotes_monitor.py</code> 재실행 또는 네이버 재로그인 후 세션 갱신을 확인하세요.</div>`;
+  }
+})();
 
 // ============================== 단지 관리 탭 ==============================
 // 시군구명 → 법정동코드 (lawd.py와 동일 로직)

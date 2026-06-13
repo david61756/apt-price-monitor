@@ -97,7 +97,8 @@ _TEMPLATE = """<!DOCTYPE html>
 <div id="warnBanner"></div>
 
 <div class="tabs">
-  <button id="tabBtnDash" class="active" onclick="showTab('dash')">📊 대시보드</button>
+  <button id="tabBtnDash" class="active" onclick="showTab('dash')">📊 매매 실거래</button>
+  <button id="tabBtnQuotes" onclick="showTab('quotes')">🏷️ 호가</button>
   <button id="tabBtnManage" onclick="showTab('manage')">⚙️ 단지 관리</button>
 </div>
 
@@ -121,6 +122,49 @@ _TEMPLATE = """<!DOCTYPE html>
                  <th>거래금액</th><th>직전대비</th><th>비고</th></tr></thead>
       <tbody id="rows"></tbody>
     </table>
+  </div>
+</div>
+
+<div id="tab-quotes" style="display:none">
+  <div id="quotesEmpty" class="section" style="display:none">
+    <h2>🏷️ 호가 데이터가 아직 없습니다</h2>
+    <div class="legend" style="line-height:1.8">
+      네이버페이 부동산 호가는 로그인된 브라우저 세션으로 수집합니다.
+      <code>python quotes_monitor.py</code> 를 한 번 실행하면 이 탭에 매물 호가가 채워집니다.
+      (단지별 <code>naver_id</code> 설정과 <code>.env</code>의 네이버 세션이 필요 — README 참고)<br>
+      ⚠ 호가는 <b>과거 조회(백필)가 불가능</b>합니다. 수집을 시작한 날부터의 스냅샷만 쌓입니다.
+    </div>
+  </div>
+  <div id="quotesBody">
+    <div id="qWarnBanner"></div>
+    <div class="cards" id="qCards"></div>
+    <div class="section">
+      <h2>호가 추이 <span class="legend" id="qTrackSince"></span></h2>
+      <select id="qGroupSel"></select>
+      <div id="qChart"></div>
+    </div>
+    <div class="section">
+      <h2>현재 호가 <span class="legend">(동일세대 묶음 — 클릭하면 중개사별 펼침)</span></h2>
+      <div class="toolbar">
+        <select id="qAptSel"></select>
+        <label style="font-size:12px;color:var(--sub)">
+          <input type="checkbox" id="qShowGone"> 내려간 매물 포함</label>
+        <span class="cnt" id="qRowCnt"></span>
+      </div>
+      <table>
+        <thead><tr><th>상태</th><th>동·층</th><th>전용(㎡)</th><th>향</th>
+                   <th>호가</th><th>직전대비</th><th>확인일</th><th>중개사</th></tr></thead>
+        <tbody id="qRows"></tbody>
+      </table>
+    </div>
+    <div class="section">
+      <h2>호가 변동·소멸 이력 <span class="legend">(최신순)</span></h2>
+      <table>
+        <thead><tr><th>날짜</th><th>단지</th><th>동·층</th><th>전용</th>
+                   <th>변동</th><th>비고</th></tr></thead>
+        <tbody id="qHistory"></tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -167,6 +211,8 @@ const DEALS = __DEALS__;
 const CONFIG = __CONFIG__;
 const SGG = __SGG__;
 const WARNINGS = __WARNINGS__;
+const QUOTES = __QUOTES__;
+const QUOTES_META = __QUOTES_META__;
 
 // ============================== 공통 유틸 ==============================
 function fmtMoney(man) {
@@ -179,9 +225,11 @@ function fmtMoney(man) {
 const groupKey = d => d.apt_nm + " " + Math.floor(d.area) + "㎡";
 
 function showTab(name) {
-  document.getElementById("tab-dash").style.display = name === "dash" ? "" : "none";
-  document.getElementById("tab-manage").style.display = name === "manage" ? "" : "none";
+  for (const t of ["dash", "quotes", "manage"]) {
+    document.getElementById("tab-" + t).style.display = name === t ? "" : "none";
+  }
   document.getElementById("tabBtnDash").classList.toggle("active", name === "dash");
+  document.getElementById("tabBtnQuotes").classList.toggle("active", name === "quotes");
   document.getElementById("tabBtnManage").classList.toggle("active", name === "manage");
 }
 
@@ -335,6 +383,250 @@ function renderTable() {
 }
 aptSel.addEventListener("change", renderTable);
 renderTable();
+
+// ============================== 호가 탭 ==============================
+(function quotesTab() {
+  const hasQuotes = QUOTES.length > 0;
+  document.getElementById("quotesEmpty").style.display = hasQuotes ? "none" : "";
+  document.getElementById("quotesBody").style.display = hasQuotes ? "" : "none";
+  if (QUOTES_META.tracking_since) {
+    document.getElementById("qTrackSince").textContent =
+      "· 호가 추적 시작 " + QUOTES_META.tracking_since;
+  }
+  if (!hasQuotes) return;
+
+  const runDate = (QUOTES_META.last_run || "").slice(0, 10);
+  const dayMs = 86400000;
+  const isRecent = iso => runDate && iso &&
+    (new Date(runDate) - new Date(iso.slice(0, 10))) <= 7 * dayMs;
+  const byComplex = {};
+  QUOTES.forEach(q => (byComplex[q.complex] = byComplex[q.complex] || []).push(q));
+  const complexNames = Object.keys(byComplex).sort();
+  const activeIn = list => list.filter(q => q.status === "active");
+  // 매매 최신가 (같은 config 단지)
+  const dealLatest = {};
+  DEALS.filter(d => !d.cancelled).forEach(d => {
+    const c = dealLatest[d.complex];
+    if (!c || d.date > c.date) dealLatest[d.complex] = d;
+  });
+
+  // ---- ① 요약 카드 (config 단지별)
+  const qCardsEl = document.getElementById("qCards");
+  complexNames.forEach(name => {
+    const act = activeIn(byComplex[name]);
+    if (!act.length) return;
+    const prices = act.map(q => q.price);
+    const minP = Math.min(...prices);
+    const newCnt = act.filter(q => isRecent(q.first_seen)).length;
+    const cutCnt = act.filter(q => q.price_history && q.price_history.length >= 2 &&
+      q.price_history[q.price_history.length - 1].price < q.price_history[q.price_history.length - 2].price).length;
+    let gapHtml = "";
+    const dl = dealLatest[name];
+    if (dl) {
+      const gap = minP - dl.amount, pct = (gap / dl.amount * 100).toFixed(1);
+      const cls = gap > 0 ? "diff-up" : gap < 0 ? "diff-down" : "";
+      gapHtml = `<div class="meta">최근 실거래 ${fmtMoney(dl.amount)} (${dl.date})` +
+        ` → 최저호가 <span class="${cls}">${gap >= 0 ? "+" : ""}${fmtMoney(gap)} (${pct > 0 ? "+" : ""}${pct}%)</span></div>`;
+    } else {
+      gapHtml = `<div class="meta">실거래 기록 없음</div>`;
+    }
+    const badge = (newCnt ? `🆕${newCnt} ` : "") + (cutCnt ? `🔻${cutCnt}` : "");
+    qCardsEl.insertAdjacentHTML("beforeend", `
+      <div class="card">
+        <h3>${name}</h3>
+        <div class="band">활성 매물 ${act.length}건 ${badge ? "· " + badge : ""}</div>
+        <div class="price">${fmtMoney(minP)}원 <span class="meta">최저호가</span></div>
+        ${gapHtml}
+      </div>`);
+  });
+
+  // ---- ② 호가 추이 차트 (config 단지별: 일별 최저/평균 호가 + 실거래 오버레이)
+  const qSel = document.getElementById("qGroupSel");
+  complexNames.forEach(n => {
+    if (activeIn(byComplex[n]).length || byComplex[n].length)
+      qSel.insertAdjacentHTML("beforeend", `<option value="${n}">${n}</option>`);
+  });
+  function priceAsOf(q, d) {
+    let p = null;
+    for (const h of (q.price_history || [])) { if (h.date <= d) p = h.price; else break; }
+    return p;
+  }
+  function drawQChart(name) {
+    const list = byComplex[name] || [];
+    const el = document.getElementById("qChart");
+    const dates = new Set();
+    list.forEach(q => (q.price_history || []).forEach(h => dates.add(h.date)));
+    if (runDate) dates.add(runDate);
+    const xdates = [...dates].sort();
+    // 일별 최저/평균 호가
+    const series = xdates.map(d => {
+      const ps = [];
+      list.forEach(q => {
+        const born = (q.first_seen || "").slice(0, 10);
+        const gone = q.gone_date;
+        if (born && born > d) return;
+        if (gone && gone <= d) return;
+        const p = priceAsOf(q, d);
+        if (p != null) ps.push(p);
+      });
+      return ps.length ? { d, min: Math.min(...ps), avg: ps.reduce((a, b) => a + b, 0) / ps.length } : null;
+    }).filter(Boolean);
+    const deals = DEALS.filter(d => d.complex === name && !d.cancelled);
+    if (!series.length && !deals.length) { el.innerHTML = "<div class='legend'>데이터 없음</div>"; return; }
+    const W = 860, H = 300, P = { l: 70, r: 20, t: 16, b: 40 };
+    const allT = series.map(s => new Date(s.d).getTime())
+      .concat(deals.map(d => new Date(d.date).getTime()));
+    const allV = series.flatMap(s => [s.min, s.avg]).concat(deals.map(d => d.amount));
+    const x0 = Math.min(...allT), x1 = Math.max(...allT) || x0 + 1;
+    const vMin = Math.min(...allV), vMax = Math.max(...allV);
+    const pad = Math.max((vMax - vMin) * 0.15, vMax * 0.02, 500);
+    const y0 = vMin - pad, y1 = vMax + pad;
+    const X = t => x1 > x0 ? P.l + (t - x0) / (x1 - x0) * (W - P.l - P.r) : (P.l + W - P.r) / 2;
+    const Y = v => H - P.b - (v - y0) / (y1 - y0) * (H - P.t - P.b);
+    let s = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px">`;
+    for (let i = 0; i <= 4; i++) {
+      const v = y0 + (y1 - y0) * i / 4, y = Y(v);
+      s += `<line x1="${P.l}" y1="${y}" x2="${W - P.r}" y2="${y}" stroke="#e5e7eb"/>`
+        + `<text x="${P.l - 8}" y="${y + 4}" text-anchor="end" font-size="11" fill="#6b7280">${fmtMoney(Math.round(v))}</text>`;
+    }
+    const line = (key, color, dash) => {
+      if (series.length < 2) return "";
+      const pts = series.map(s2 => `${X(new Date(s2.d).getTime())},${Y(s2[key])}`).join(" ");
+      return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2"${dash ? ` stroke-dasharray="${dash}"` : ""}/>`;
+    };
+    s += line("min", "#0f766e", "");
+    s += line("avg", "#94a3b8", "4 3");
+    series.forEach(s2 => {
+      s += `<circle cx="${X(new Date(s2.d).getTime())}" cy="${Y(s2.min)}" r="3.5" fill="#0f766e">`
+        + `<title>${s2.d} · 최저호가 ${fmtMoney(s2.min)}원</title></circle>`;
+    });
+    deals.forEach(d => {
+      const cx = X(new Date(d.date).getTime()), cy = Y(d.amount);
+      s += `<circle cx="${cx}" cy="${cy}" r="4" fill="none" stroke="#dc2626" stroke-width="2">`
+        + `<title>실거래 ${d.date} · ${fmtMoney(d.amount)}원</title></circle>`;
+    });
+    let lastLabelX = -999;
+    series.forEach(s2 => {
+      const lx = X(new Date(s2.d).getTime());
+      if (lx - lastLabelX < 64) return;          // 라벨 최소 간격 확보(겹침 방지)
+      lastLabelX = lx;
+      s += `<text x="${lx}" y="${H - P.b + 18}" text-anchor="middle" font-size="11" fill="#6b7280">${s2.d.slice(2)}</text>`;
+    });
+    s += "</svg>";
+    el.innerHTML = s + `<div class="legend">실선=최저호가 · 점선=평균호가 · <span style="color:#dc2626">○</span>=실거래(체결). 점에 마우스를 올리면 상세.</div>`;
+  }
+  qSel.addEventListener("change", () => drawQChart(qSel.value));
+  if (qSel.options.length) { qSel.value = qSel.options[0].value; drawQChart(qSel.value); }
+
+  // ---- ③ 현재 호가 목록 (unit_key 묶음)
+  const qAptSel = document.getElementById("qAptSel");
+  qAptSel.insertAdjacentHTML("beforeend", `<option value="__all__">전체 단지</option>`);
+  complexNames.forEach(n => {
+    const cnt = activeIn(byComplex[n]).length;
+    qAptSel.insertAdjacentHTML("beforeend", `<option value="${n}">${n} (활성 ${cnt})</option>`);
+  });
+  function qChangeBadge(q) {
+    const h = q.price_history || [];
+    if (h.length < 2) return "";
+    const dv = h[h.length - 1].price - h[h.length - 2].price;
+    const pct = (dv / h[h.length - 2].price * 100).toFixed(1);
+    return dv < 0 ? `<span class="diff-down">${fmtMoney(dv)} (${pct}%)</span>`
+         : dv > 0 ? `<span class="diff-up">+${fmtMoney(dv)} (+${pct}%)</span>` : "보합";
+  }
+  function statusBadge(q) {
+    if (q.status === "gone") return `<span class="badge">내려감</span>`;
+    let b = "";
+    if (isRecent(q.first_seen)) b += `<span class="badge" style="background:#dcfce7;color:#15803d">신규</span> `;
+    if (q.relisted_count || q.relist_of) b += `<span class="badge" style="background:#e0e7ff;color:#4338ca">재등록</span> `;
+    return b || "·";
+  }
+  function qReps(list) {
+    // unit_key로 묶고 대표(최저가→확인일 최신→article_no) 선택
+    const groups = {};
+    list.forEach(q => {
+      const k = q.unit_key_confident ? q.unit_key : "solo:" + q.article_no;
+      (groups[k] = groups[k] || []).push(q);
+    });
+    return Object.values(groups).map(g => {
+      g.sort((a, b) => a.price - b.price ||
+        (b.confirm_ymd || "").localeCompare(a.confirm_ymd || "") ||
+        a.article_no.localeCompare(b.article_no));
+      return g;
+    }).sort((a, b) => a[0].price - b[0].price);
+  }
+  function renderQTable() {
+    const mode = qAptSel.value;
+    const showGone = document.getElementById("qShowGone").checked;
+    const tbody = document.getElementById("qRows");
+    tbody.innerHTML = "";
+    let list = QUOTES.filter(q => mode === "__all__" || q.complex === mode);
+    if (!showGone) list = list.filter(q => q.status === "active");
+    let shown = 0;
+    qReps(list).forEach(group => {
+      const rep = group[0], n = group.length;
+      const dongFloor = `${rep.building_name !== "?" ? rep.building_name + "동 " : ""}${rep.floor_self || "?"}층`;
+      const dupBadge = n > 1 ? ` <span class="badge" style="background:#f1f5f9;color:#475569;cursor:pointer">+${n - 1}곳</span>` : "";
+      tbody.insertAdjacentHTML("beforeend", `
+        <tr class="${rep.status === "gone" ? "cancelled" : ""}" ${n > 1 ? `style="cursor:pointer" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'"` : ""}>
+          <td>${statusBadge(rep)}</td><td>${dongFloor}${dupBadge}</td>
+          <td>${rep.area}</td><td>${rep.direction || "-"}</td>
+          <td><b>${fmtMoney(rep.price)}</b></td><td>${qChangeBadge(rep)}</td>
+          <td>${fmtYmd(rep.confirm_ymd)}</td><td>${rep.realtor || ""}</td>
+        </tr>`);
+      if (n > 1) {
+        const inner = group.slice(1).map(q =>
+          `<div style="padding:2px 0">· ${fmtMoney(q.price)}원 — ${q.realtor || "?"} (${fmtYmd(q.confirm_ymd)}) ${qChangeBadge(q)}</div>`).join("");
+        tbody.insertAdjacentHTML("beforeend",
+          `<tr style="display:none"><td></td><td colspan="7" style="color:var(--sub);font-size:12px">${inner}</td></tr>`);
+      }
+      shown += n;
+    });
+    document.getElementById("qRowCnt").textContent = `${shown}건`;
+  }
+  function fmtYmd(s) { return s && s.length === 8 ? `${s.slice(2, 4)}.${s.slice(4, 6)}.${s.slice(6)}` : "-"; }
+  qAptSel.addEventListener("change", renderQTable);
+  document.getElementById("qShowGone").addEventListener("change", renderQTable);
+  renderQTable();
+
+  // ---- ④ 호가 변동·소멸 이력
+  const hist = [];
+  QUOTES.forEach(q => {
+    const h = q.price_history || [];
+    for (let i = 1; i < h.length; i++) {
+      hist.push({ date: h[i].date, q, kind: "change", from: h[i - 1].price, to: h[i].price });
+    }
+    if (q.status === "gone" && q.gone_date) hist.push({ date: q.gone_date, q, kind: "gone" });
+  });
+  hist.sort((a, b) => b.date.localeCompare(a.date));
+  const hb = document.getElementById("qHistory");
+  hist.slice(0, 200).forEach(e => {
+    const q = e.q;
+    const dongFloor = `${q.building_name !== "?" ? q.building_name + "동 " : ""}${q.floor_self || "?"}층`;
+    let change, note;
+    if (e.kind === "gone") {
+      change = `<span style="color:#9ca3af">${fmtMoney(q.price)} → 내려감</span>`;
+      note = `<span class="badge">소멸</span>`;
+    } else {
+      const dv = e.to - e.from, pct = (dv / e.from * 100).toFixed(1);
+      const cls = dv < 0 ? "diff-down" : "diff-up";
+      change = `${fmtMoney(e.from)} → <b>${fmtMoney(e.to)}</b> <span class="${cls}">(${dv > 0 ? "+" : ""}${fmtMoney(dv)}, ${pct > 0 ? "+" : ""}${pct}%)</span>`;
+      note = dv < 0 ? "🔻 인하" : "🔺 인상";
+    }
+    hb.insertAdjacentHTML("beforeend", `
+      <tr><td>${e.date}</td><td>${q.apt_nm}</td><td>${dongFloor}</td>
+          <td>${q.area}</td><td>${change}</td><td>${note}</td></tr>`);
+  });
+  if (!hist.length) hb.insertAdjacentHTML("beforeend",
+    `<tr><td colspan="6" class="legend">아직 변동·소멸 이력이 없습니다 (스냅샷이 2회 이상 쌓이면 표시).</td></tr>`);
+
+  // ---- ⑤ 경고 배너 (조회 실패/0건 의심 단지)
+  const stale = complexNames.filter(n => activeIn(byComplex[n]).length === 0);
+  if (stale.length) {
+    document.getElementById("qWarnBanner").innerHTML =
+      `<div class="warn">⚠ 활성 호가 0건인 단지: <b>${stale.join(", ")}</b>. ` +
+      `세션 만료·매물 소진·naver_id 오류일 수 있습니다. <code>python quotes_monitor.py</code> 재실행 또는 네이버 재로그인 후 세션 갱신을 확인하세요.</div>`;
+  }
+})();
 
 // ============================== 단지 관리 탭 ==============================
 // 시군구명 → 법정동코드 (lawd.py와 동일 로직)
@@ -534,7 +826,7 @@ function copyYaml() {
 """
 
 
-def render_dashboard(state, cfg, out_path):
+def render_dashboard(state, cfg, out_path, quotes_state=None):
     complexes = cfg.get("complexes", [])
     all_deals = sorted(state.get("deals", {}).values(), key=lambda d: d["date"])
 
@@ -557,12 +849,22 @@ def render_dashboard(state, cfg, out_path):
                 "match": c.get("match") or [], "areas": c.get("areas") or [],
             })
 
+    # 호가: 현재 config에 매칭되는 매물만 표시 (관심단지에서 빠진 매물 숨김)
+    qs = quotes_state or {}
+    visible_quotes = [q for q in qs.get("quotes", {}).values()
+                      if matching_complex_name(q, complexes) is not None]
+    quotes_meta = {
+        "tracking_since": qs.get("tracking_since", ""),
+        "last_run": qs.get("last_run", ""),
+    }
+
     config_pub = {
         "complexes": [
             {"name": c["name"],
              **({"region": c["region"]} if c.get("region") else {"lawd_cd": c["lawd_cd"]}),
              "match": c.get("match") or [],
-             "areas": c.get("areas") or []}
+             "areas": c.get("areas") or [],
+             **({"naver_id": c["naver_id"]} if c.get("naver_id") else {})}
             for c in complexes
         ],
         "options": cfg.get("options") or {},
@@ -575,5 +877,7 @@ def render_dashboard(state, cfg, out_path):
             .replace("__DEALS__", json.dumps(visible, ensure_ascii=False))
             .replace("__WARNINGS__", json.dumps(warnings, ensure_ascii=False))
             .replace("__CONFIG__", json.dumps(config_pub, ensure_ascii=False))
-            .replace("__SGG__", json.dumps(sgg, ensure_ascii=False)))
+            .replace("__SGG__", json.dumps(sgg, ensure_ascii=False))
+            .replace("__QUOTES__", json.dumps(visible_quotes, ensure_ascii=False))
+            .replace("__QUOTES_META__", json.dumps(quotes_meta, ensure_ascii=False)))
     out_path.write_text(html, encoding="utf-8")
