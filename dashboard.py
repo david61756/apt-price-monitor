@@ -817,8 +817,11 @@ async function runNow(silent) {
   try {
     await gh("actions/workflows/monitor.yml/dispatches",
              {method: "POST", body: JSON.stringify({ref: "main"})});
-    setStatus("✅ 실행을 요청했습니다. 약 1~2분간 데이터를 조회·집계하고, " +
-              "2~3분 뒤 이 페이지를 새로고침(Shift+새로고침)하면 현황판에 반영됩니다.", true);
+    setStatus("✅ 실행을 요청했습니다.\\n" +
+              "· 매매: 약 1~2분 뒤 갱신 (GitHub Actions)\\n" +
+              "· 호가: 내 Mac이 변경을 감지해 자동 수집 (최대 15분, Mac이 켜져 있어야 함)\\n" +
+              "2~3분 뒤(호가는 좀 더) 이 페이지를 Shift+새로고침 하세요. " +
+              "바로 받으려면 터미널에서 `bash run_quotes.sh` 실행.", true);
     return true;
   } catch (e) { setStatus("❌ 실행 요청 실패: " + e.message, false); return false; }
 }

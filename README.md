@@ -237,6 +237,12 @@ python quotes_monitor.py --dry-run  # 저장 없이 감지 결과만
 - 로그: `logs/quotes.log` (수집 결과), `logs/launchd.*.log`
 - Mac이 그 시각에 꺼져/잠들어 있었으면 **깨어난 뒤 한 번** 실행됩니다.
 
+**단지 변경 자동 반영(동기화):** `com.aptmonitor.sync` 에이전트가 **15분마다** 원격 `config.yaml`을
+확인해, **단지 관리 탭에서 단지를 추가/수정·저장하면 자동으로 호가를 다시 수집**합니다
+(변경이 없으면 즉시 종료 → 가벼움). 즉 대시보드에서 저장만 해두면 매매는 Actions가, 호가는 내
+Mac이 알아서 갱신합니다. 즉시 받고 싶으면 `bash run_quotes.sh`. 끄려면
+`launchctl unload ~/Library/LaunchAgents/com.aptmonitor.sync.plist`.
+
 | 작업 | 명령 |
 |---|---|
 | 지금 즉시 한 번 실행 | `launchctl start com.aptmonitor.quotes` |
