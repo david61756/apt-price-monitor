@@ -5,3 +5,4 @@ __pycache__/
 .ipynb_checkpoints/
 *.ipynb
 naver_curl.txt
+.naver_profile/

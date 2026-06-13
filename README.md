@@ -167,31 +167,51 @@ python naver_lookup.py 이매촌삼성      # → naver_id: 2493
 
 `config.yaml`의 해당 단지에 `naver_id: "2493"` 을 추가합니다(이미 예시 3개는 채워져 있음).
 
-### 7-2. 네이버 세션 준비 (cURL 붙여넣기)
+비공식 API라 **로그인 세션**이 필요하고, 네이버가 TLS 지문으로 봇을 막습니다.
+두 가지 수집 방식이 있습니다 — **방식 A(Playwright)를 권장**합니다.
 
-비공식 API라 **로그인 세션**이 필요하고, 네이버가 TLS 지문으로 봇을 막기 때문에
-크롬 TLS를 흉내내는 `curl_cffi`를 사용합니다(`requirements.txt`에 포함).
+### 7-2. 방식 A — Playwright 자동 로그인 (권장, 토큰 입력 0회)
 
-세션은 **"Copy as cURL" 한 번 붙여넣기**로 끝납니다:
-
-1. 크롬에서 네이버 로그인 → `https://new.land.naver.com/complexes/2493` 접속
-2. **F12 → Network 탭** → Network 필터에 `article` → 페이지를 스크롤해 매물이 보이게
-3. **`articles`** 로 시작하는 요청 우클릭 → **Copy → Copy as cURL**
-4. 복사한 내용을 프로젝트 폴더의 **`naver_curl.txt`** 파일에 통째로 붙여넣고 저장
-   (이 파일은 `.gitignore`에 있어 커밋되지 않음. `.env`의 `NAVER_AUTH`/`NAVER_COOKIE`를
-    직접 채워도 됨)
-5. `python quotes_monitor.py` 실행 — 토큰·쿠키를 자동으로 읽습니다
-
-> **토큰 수명 (자주 묻는 질문):** 네이버 인증 토큰(Bearer)은 약 **3시간 뒤 만료**됩니다(네이버가
-> 그렇게 발급하며, 자동 재발급은 막혀 있습니다). 로그인 쿠키는 더 오래가지만 토큰과 쿠키가
-> **둘 다** 있어야 통과됩니다. 따라서 **호가를 새로 받을 때마다** 위 3~4단계로 cURL을 한 번
-> 새로 떠서 `naver_curl.txt`를 갱신해 주세요(약 30초). 토큰이 만료되면 스크립트가
-> "토큰이 만료됐습니다"라고 알려주고, 기존 호가 데이터는 **지우지 않습니다**.
-
-### 7-3. 호가 수집 실행
+진짜 크로미움을 코드로 띄워 페이지가 발급한 토큰을 자동으로 받아 쓰므로,
+**매번 토큰을 넣을 필요가 없습니다.** 한 번 설치하면 끝입니다.
 
 ```bash
-python quotes_monitor.py            # 수집 → 중복제거/변동감지 → 저장 → 대시보드 갱신
+pip install playwright
+python -m playwright install chromium     # 최초 1회, 브라우저 다운로드(~150MB)
+
+python quotes_monitor.py                  # 호가 수집 (토큰 입력 불필요!)
+python quotes_monitor.py --headful        # 브라우저 창을 보면서 실행(디버그)
+```
+
+- 보통 **로그인 없이도** 매물 조회가 됩니다(매물 목록은 공개). 만약 토큰/조회 실패가 뜨면
+  로그인을 1회 해두세요(프로필 `.naver_profile`에 저장돼 이후 자동 사용):
+  ```bash
+  python naver_playwright.py login          # 브라우저가 열리면 네이버 로그인 후 터미널에서 Enter
+  ```
+- 토큰 만료를 신경 쓸 필요가 없어 **launchd/cron으로 매일 자동 실행**도 가능합니다.
+
+### 7-3. 방식 B — cURL 붙여넣기 (대안, 설치 최소)
+
+Playwright 설치가 부담되면 `curl_cffi`만으로도 됩니다(토큰은 약 3시간마다 갱신):
+
+```bash
+pip install curl_cffi
+```
+
+1. 크롬에서 네이버 로그인 → `https://new.land.naver.com/complexes/2493` 접속
+2. **F12 → Network 탭** → 필터 `article` → 매물이 보이게 스크롤
+3. **`articles`** 요청 우클릭 → **Copy → Copy as cURL**
+4. 복사한 내용을 프로젝트 폴더의 **`naver_curl.txt`** 에 통째로 붙여넣고 저장(`.gitignore`됨)
+5. `python quotes_monitor.py --curl` 실행
+
+> 방식 B의 토큰은 약 3시간 뒤 만료됩니다 → 호가를 새로 받을 때 cURL을 한 번 다시 떠서
+> `naver_curl.txt`를 갱신하세요(약 30초). 만료되면 스크립트가 알려주고 기존 데이터는 **보존**합니다.
+
+### 7-4. 호가 수집 실행
+
+```bash
+python quotes_monitor.py            # (방식 A) 수집 → 중복제거/변동감지 → 저장 → 대시보드
+python quotes_monitor.py --curl     # (방식 B) cURL 세션으로 수집
 python quotes_monitor.py --dry-run  # 저장 없이 감지 결과만
 ```
 
@@ -214,7 +234,8 @@ python quotes_monitor.py --dry-run  # 저장 없이 감지 결과만
 monitor.py         # 매매: 조회 → 신규 감지 → 텔레그램 알림 → state/대시보드 갱신
 quotes_monitor.py  # 호가: 네이버 매물 수집 → 중복제거/변동감지 → quotes_state/대시보드
 quotes.py          # 호가 순수 도메인 로직 (식별·중복제거·변동/신규/소멸 감지)
-naver_adapter.py   # 네이버페이 부동산 매물 API 수집기 (로그인 세션 사용)
+naver_playwright.py # 호가 수집 방식 A: Playwright 자동 로그인(토큰 입력 0회, 권장)
+naver_adapter.py   # 호가 수집 방식 B: cURL 토큰 세션(curl_cffi)
 dashboard.py       # state+quotes → docs/index.html (현재 config 단지만 표시)
 matching.py        # 관심단지 매칭 로직 (매매·호가·dashboard 공유)
 lawd.py            # 시군구명 → 법정동코드 변환

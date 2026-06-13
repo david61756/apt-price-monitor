@@ -65,6 +65,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true", help="저장/알림 없이 감지만")
     ap.add_argument("--no-notify", action="store_true", help="알림 없이 저장만")
+    ap.add_argument("--curl", action="store_true",
+                    help="cURL/.env 세션 방식 사용(기본: Playwright 자동 로그인)")
+    ap.add_argument("--headful", action="store_true", help="Playwright 브라우저 창을 띄워 실행")
     args = ap.parse_args()
 
     monitor.load_env()
@@ -74,15 +77,22 @@ def main():
         sys.exit("config.yaml의 어떤 단지에도 naver_id가 없습니다. "
                  "python naver_lookup.py \"단지명\" 으로 번호를 찾아 추가하세요.")
 
-    session, err = naver_adapter.build_session()
-    if err:
-        sys.exit("❌ " + err + "\n   README의 '호가 수집 세션 설정'을 참고해 .env를 채우세요.")
-
     now = datetime.now(monitor.KST)
     first_run = not Q.QUOTES_PATH.exists()
     qstate = Q.load_quotes_state()
 
-    fetched, scanned = naver_adapter.fetch_all(cfg, session)
+    if args.curl:
+        session, err = naver_adapter.build_session()
+        if err:
+            sys.exit("❌ " + err)
+        fetched, scanned = naver_adapter.fetch_all(cfg, session)
+    else:
+        try:
+            import naver_playwright
+        except ImportError:
+            sys.exit("Playwright가 없습니다. 'pip install playwright && python -m playwright "
+                     "install chromium' 후 다시 시도하거나, --curl 방식을 쓰세요.")
+        fetched, scanned = naver_playwright.fetch_all_playwright(cfg, headless=not args.headful)
     quotes, events = Q.reconcile(qstate, fetched, scanned, now)
 
     # 차단 의심 → 저장 스킵, 경고만

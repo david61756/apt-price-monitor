@@ -1,3 +1,6 @@
 requests>=2.31
 PyYAML>=6.0
-curl_cffi>=0.7
+
+# 호가(네이버) 수집용 — 매매만 쓸 거면 불필요
+playwright>=1.40        # 자동 로그인 방식(권장): pip 후 'python -m playwright install chromium'
+curl_cffi>=0.7          # cURL 토큰 방식(대안)
