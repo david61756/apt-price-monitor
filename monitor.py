@@ -24,6 +24,7 @@ import yaml
 
 from dashboard import render_dashboard
 from lawd import resolve_lawd_cd
+from matching import match_complex
 
 BASE_DIR = Path(__file__).resolve().parent
 CONFIG_PATH = BASE_DIR / "config.yaml"
@@ -182,14 +183,6 @@ def target_months(now_kst, months_back=1):
     return months
 
 
-def match_complex(rec, complex_cfg):
-    if not any(kw in rec["apt_nm"] for kw in complex_cfg["match"]):
-        return False
-    if complex_cfg["areas"] and int(rec["area"]) not in complex_cfg["areas"]:
-        return False
-    return True
-
-
 def find_prev_deal(all_deals, rec):
     """같은 단지·같은 면적대(정수 ㎡)에서 이 계약일 직전의 유효 거래."""
     band = int(rec["area"])
@@ -321,12 +314,23 @@ def main():
                 if rid not in fetched or r["cancelled"]:
                     fetched[rid] = r
 
-    # 관심 단지 매칭
+    # 관심 단지 매칭 (단지별 매칭 수 진단)
     matched = {}
+    per_complex = {}
     for c in cfg["complexes"]:
+        cnt = 0
         for rid, r in fetched.items():
-            if r["lawd_cd"] == c["lawd_cd"] and match_complex(r, c):
+            if match_complex(r, c):
                 matched[rid] = {**r, "complex": c["name"]}
+                cnt += 1
+        per_complex[c["name"]] = cnt
+
+    print("\n=== 단지별 조회 기간 내 매칭 ===")
+    for c in cfg["complexes"]:
+        n = per_complex[c["name"]]
+        flag = "  ⚠ 0건 — 단지명(match)·면적(areas) 확인 필요" if n == 0 else ""
+        print(f"  {n:4d}건  {c['name']}  "
+              f"[{c['lawd_cd']} / match={c['match']} / areas={c['areas'] or '전체'}]{flag}")
 
     # 신규/해제 diff
     new_deals, cancelled_deals = [], []
@@ -367,12 +371,20 @@ def main():
         print("\n--dry-run: state.json/대시보드를 갱신하지 않았습니다.")
         return
 
+    # 관심단지에서 빠진(현재 config에 매칭 안 되는) 옛 거래는 정리해 state를 동기화
+    before = len(known)
+    known = {rid: d for rid, d in known.items()
+             if any(match_complex(d, c) for c in cfg["complexes"])}
+    state["deals"] = known
+    if before - len(known):
+        print(f"정리: 현재 관심단지에 없는 거래 {before - len(known)}건 제거")
+
     state["last_run"] = datetime.now(KST).isoformat(timespec="seconds")
     STATE_PATH.write_text(
         json.dumps(state, ensure_ascii=False, indent=1), encoding="utf-8")
     DASHBOARD_PATH.parent.mkdir(exist_ok=True)
     render_dashboard(state, cfg, DASHBOARD_PATH)
-    print(f"state.json 저장 (누적 {len(known)}건), 대시보드 갱신: {DASHBOARD_PATH}")
+    print(f"state.json 저장 (관심단지 누적 {len(known)}건), 대시보드 갱신: {DASHBOARD_PATH}")
 
 
 if __name__ == "__main__":

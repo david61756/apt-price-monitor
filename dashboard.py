@@ -10,6 +10,8 @@
 import json
 from pathlib import Path
 
+from matching import matching_complex_name
+
 _SGG_PATH = Path(__file__).resolve().parent / "sgg_codes.json"
 
 _TEMPLATE = """<!DOCTYPE html>
@@ -81,11 +83,18 @@ _TEMPLATE = """<!DOCTYPE html>
   #saveStatus { margin-top: 12px; font-size: 13px; white-space: pre-wrap; }
   .note { font-size: 12px; color: var(--sub); background: #f9fafb; border: 1px solid var(--line);
           border-radius: 8px; padding: 10px 12px; margin-top: 14px; line-height: 1.7; }
+  .warn { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 12px;
+          padding: 14px 16px; margin-bottom: 20px; font-size: 13px; color: #92400e; line-height: 1.7; }
+  .warn b { color: #b45309; }
+  .warn code { background: #fef3c7; padding: 1px 5px; border-radius: 4px; }
+  .warn a { color: #b45309; }
 </style>
 </head>
 <body>
 <h1>🏠 아파트 실거래가 모니터</h1>
-<div class="sub">마지막 갱신: __LAST_RUN__ · 누적 기록 __TOTAL__건</div>
+<div class="sub">마지막 갱신: __LAST_RUN__ · 관심단지 __WATCHED__곳 · 표시 거래 __TOTAL__건</div>
+
+<div id="warnBanner"></div>
 
 <div class="tabs">
   <button id="tabBtnDash" class="active" onclick="showTab('dash')">📊 대시보드</button>
@@ -135,18 +144,20 @@ _TEMPLATE = """<!DOCTYPE html>
       <div><label>저장소 이름</label><input type="text" id="ghRepo"></div>
       <div><label>GitHub 토큰 (repo·workflow 권한)</label><input type="password" id="ghToken" placeholder="ghp_..."></div>
     </div>
-    <button class="btn primary" onclick="saveToGitHub()">💾 GitHub에 저장 (config.yaml 커밋)</button>
-    <button class="btn" onclick="runNow()">▶ 모니터링 지금 실행</button>
+    <button class="btn primary" onclick="saveAndRun()">💾 저장하고 지금 실행 ▶</button>
+    <button class="btn" onclick="saveToGitHub()">저장만 (커밋)</button>
+    <button class="btn" onclick="runNow()">실행만</button>
     <button class="btn" onclick="copyYaml()">📋 YAML 복사</button>
     <a class="btn" id="editLink" style="text-decoration:none;display:inline-block" target="_blank">✏️ GitHub에서 직접 편집</a>
     <div id="saveStatus"></div>
     <div class="note">
-      · 저장하면 config.yaml이 GitHub에 바로 커밋되고, <b>다음 자동 실행(매일 09:00 KST)부터 반영</b>됩니다.
-        바로 반영하려면 "모니터링 지금 실행"을 누르세요 (1~2분 후 이 페이지 새로고침).<br>
-      · 토큰은 이 브라우저(localStorage)에만 저장되며 저장소에는 올라가지 않습니다.
-        공용 PC에서는 입력하지 마세요.<br>
-      · 지역명이 모호하면(예: 고성군) 시도명을 포함하거나 법정동코드 5자리를 직접 입력하세요.
-        입력란 아래에 변환된 코드가 즉시 표시됩니다.
+      · <b>"저장하고 지금 실행"</b>을 누르면 config.yaml 커밋 + 모니터링 실행이 한 번에 됩니다.
+        <b>저장만으로는 현황판이 바뀌지 않습니다</b> — 실제 데이터 조회·집계가 실행되어야 반영됩니다.<br>
+      · 실행 후 <b>2~3분 뒤</b> 이 페이지를 <b>새로고침</b>하면 결과가 보입니다
+        (GitHub Pages 갱신에 약간 시간이 걸리며, 안 보이면 Shift+새로고침으로 캐시를 비우세요).<br>
+      · 단지명(match)은 <b>실제 등록명과 정확히 일치</b>해야 합니다(괄호·'촌' 등 포함).
+        헷갈리면 로컬에서 <code>python search.py "지역명" 키워드</code> 로 실제 단지명·전용면적을 확인하세요.<br>
+      · 토큰은 이 브라우저(localStorage)에만 저장되며 저장소에는 올라가지 않습니다. 공용 PC에서는 입력하지 마세요.
     </div>
   </div>
 </div>
@@ -155,6 +166,7 @@ _TEMPLATE = """<!DOCTYPE html>
 const DEALS = __DEALS__;
 const CONFIG = __CONFIG__;
 const SGG = __SGG__;
+const WARNINGS = __WARNINGS__;
 
 // ============================== 공통 유틸 ==============================
 function fmtMoney(man) {
@@ -172,6 +184,25 @@ function showTab(name) {
   document.getElementById("tabBtnDash").classList.toggle("active", name === "dash");
   document.getElementById("tabBtnManage").classList.toggle("active", name === "manage");
 }
+
+// 매칭 0건 단지 경고 배너
+(function renderWarnings() {
+  if (!WARNINGS.length) return;
+  const items = WARNINGS.map(w =>
+    `<li><b>${w.name}</b> — 지역 <code>${w.region}</code>, ` +
+    `단지명 <code>${(w.match||[]).join(", ") || "(없음)"}</code>` +
+    (w.areas && w.areas.length ? `, 전용 <code>${w.areas.join(", ")}㎡</code>` : "") +
+    `</li>`).join("");
+  document.getElementById("warnBanner").innerHTML = `
+    <div class="warn">
+      ⚠ <b>아래 ${WARNINGS.length}개 단지는 매칭된 거래가 0건</b>입니다.
+      단지명(match)이 실제 등록명과 다르거나, 전용면적(areas)이 실제와 다를 수 있습니다.
+      <ul style="margin:8px 0 4px">${items}</ul>
+      해결: <b>⚙️ 단지 관리</b> 탭에서 값을 수정하거나, 로컬에서
+      <code>python search.py "지역명" 키워드</code> 로 실제 단지명·전용면적을 확인하세요.
+      (실거래 신고가 없으면 일시적으로 0건일 수도 있습니다.)
+    </div>`;
+})();
 
 // 그룹별(단지+면적대) 정렬된 거래
 const groups = {};
@@ -442,14 +473,19 @@ function persistFields() {
   localStorage.setItem("gh_token", tokenEl.value.trim());
 }
 
-async function saveToGitHub() {
-  const {complexes, errors} = gatherCfg();
-  if (errors.length) { setStatus("입력 오류:\\n· " + errors.join("\\n· "), false); return; }
+function checkCreds() {
   if (!ownerEl.value || !repoEl.value || !tokenEl.value.trim()) {
-    setStatus("저장소 소유자/이름/토큰을 모두 입력하세요", false); return;
+    setStatus("저장소 소유자/이름/토큰을 모두 입력하세요", false); return false;
   }
+  return true;
+}
+
+async function saveToGitHub(silent) {
+  const {complexes, errors} = gatherCfg();
+  if (errors.length) { setStatus("입력 오류:\\n· " + errors.join("\\n· "), false); return false; }
+  if (!checkCreds()) return false;
   persistFields();
-  setStatus("저장 중...", true);
+  if (!silent) setStatus("저장 중...", true);
   try {
     const yaml = buildYaml(complexes);
     const cur = await gh("contents/config.yaml?ref=main");
@@ -458,22 +494,31 @@ async function saveToGitHub() {
     await gh("contents/config.yaml", {method: "PUT", body: JSON.stringify({
       message: "config: 대시보드에서 관심단지 수정",
       content: btoa(bin), sha: cur.sha, branch: "main"})});
-    setStatus(`✅ 저장 완료 (단지 ${complexes.length}개). 다음 자동 실행부터 반영됩니다.\\n` +
-              `바로 반영하려면 "모니터링 지금 실행"을 누르세요.`, true);
-  } catch (e) { setStatus("❌ 저장 실패: " + e.message, false); }
+    if (!silent) setStatus(`✅ 저장 완료 (단지 ${complexes.length}개). ` +
+      `현황판에 반영하려면 "실행만" 또는 "저장하고 지금 실행"을 누르세요.`, true);
+    return true;
+  } catch (e) { setStatus("❌ 저장 실패: " + e.message, false); return false; }
 }
 
-async function runNow() {
-  if (!ownerEl.value || !repoEl.value || !tokenEl.value.trim()) {
-    setStatus("저장소 소유자/이름/토큰을 모두 입력하세요", false); return;
-  }
+async function runNow(silent) {
+  if (!checkCreds()) return false;
   persistFields();
-  setStatus("실행 요청 중...", true);
+  if (!silent) setStatus("실행 요청 중...", true);
   try {
     await gh("actions/workflows/monitor.yml/dispatches",
              {method: "POST", body: JSON.stringify({ref: "main"})});
-    setStatus("✅ 실행 요청 완료. 1~2분 후 이 페이지를 새로고침하면 결과가 반영됩니다.", true);
-  } catch (e) { setStatus("❌ 실행 요청 실패: " + e.message, false); }
+    setStatus("✅ 실행을 요청했습니다. 약 1~2분간 데이터를 조회·집계하고, " +
+              "2~3분 뒤 이 페이지를 새로고침(Shift+새로고침)하면 현황판에 반영됩니다.", true);
+    return true;
+  } catch (e) { setStatus("❌ 실행 요청 실패: " + e.message, false); return false; }
+}
+
+async function saveAndRun() {
+  if (!checkCreds()) return;
+  setStatus("① config 저장 중...", true);
+  if (!(await saveToGitHub(true))) return;
+  setStatus("② 저장 완료. 모니터링 실행 요청 중...", true);
+  await runNow(true);
 }
 
 function copyYaml() {
@@ -490,22 +535,45 @@ function copyYaml() {
 
 
 def render_dashboard(state, cfg, out_path):
-    deals = sorted(state.get("deals", {}).values(), key=lambda d: d["date"])
+    complexes = cfg.get("complexes", [])
+    all_deals = sorted(state.get("deals", {}).values(), key=lambda d: d["date"])
+
+    # 현재 config에 매칭되는 거래만 표시 (관심단지에서 빠진 옛 단지 데이터는 숨김).
+    # 거래의 complex 이름도 현재 config 기준으로 다시 태깅(단지명 변경 대응).
+    visible, counts = [], {c["name"]: 0 for c in complexes}
+    for d in all_deals:
+        name = matching_complex_name(d, complexes)
+        if name is not None:
+            visible.append({**d, "complex": name})
+            counts[name] += 1
+
+    # 매칭 0건 단지 → 경고 배너
+    warnings = []
+    for c in complexes:
+        if counts.get(c["name"], 0) == 0:
+            ref = c.get("region") or c.get("lawd_cd")
+            warnings.append({
+                "name": c["name"], "region": ref,
+                "match": c.get("match") or [], "areas": c.get("areas") or [],
+            })
+
     config_pub = {
         "complexes": [
             {"name": c["name"],
              **({"region": c["region"]} if c.get("region") else {"lawd_cd": c["lawd_cd"]}),
              "match": c.get("match") or [],
              "areas": c.get("areas") or []}
-            for c in cfg.get("complexes", [])
+            for c in complexes
         ],
         "options": cfg.get("options") or {},
     }
     sgg = json.loads(_SGG_PATH.read_text(encoding="utf-8"))
     html = (_TEMPLATE
             .replace("__LAST_RUN__", state.get("last_run", "-"))
-            .replace("__TOTAL__", str(len(deals)))
-            .replace("__DEALS__", json.dumps(deals, ensure_ascii=False))
+            .replace("__TOTAL__", str(len(visible)))
+            .replace("__WATCHED__", str(len(complexes)))
+            .replace("__DEALS__", json.dumps(visible, ensure_ascii=False))
+            .replace("__WARNINGS__", json.dumps(warnings, ensure_ascii=False))
             .replace("__CONFIG__", json.dumps(config_pub, ensure_ascii=False))
             .replace("__SGG__", json.dumps(sgg, ensure_ascii=False)))
     out_path.write_text(html, encoding="utf-8")
