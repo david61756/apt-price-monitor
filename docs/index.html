@@ -244,6 +244,13 @@ DEALS.slice().sort((a,b) => a.date.localeCompare(b.date)).forEach(d => {
 const activeOf = g => g.filter(d => !d.cancelled);
 
 // ============================== 요약 카드 ==============================
+// 단지(config)별 현재 최저호가 — 매매 카드에 함께 구분 표시
+const askMinByComplex = {};
+QUOTES.filter(q => q.status === "active").forEach(q => {
+  if (askMinByComplex[q.complex] == null || q.price < askMinByComplex[q.complex])
+    askMinByComplex[q.complex] = q.price;
+});
+
 const cardsEl = document.getElementById("cards");
 Object.entries(groups).forEach(([key, g]) => {
   const act = activeOf(g);
@@ -256,12 +263,22 @@ Object.entries(groups).forEach(([key, g]) => {
              : diff < 0 ? `<span class="diff-down">▼ ${fmtMoney(-diff)} (${pct}%)</span>`
              : "<span>― 보합</span>";
   }
+  // 같은 단지의 현재 최저호가(있으면) — 실거래와 구분해 표시
+  const ask = askMinByComplex[last.complex];
+  let askHtml = "";
+  if (ask != null) {
+    const gap = ask - last.amount, p = (gap / last.amount * 100).toFixed(1);
+    const cls = gap > 0 ? "diff-up" : gap < 0 ? "diff-down" : "";
+    askHtml = `<div class="meta">🏷️ 현재 최저호가 <b>${fmtMoney(ask)}</b>`
+      + ` <span class="${cls}">(${gap >= 0 ? "+" : ""}${p}%)</span></div>`;
+  }
   cardsEl.insertAdjacentHTML("beforeend", `
     <div class="card">
       <h3>${last.apt_nm}</h3>
       <div class="band">전용 ${Math.floor(last.area)}㎡대 · ${last.umd_nm} · 기록 ${act.length}건</div>
-      <div class="price">${fmtMoney(last.amount)}원</div>
+      <div class="price">${fmtMoney(last.amount)}원 <span class="meta">실거래</span></div>
       <div>${diffHtml}</div>
+      ${askHtml}
       <div class="meta">최근 계약 ${last.date} · ${last.floor || "?"}층</div>
     </div>`);
 });
