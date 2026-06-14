@@ -93,7 +93,7 @@ _TEMPLATE = """<!DOCTYPE html>
 </head>
 <body>
 <h1>🏠 아파트 실거래가 모니터</h1>
-<div class="sub">마지막 갱신: __LAST_RUN__ · 관심단지 __WATCHED__곳 · 표시 거래 __TOTAL__건</div>
+<div class="sub">매매 갱신: __LAST_RUN__ · 관심단지 __WATCHED__곳 · 표시 거래 __TOTAL__건<span id="quotesRunHdr"></span></div>
 
 <div id="warnBanner"></div>
 
@@ -413,6 +413,11 @@ renderTable();
   const hasQuotes = QUOTES.length > 0;
   document.getElementById("quotesEmpty").style.display = hasQuotes ? "none" : "";
   document.getElementById("quotesBody").style.display = hasQuotes ? "" : "none";
+  // 헤더에 호가 마지막 수집 시각 표시 (가격 변동이 없어도 '언제 수집했는지' 보이도록)
+  if (QUOTES_META.last_run) {
+    document.getElementById("quotesRunHdr").textContent =
+      " · 호가 수집: " + QUOTES_META.last_run.slice(0, 16).replace("T", " ");
+  }
   if (QUOTES_META.tracking_since) {
     document.getElementById("qTrackSince").textContent =
       "· 호가 추적 시작 " + QUOTES_META.tracking_since;
