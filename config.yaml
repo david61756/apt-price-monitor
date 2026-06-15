@@ -1,37 +1,28 @@
-# 관심 단지 설정
-#
-# 각 단지 항목:
-#   name:    표시용 이름 (필수)
-#   region:  시군구명 — 법정동코드 5자리로 자동 변환 (예: "경기도 용인시 수지구")
-#   lawd_cd: 법정동코드 5자리 직접 지정 (region 대신 사용 가능)
-#   match:   단지명(aptNm) 부분일치 키워드. 실제 등록명과 정확히 일치해야 함(괄호 포함!)
-#   areas:   전용면적 필터(㎡ 정수 대역). [59]면 59.0~59.99㎡만. 생략하면 전체 면적
-#   naver_id: (선택) 네이버페이 부동산 단지번호. 있으면 호가도 수집. 확인: python naver_lookup.py "단지명"
-#
-# ⚠ 실제 단지명/전용면적이 헷갈리면: python search.py "지역명" 키워드  로 확인하세요.
+# 관심 단지 설정 — 대시보드 '단지 관리' 탭에서 생성됨
+# region: 시군구명(자동 변환) / lawd_cd: 법정동코드 5자리 직접 지정
+# match: 단지명 부분일치 키워드 / areas: 전용면적 ㎡ 정수 대역(생략 시 전체)
+
 complexes:
   - name: "신정7단지(상록) 전용59㎡(24평)"
     region: "경기도 용인시 수지구"
-    match: ["신정7단지"]      # 실제 등록명: 신정7단지(상록)공무원
-    areas: [59]               # 59.4㎡ = 24평형 (85㎡=33평형도 있음)
+    match: ["신정7단지"]
+    areas: [59]
     naver_id: "11231"
-
   - name: "수지삼성2차 전용74㎡(28평)"
     region: "경기도 용인시 수지구"
     match: ["수지삼성2차"]
-    areas: [74]               # 74.1㎡ = 28평형 (60㎡=24평형도 있음)
+    areas: [74]
     naver_id: "2220"
-
   - name: "이매촌삼성 전용73㎡(27평)"
     region: "경기도 성남시 분당구"
-    match: ["이매촌(삼성)"]    # 실제 등록명에 '촌'과 괄호 포함
-    areas: [73]               # 73.2㎡ = 27평형
+    match: ["이매촌(삼성)"]
+    areas: [73]
     naver_id: "2493"
 
 options:
-  months_back: 1            # 이번 달 + 과거 N개월 조회 (신고 지연 대비)
-  notify_cancellations: true  # 거래 해제(취소)도 알림
+  months_back: 1
+  notify_cancellations: true
 
-naver:                      # 호가(매물) 수집 옵션 (naver_id가 있는 단지만 대상)
-  trade_types: ["A1"]       # 수집할 거래유형 (A1=매매, B1=전세, B2=월세). 기본 매매만
-  notify: true              # 호가 신규/인하/소멸 텔레그램 알림
+naver:
+  trade_types: ["A1"]
+  notify: true
