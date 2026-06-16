@@ -45,12 +45,12 @@ _TEMPLATE = """<!DOCTYPE html>
   .card .price { font-size: 22px; font-weight: 700; }
   .card .meta { font-size: 12px; color: var(--sub); margin-top: 6px; }
   .card .pyeong { font-size: 12px; color: var(--accent); font-weight: 600; margin-top: 4px; }
-  /* 매매 요약 카드: 클릭 시 가격추이·거래내역을 해당 단지로 필터(다시 클릭 시 해제) */
-  #cards .card { cursor: pointer; transition: box-shadow .12s, border-color .12s; }
-  #cards .card:hover { border-color: #94a3b8; }
-  #cards .card.sel { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent) inset; background: #f0fdfa; }
-  #cards .card .selhint { font-size: 11px; color: #94a3b8; margin-top: 8px; }
-  #cards .card.sel .selhint { color: var(--accent); }
+  /* 요약 카드: 클릭 시 가격추이·거래내역을 해당 단지로 필터(다시 클릭 시 해제). 매매·호가 공통 */
+  #cards .card, #qCards .card { cursor: pointer; transition: box-shadow .12s, border-color .12s; }
+  #cards .card:hover, #qCards .card:hover { border-color: #94a3b8; }
+  #cards .card.sel, #qCards .card.sel { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent) inset; background: #f0fdfa; }
+  #cards .card .selhint, #qCards .card .selhint { font-size: 11px; color: #94a3b8; margin-top: 8px; }
+  #cards .card.sel .selhint, #qCards .card.sel .selhint { color: var(--accent); }
   .diff-up { color: var(--up); font-weight: 600; }
   .diff-down { color: var(--down); font-weight: 600; }
   .section { background: var(--card); border: 1px solid var(--line);
@@ -496,11 +496,12 @@ renderTable();
     }
     const badge = (newCnt ? `🆕${newCnt} ` : "") + (cutCnt ? `🔻${cutCnt}` : "");
     qCardsEl.insertAdjacentHTML("beforeend", `
-      <div class="card">
+      <div class="card" data-name="${esc(name)}">
         <h3>${esc(name)}</h3>
         <div class="band">활성 매물 ${act.length}건 ${badge ? "· " + badge : ""}</div>
         <div class="price">${fmtMoney(minP)}원 <span class="meta">최저호가</span></div>
         ${gapHtml}
+        <div class="selhint">▸ 클릭하면 이 단지로 호가추이·목록 보기</div>
       </div>`);
   });
 
@@ -579,7 +580,7 @@ renderTable();
     s += "</svg>";
     el.innerHTML = s + `<div class="legend">실선=최저호가 · 점선=평균호가 · <span style="color:#dc2626">○</span>=실거래(체결). 점에 마우스를 올리면 상세.</div>`;
   }
-  qSel.addEventListener("change", () => drawQChart(qSel.value));
+  qSel.addEventListener("change", () => { clearQCardSel(); drawQChart(qSel.value); });
   if (qSel.options.length) { qSel.value = qSel.options[0].value; drawQChart(qSel.value); }
 
   // ---- ③ 현재 호가 목록 (unit_key 묶음)
@@ -657,9 +658,32 @@ renderTable();
     document.getElementById("qRowCnt").textContent = `${shown}건`;
   }
   function fmtYmd(s) { return s && s.length === 8 ? `${s.slice(2, 4)}.${s.slice(4, 6)}.${s.slice(6)}` : "-"; }
-  qAptSel.addEventListener("change", renderQTable);
+  qAptSel.addEventListener("change", () => { clearQCardSel(); renderQTable(); });
   document.getElementById("qShowGone").addEventListener("change", renderQTable);
   renderQTable();
+
+  // 호가 카드 클릭 → 호가추이·목록을 해당 단지로 필터(재클릭 시 해제, 토글)
+  let selQCard = null;
+  function clearQCardSel() {
+    selQCard = null;
+    qCardsEl.querySelectorAll(".card.sel").forEach(c => c.classList.remove("sel"));
+  }
+  qCardsEl.addEventListener("click", e => {
+    const card = e.target.closest(".card");
+    if (!card) return;
+    const name = card.dataset.name;
+    if (selQCard === name) {                          // 토글 해제 → 전체로 복귀
+      clearQCardSel();
+      if (qSel.options.length) { qSel.value = qSel.options[0].value; drawQChart(qSel.value); }
+      qAptSel.value = "__all__"; renderQTable();
+      return;
+    }
+    selQCard = name;
+    qCardsEl.querySelectorAll(".card").forEach(c => c.classList.toggle("sel", c === card));
+    if ([...qSel.options].some(o => o.value === name)) { qSel.value = name; drawQChart(name); }
+    qAptSel.value = name; renderQTable();
+    document.getElementById("qChart").scrollIntoView({ behavior: "smooth", block: "center" });
+  });
 
   // ---- ④ 호가 변동·소멸 이력
   const hist = [];
