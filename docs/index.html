@@ -298,14 +298,24 @@ Object.entries(groups).forEach(([key, g]) => {
   // 평단가(만원/평) — 면적 다른 단지 비교용 핵심 지표
   const pyeong = last.area ? Math.round(last.amount * 3.3058 / last.area) : 0;
   const pyeongHtml = pyeong ? `<div class="pyeong">평단가 ${pyeong.toLocaleString()}만/평</div>` : "";
+  // #2 신고가/신저가 배지 — 추적기간 내 최신 거래가 최고/최저일 때(표본 5건 이상에서만)
+  const amts = act.map(d => d.amount);
+  const isHigh = act.length >= 5 && last.amount === Math.max(...amts);
+  const isLow = act.length >= 5 && last.amount === Math.min(...amts);
+  const recBadge = isHigh ? `<span class="badge" style="background:#fee2e2;color:#b91c1c">🔺 신고가</span>`
+                 : isLow ? `<span class="badge" style="background:#dbeafe;color:#1d4ed8">🔻 신저가</span>` : "";
+  // #1 표본 부족 경고 — 거래 5건 미만이면 등락/호가갭이 불안정함을 고지
+  const thinHtml = act.length < 5
+    ? `<div class="meta" style="color:#b45309">⚠ 실거래 표본 ${act.length}건 · 추세·갭은 참고용</div>` : "";
   cardsEl.insertAdjacentHTML("beforeend", `
     <div class="card" data-key="${esc(key)}" data-apt="${esc(last.apt_nm)}">
-      <h3>${esc(last.apt_nm)}</h3>
+      <h3>${esc(last.apt_nm)} ${recBadge}</h3>
       <div class="band">전용 ${Math.floor(last.area)}㎡대 · ${esc(last.umd_nm)} · 기록 ${act.length}건</div>
       <div class="price">${fmtMoney(last.amount)}원 <span class="meta">실거래</span></div>
       <div>${diffHtml}</div>
       ${pyeongHtml}
       ${askHtml}
+      ${thinHtml}
       <div class="meta">최근 계약 ${last.date} · ${last.floor || "?"}층</div>
       <div class="selhint">▸ 클릭하면 이 단지로 차트·내역 보기</div>
     </div>`);
@@ -344,38 +354,57 @@ function drawChart(key) {
   const data = activeOf(groups[key] || []);
   const el = document.getElementById("chart");
   if (!data.length) { el.innerHTML = "<div class='legend'>데이터 없음</div>"; return; }
-  const W = 860, H = 300, P = {l: 70, r: 20, t: 16, b: 40};
+  const W = 880, H = 330, P = {l: 78, r: 58, t: 26, b: 42};
   const xs = data.map(d => new Date(d.date).getTime());
   const ys = data.map(d => d.amount);
   const x0 = Math.min(...xs), x1 = Math.max(...xs) || x0 + 1;
   const yMin = Math.min(...ys), yMax = Math.max(...ys);
-  const pad = Math.max((yMax - yMin) * 0.15, yMax * 0.02, 500);
+  const pad = Math.max((yMax - yMin) * 0.18, yMax * 0.03, 500);
   const y0 = yMin - pad, y1 = yMax + pad;
   const X = t => xs.length > 1 && x1 > x0
     ? P.l + (t - x0) / (x1 - x0) * (W - P.l - P.r) : (P.l + W - P.r) / 2;
   const Y = v => H - P.b - (v - y0) / (y1 - y0) * (H - P.t - P.b);
+  const pts = data.map(d => [X(new Date(d.date).getTime()), Y(d.amount)]);
   let s = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px">`;
+  s += `<defs><linearGradient id="gradDeal" x1="0" y1="0" x2="0" y2="1">`
+     + `<stop offset="0" stop-color="#0f766e" stop-opacity="0.20"/>`
+     + `<stop offset="1" stop-color="#0f766e" stop-opacity="0"/></linearGradient></defs>`;
   for (let i = 0; i <= 4; i++) {
     const v = y0 + (y1 - y0) * i / 4, y = Y(v);
-    s += `<line x1="${P.l}" y1="${y}" x2="${W - P.r}" y2="${y}" stroke="#e5e7eb"/>`
-       + `<text x="${P.l - 8}" y="${y + 4}" text-anchor="end" font-size="11" fill="#6b7280">${fmtMoney(Math.round(v))}</text>`;
+    s += `<line x1="${P.l}" y1="${y}" x2="${W - P.r}" y2="${y}" stroke="#eef2f7"/>`
+       + `<text x="${P.l - 8}" y="${y + 4}" text-anchor="end" font-size="11" fill="#9ca3af">${fmtMoney(Math.round(v))}</text>`;
   }
-  if (data.length > 1) {
-    const pts = data.map(d => `${X(new Date(d.date).getTime())},${Y(d.amount)}`).join(" ");
-    s += `<polyline points="${pts}" fill="none" stroke="#0f766e" stroke-width="2"/>`;
+  if (pts.length > 1) {
+    const poly = pts.map(p => p.join(",")).join(" ");
+    s += `<polygon points="${pts[0][0]},${H - P.b} ${poly} ${pts[pts.length - 1][0]},${H - P.b}" fill="url(#gradDeal)"/>`;
+    s += `<polyline points="${poly}" fill="none" stroke="#0f766e" stroke-width="2.5" stroke-linejoin="round"/>`;
   }
-  data.forEach(d => {
-    const cx = X(new Date(d.date).getTime()), cy = Y(d.amount);
-    s += `<circle cx="${cx}" cy="${cy}" r="4" fill="#0f766e">`
+  data.forEach((d, i) => {
+    s += `<circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="3.5" fill="#0f766e">`
        + `<title>${d.date} · ${d.floor || "?"}층 · ${fmtMoney(d.amount)}원</title></circle>`;
   });
-  const labelStep = Math.max(1, Math.ceil(data.length / 8));
+  // 최고·최저 지점 라벨 (표본 3건 이상)
+  if (data.length >= 3 && yMax !== yMin) {
+    const mi = ys.indexOf(yMax), ni = ys.indexOf(yMin);
+    s += `<text x="${pts[mi][0]}" y="${pts[mi][1] - 9}" text-anchor="middle" font-size="10" fill="#dc2626">최고 ${fmtMoney(yMax)}</text>`;
+    s += `<text x="${pts[ni][0]}" y="${pts[ni][1] + 16}" text-anchor="middle" font-size="10" fill="#2563eb">최저 ${fmtMoney(yMin)}</text>`;
+  }
+  // 최신 거래 강조 + 값 배지
+  const last = data[data.length - 1], lx = pts[pts.length - 1][0], ly = pts[pts.length - 1][1];
+  s += `<circle cx="${lx}" cy="${ly}" r="5.5" fill="#0f766e" stroke="#fff" stroke-width="2"/>`;
+  const lbl = fmtMoney(last.amount) + "원", bw = lbl.length * 7 + 16;
+  let bx = lx + 10; if (bx + bw > W - 2) bx = lx - 10 - bw;
+  const by = Math.min(Math.max(ly - 11, P.t), H - P.b - 22);
+  s += `<rect x="${bx}" y="${by}" width="${bw}" height="22" rx="6" fill="#0f766e"/>`
+     + `<text x="${bx + bw / 2}" y="${by + 15}" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">${lbl}</text>`;
+  let lastLx = -999;
   data.forEach((d, i) => {
-    if (i % labelStep) return;
-    s += `<text x="${X(new Date(d.date).getTime())}" y="${H - P.b + 18}" text-anchor="middle" font-size="11" fill="#6b7280">${d.date.slice(2)}</text>`;
+    if (i !== data.length - 1 && pts[i][0] - lastLx < 60) return;
+    lastLx = pts[i][0];
+    s += `<text x="${pts[i][0]}" y="${H - P.b + 18}" text-anchor="middle" font-size="11" fill="#9ca3af">${d.date.slice(2)}</text>`;
   });
   s += "</svg>";
-  el.innerHTML = s + `<div class="legend">점 위에 마우스를 올리면 층·금액이 표시됩니다. 해제 거래는 제외.</div>`;
+  el.innerHTML = s + `<div class="legend"><span style="color:#0f766e">●</span> 실거래 추이 · 최신가 강조 · 점에 마우스를 올리면 층·금액. 해제 거래 제외.</div>`;
 }
 sel.addEventListener("change", () => { clearCardSel(); drawChart(sel.value); });
 if (sel.options.length) { sel.value = sel.options[0].value; drawChart(sel.value); }
@@ -474,6 +503,14 @@ renderTable();
     if (!act.length) return;
     const prices = act.map(q => q.price);
     const minP = Math.min(...prices);
+    const maxP = Math.max(...prices);
+    // #4 호가 범위(최저~최고) — 매도자 기대 분포
+    const rangeHtml = maxP > minP
+      ? `<div class="meta">호가 범위 ${fmtMoney(minP)} ~ ${fmtMoney(maxP)}</div>` : "";
+    // #3 평단가(최저호가 기준) — 매매 카드와 동일 지표
+    const cheap = act.reduce((a, b) => b.price < a.price ? b : a);
+    const pyq = cheap.area ? Math.round(minP * 3.3058 / cheap.area) : 0;
+    const pyeongQHtml = pyq ? `<div class="pyeong">최저호가 평단가 ${pyq.toLocaleString()}만/평</div>` : "";
     const newCnt = act.filter(q => isRecent(q.first_seen)).length;
     const cutCnt = act.filter(q => q.price_history && q.price_history.length >= 2 &&
       q.price_history[q.price_history.length - 1].price < q.price_history[q.price_history.length - 2].price).length;
@@ -493,6 +530,8 @@ renderTable();
         <h3>${esc(name)}</h3>
         <div class="band">활성 매물 ${act.length}건 ${badge ? "· " + badge : ""}</div>
         <div class="price">${fmtMoney(minP)}원 <span class="meta">최저호가</span></div>
+        ${rangeHtml}
+        ${pyeongQHtml}
         ${gapHtml}
         <div class="selhint">▸ 클릭하면 이 단지로 호가추이·목록 보기</div>
       </div>`);
@@ -531,47 +570,60 @@ renderTable();
     }).filter(Boolean);
     const deals = DEALS.filter(d => d.complex === name && !d.cancelled);
     if (!series.length && !deals.length) { el.innerHTML = "<div class='legend'>데이터 없음</div>"; return; }
-    const W = 860, H = 300, P = { l: 70, r: 20, t: 16, b: 40 };
+    const W = 880, H = 330, P = { l: 78, r: 58, t: 26, b: 42 };
     const allT = series.map(s => new Date(s.d).getTime())
       .concat(deals.map(d => new Date(d.date).getTime()));
     const allV = series.flatMap(s => [s.min, s.avg]).concat(deals.map(d => d.amount));
     const x0 = Math.min(...allT), x1 = Math.max(...allT) || x0 + 1;
     const vMin = Math.min(...allV), vMax = Math.max(...allV);
-    const pad = Math.max((vMax - vMin) * 0.15, vMax * 0.02, 500);
+    const pad = Math.max((vMax - vMin) * 0.18, vMax * 0.03, 500);
     const y0 = vMin - pad, y1 = vMax + pad;
     const X = t => x1 > x0 ? P.l + (t - x0) / (x1 - x0) * (W - P.l - P.r) : (P.l + W - P.r) / 2;
     const Y = v => H - P.b - (v - y0) / (y1 - y0) * (H - P.t - P.b);
     let s = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px">`;
+    s += `<defs><linearGradient id="gradQ" x1="0" y1="0" x2="0" y2="1">`
+       + `<stop offset="0" stop-color="#0f766e" stop-opacity="0.18"/>`
+       + `<stop offset="1" stop-color="#0f766e" stop-opacity="0"/></linearGradient></defs>`;
     for (let i = 0; i <= 4; i++) {
       const v = y0 + (y1 - y0) * i / 4, y = Y(v);
-      s += `<line x1="${P.l}" y1="${y}" x2="${W - P.r}" y2="${y}" stroke="#e5e7eb"/>`
-        + `<text x="${P.l - 8}" y="${y + 4}" text-anchor="end" font-size="11" fill="#6b7280">${fmtMoney(Math.round(v))}</text>`;
+      s += `<line x1="${P.l}" y1="${y}" x2="${W - P.r}" y2="${y}" stroke="#eef2f7"/>`
+        + `<text x="${P.l - 8}" y="${y + 4}" text-anchor="end" font-size="11" fill="#9ca3af">${fmtMoney(Math.round(v))}</text>`;
     }
-    const line = (key, color, dash) => {
-      if (series.length < 2) return "";
-      const pts = series.map(s2 => `${X(new Date(s2.d).getTime())},${Y(s2[key])}`).join(" ");
-      return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2"${dash ? ` stroke-dasharray="${dash}"` : ""}/>`;
-    };
-    s += line("min", "#0f766e", "");
-    s += line("avg", "#94a3b8", "4 3");
-    series.forEach(s2 => {
-      s += `<circle cx="${X(new Date(s2.d).getTime())}" cy="${Y(s2.min)}" r="3.5" fill="#0f766e">`
+    const mpts = series.map(s2 => [X(new Date(s2.d).getTime()), Y(s2.min)]);
+    if (mpts.length > 1) {
+      const poly = mpts.map(p => p.join(",")).join(" ");
+      s += `<polygon points="${mpts[0][0]},${H - P.b} ${poly} ${mpts[mpts.length - 1][0]},${H - P.b}" fill="url(#gradQ)"/>`;
+      s += `<polyline points="${poly}" fill="none" stroke="#0f766e" stroke-width="2.5" stroke-linejoin="round"/>`;
+      const apoly = series.map(s2 => `${X(new Date(s2.d).getTime())},${Y(s2.avg)}`).join(" ");
+      s += `<polyline points="${apoly}" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="4 3"/>`;
+    }
+    series.forEach((s2, i) => {
+      s += `<circle cx="${mpts[i][0]}" cy="${mpts[i][1]}" r="3.5" fill="#0f766e">`
         + `<title>${s2.d} · 최저호가 ${fmtMoney(s2.min)}원</title></circle>`;
     });
     deals.forEach(d => {
       const cx = X(new Date(d.date).getTime()), cy = Y(d.amount);
-      s += `<circle cx="${cx}" cy="${cy}" r="4" fill="none" stroke="#dc2626" stroke-width="2">`
+      s += `<circle cx="${cx}" cy="${cy}" r="4.5" fill="none" stroke="#dc2626" stroke-width="2">`
         + `<title>실거래 ${d.date} · ${fmtMoney(d.amount)}원</title></circle>`;
     });
+    if (mpts.length) {     // 최신 최저호가 강조 + 값 배지
+      const last = series[series.length - 1], lx = mpts[mpts.length - 1][0], ly = mpts[mpts.length - 1][1];
+      s += `<circle cx="${lx}" cy="${ly}" r="5.5" fill="#0f766e" stroke="#fff" stroke-width="2"/>`;
+      const lbl = fmtMoney(last.min) + "원", bw = lbl.length * 7 + 16;
+      let bx = lx + 10; if (bx + bw > W - 2) bx = lx - 10 - bw;
+      const by = Math.min(Math.max(ly - 11, P.t), H - P.b - 22);
+      s += `<rect x="${bx}" y="${by}" width="${bw}" height="22" rx="6" fill="#0f766e"/>`
+        + `<text x="${bx + bw / 2}" y="${by + 15}" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">${lbl}</text>`;
+    }
     let lastLabelX = -999;
-    series.forEach(s2 => {
+    series.forEach((s2, i) => {
       const lx = X(new Date(s2.d).getTime());
-      if (lx - lastLabelX < 64) return;          // 라벨 최소 간격 확보(겹침 방지)
+      if (i !== series.length - 1 && lx - lastLabelX < 60) return;
       lastLabelX = lx;
-      s += `<text x="${lx}" y="${H - P.b + 18}" text-anchor="middle" font-size="11" fill="#6b7280">${s2.d.slice(2)}</text>`;
+      s += `<text x="${lx}" y="${H - P.b + 18}" text-anchor="middle" font-size="11" fill="#9ca3af">${s2.d.slice(2)}</text>`;
     });
     s += "</svg>";
-    el.innerHTML = s + `<div class="legend">실선=최저호가 · 점선=평균호가 · <span style="color:#dc2626">○</span>=실거래(체결). 점에 마우스를 올리면 상세.</div>`;
+    el.innerHTML = s + `<div class="legend"><b style="color:#0f766e">▬</b> 최저호가 · <span style="color:#94a3b8">┄</span> 평균호가 · <span style="color:#dc2626">○</span> 실거래(체결) · 최신 최저호가 강조. 점에 마우스를 올리면 상세.</div>`;
   }
   qSel.addEventListener("change", () => { clearQCardSel(); drawQChart(qSel.value); });
   if (qSel.options.length) { qSel.value = qSel.options[0].value; drawQChart(qSel.value); }
