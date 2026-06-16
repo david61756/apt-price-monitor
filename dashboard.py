@@ -31,9 +31,10 @@ _TEMPLATE = """<!DOCTYPE html>
          font-family: "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", sans-serif; }
   h1 { font-size: 22px; margin: 0 0 4px; }
   .sub { color: var(--sub); font-size: 13px; margin-bottom: 16px; }
-  .tabs { display: flex; gap: 8px; margin-bottom: 18px; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
   .tabs button { padding: 9px 18px; border: 1px solid var(--line); border-radius: 99px;
-                 background: var(--card); font-size: 14px; cursor: pointer; color: var(--sub); }
+                 background: var(--card); font-size: 14px; cursor: pointer; color: var(--sub);
+                 white-space: nowrap; }
   .tabs button.active { background: var(--accent); border-color: var(--accent);
                         color: #fff; font-weight: 600; }
   .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -58,6 +59,13 @@ _TEMPLATE = """<!DOCTYPE html>
   .section h2 { font-size: 16px; margin: 0 0 12px; }
   svg text { font-family: inherit; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  /* 모바일: 표를 가로 스크롤(컬럼 글자단위 줄바꿈 방지), 탭/여백 축소 */
+  @media (max-width: 640px) {
+    body { padding: 14px; }
+    .tabs button { padding: 8px 13px; font-size: 13px; }
+    table { display: block; overflow-x: auto; white-space: nowrap; }
+    .cfg-row { grid-template-columns: 1fr; gap: 6px; }
+  }
   th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--line); }
   th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: left; }
   th { color: var(--sub); font-weight: 600; font-size: 12px; }
@@ -231,6 +239,8 @@ function fmtMoney(man) {
   return sign + rest.toLocaleString() + "만";
 }
 const groupKey = d => d.apt_nm + " " + Math.floor(d.area) + "㎡";
+// 전용면적 표시: 소수 2자리까지, 불필요한 0 제거 (74.1285 → 74.13, 73 → 73)
+const fmtArea = a => (+a || 0).toFixed(2).replace(/\\.?0+$/, "");
 
 // HTML 이스케이프 — 외부 문자열(네이버 단지명·중개사명 등)을 innerHTML에 넣기 전 적용(XSS 방지)
 function esc(s) {
@@ -409,7 +419,7 @@ function rowHtml(d) {
   }
   return `
     <tr class="${d.cancelled ? "cancelled" : ""}">
-      <td>${d.date}</td><td>${esc(d.apt_nm)}</td><td>${d.area}</td>
+      <td>${d.date}</td><td>${esc(d.apt_nm)}</td><td>${fmtArea(d.area)}</td>
       <td>${d.floor || "?"}</td><td><b>${fmtMoney(d.amount)}</b></td>
       <td>${diff}</td>
       <td>${d.cancelled ? '<span class="badge">해제</span>' : (d.dealing_gbn || "")}</td>
@@ -641,7 +651,7 @@ renderTable();
         tbody.insertAdjacentHTML("beforeend", `
           <tr class="${rep.status === "gone" ? "cancelled" : ""}" ${n > 1 ? `style="cursor:pointer" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'"` : ""}>
             <td>${fmtYmd(rep.confirm_ymd)}</td><td>${esc(rep.complex)}</td>
-            <td>${rep.area}</td><td>${dongFloor}</td>
+            <td>${fmtArea(rep.area)}</td><td>${dongFloor}</td>
             <td><b>${fmtMoney(rep.price)}</b></td><td>${qChangeBadge(rep) || "—"}</td>
             <td>${note}</td>
           </tr>`);
