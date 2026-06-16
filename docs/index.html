@@ -27,6 +27,13 @@
   .card .band { color: var(--sub); font-size: 12px; margin-bottom: 10px; }
   .card .price { font-size: 22px; font-weight: 700; }
   .card .meta { font-size: 12px; color: var(--sub); margin-top: 6px; }
+  .card .pyeong { font-size: 12px; color: var(--accent); font-weight: 600; margin-top: 4px; }
+  /* 매매 요약 카드: 클릭 시 가격추이·거래내역을 해당 단지로 필터(다시 클릭 시 해제) */
+  #cards .card { cursor: pointer; transition: box-shadow .12s, border-color .12s; }
+  #cards .card:hover { border-color: #94a3b8; }
+  #cards .card.sel { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent) inset; background: #f0fdfa; }
+  #cards .card .selhint { font-size: 11px; color: #94a3b8; margin-top: 8px; }
+  #cards .card.sel .selhint { color: var(--accent); }
   .diff-up { color: var(--up); font-weight: 600; }
   .diff-down { color: var(--down); font-weight: 600; }
   .section { background: var(--card); border: 1px solid var(--line);
@@ -278,15 +285,43 @@ Object.entries(groups).forEach(([key, g]) => {
     askHtml = `<div class="meta">🏷️ 현재 최저호가 <b>${fmtMoney(ask)}</b>`
       + ` <span class="${cls}">(${gap >= 0 ? "+" : ""}${p}%)</span></div>`;
   }
+  // 평단가(만원/평) — 면적 다른 단지 비교용 핵심 지표
+  const pyeong = last.area ? Math.round(last.amount * 3.3058 / last.area) : 0;
+  const pyeongHtml = pyeong ? `<div class="pyeong">평단가 ${pyeong.toLocaleString()}만/평</div>` : "";
   cardsEl.insertAdjacentHTML("beforeend", `
-    <div class="card">
+    <div class="card" data-key="${esc(key)}" data-apt="${esc(last.apt_nm)}">
       <h3>${esc(last.apt_nm)}</h3>
       <div class="band">전용 ${Math.floor(last.area)}㎡대 · ${esc(last.umd_nm)} · 기록 ${act.length}건</div>
       <div class="price">${fmtMoney(last.amount)}원 <span class="meta">실거래</span></div>
       <div>${diffHtml}</div>
+      ${pyeongHtml}
       ${askHtml}
       <div class="meta">최근 계약 ${last.date} · ${last.floor || "?"}층</div>
+      <div class="selhint">▸ 클릭하면 이 단지로 차트·내역 보기</div>
     </div>`);
+});
+
+// 카드 클릭 → 가격추이(차트)·거래내역(표)을 해당 단지로 필터. 같은 카드 재클릭 시 해제(토글).
+let selCardKey = null;
+function clearCardSel() {
+  selCardKey = null;
+  cardsEl.querySelectorAll(".card.sel").forEach(c => c.classList.remove("sel"));
+}
+cardsEl.addEventListener("click", e => {
+  const card = e.target.closest(".card");
+  if (!card) return;
+  const key = card.dataset.key, apt = card.dataset.apt;
+  if (selCardKey === key) {                         // 토글 해제 → 기본(전체)로 복귀
+    clearCardSel();
+    if (sel.options.length) { sel.value = sel.options[0].value; drawChart(sel.value); }
+    aptSel.value = "__all__"; renderTable();
+    return;
+  }
+  selCardKey = key;
+  cardsEl.querySelectorAll(".card").forEach(c => c.classList.toggle("sel", c === card));
+  if ([...sel.options].some(o => o.value === key)) { sel.value = key; drawChart(key); }
+  aptSel.value = apt; renderTable();
+  document.getElementById("chart").scrollIntoView({ behavior: "smooth", block: "center" });
 });
 
 // ============================== 가격 추이 차트 ==============================
@@ -332,7 +367,7 @@ function drawChart(key) {
   s += "</svg>";
   el.innerHTML = s + `<div class="legend">점 위에 마우스를 올리면 층·금액이 표시됩니다. 해제 거래는 제외.</div>`;
 }
-sel.addEventListener("change", () => drawChart(sel.value));
+sel.addEventListener("change", () => { clearCardSel(); drawChart(sel.value); });
 if (sel.options.length) { sel.value = sel.options[0].value; drawChart(sel.value); }
 
 // ============================== 거래 내역 (단지별 분류) ==============================
@@ -388,7 +423,7 @@ function renderTable() {
   }
   document.getElementById("rowCnt").textContent = `${shown}건 표시`;
 }
-aptSel.addEventListener("change", renderTable);
+aptSel.addEventListener("change", () => { clearCardSel(); renderTable(); });
 renderTable();
 
 // ============================== 호가 탭 ==============================
@@ -571,27 +606,36 @@ renderTable();
     const showGone = document.getElementById("qShowGone").checked;
     const tbody = document.getElementById("qRows");
     tbody.innerHTML = "";
-    let list = QUOTES.filter(q => mode === "__all__" || q.complex === mode);
-    if (!showGone) list = list.filter(q => q.status === "active");
     let shown = 0;
-    qReps(list).forEach(group => {
-      const rep = group[0], n = group.length;
-      const dongFloor = `${rep.building_name !== "?" ? esc(rep.building_name) + "동 " : ""}${esc(rep.floor_self) || "?"}층`;
-      const dupBadge = n > 1 ? ` <span class="badge" style="background:#f1f5f9;color:#475569;cursor:pointer">+${n - 1}곳</span>` : "";
-      tbody.insertAdjacentHTML("beforeend", `
-        <tr class="${rep.status === "gone" ? "cancelled" : ""}" ${n > 1 ? `style="cursor:pointer" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'"` : ""}>
-          <td>${statusBadge(rep)}</td><td>${dongFloor}${dupBadge}</td>
-          <td>${rep.area}</td><td>${esc(rep.direction) || "-"}</td>
-          <td><b>${fmtMoney(rep.price)}</b></td><td>${qChangeBadge(rep)}</td>
-          <td>${fmtYmd(rep.confirm_ymd)}</td><td>${esc(rep.realtor)}</td>
-        </tr>`);
-      if (n > 1) {
-        const inner = group.slice(1).map(q =>
-          `<div style="padding:2px 0">· ${fmtMoney(q.price)}원 — ${esc(q.realtor) || "?"} (${fmtYmd(q.confirm_ymd)}) ${qChangeBadge(q)}</div>`).join("");
+    const names = mode === "__all__" ? complexNames : [mode];
+    names.forEach(name => {
+      let list = (byComplex[name] || []).filter(q => showGone || q.status === "active");
+      if (!list.length) return;
+      // '전체 단지' 보기에서 어떤 단지의 호가인지 보이도록 단지명 헤더를 넣는다
+      if (mode === "__all__") {
+        const minP = Math.min(...list.map(q => q.price));
         tbody.insertAdjacentHTML("beforeend",
-          `<tr style="display:none"><td></td><td colspan="7" style="color:var(--sub);font-size:12px">${inner}</td></tr>`);
+          `<tr class="grp"><td colspan="8">📍 ${esc(name)} — 활성 ${activeIn(byComplex[name]).length}건 · 최저 ${fmtMoney(minP)}원</td></tr>`);
       }
-      shown += n;
+      qReps(list).forEach(group => {
+        const rep = group[0], n = group.length;
+        const dongFloor = `${rep.building_name !== "?" ? esc(rep.building_name) + "동 " : ""}${esc(rep.floor_self) || "?"}층`;
+        const dupBadge = n > 1 ? ` <span class="badge" style="background:#f1f5f9;color:#475569;cursor:pointer">+${n - 1}곳</span>` : "";
+        tbody.insertAdjacentHTML("beforeend", `
+          <tr class="${rep.status === "gone" ? "cancelled" : ""}" ${n > 1 ? `style="cursor:pointer" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'"` : ""}>
+            <td>${statusBadge(rep)}</td><td>${dongFloor}${dupBadge}</td>
+            <td>${rep.area}</td><td>${esc(rep.direction) || "-"}</td>
+            <td><b>${fmtMoney(rep.price)}</b></td><td>${qChangeBadge(rep)}</td>
+            <td>${fmtYmd(rep.confirm_ymd)}</td><td>${esc(rep.realtor)}</td>
+          </tr>`);
+        if (n > 1) {
+          const inner = group.slice(1).map(q =>
+            `<div style="padding:2px 0">· ${fmtMoney(q.price)}원 — ${esc(q.realtor) || "?"} (${fmtYmd(q.confirm_ymd)}) ${qChangeBadge(q)}</div>`).join("");
+          tbody.insertAdjacentHTML("beforeend",
+            `<tr style="display:none"><td></td><td colspan="7" style="color:var(--sub);font-size:12px">${inner}</td></tr>`);
+        }
+        shown += n;
+      });
     });
     document.getElementById("qRowCnt").textContent = `${shown}건`;
   }
