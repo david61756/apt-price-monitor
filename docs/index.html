@@ -143,8 +143,8 @@
         <span class="cnt" id="qRowCnt"></span>
       </div>
       <table>
-        <thead><tr><th>상태</th><th>동·층</th><th>전용(㎡)</th><th>향</th>
-                   <th>호가</th><th>직전대비</th><th>확인일</th><th>중개사</th></tr></thead>
+        <thead><tr><th>확인일</th><th>단지</th><th>전용(㎡)</th><th>동·층</th>
+                   <th>호가</th><th>직전대비</th><th>비고</th></tr></thead>
         <tbody id="qRows"></tbody>
       </table>
     </div>
@@ -568,7 +568,8 @@ renderTable();
 
   // ---- ③ 현재 호가 목록 (unit_key 묶음)
   const qAptSel = document.getElementById("qAptSel");
-  qAptSel.insertAdjacentHTML("beforeend", `<option value="__all__">전체 단지</option>`);
+  qAptSel.insertAdjacentHTML("beforeend", `<option value="__all__">전체 단지 (최신순)</option>`);
+  qAptSel.insertAdjacentHTML("beforeend", `<option value="__grouped__">전체 단지 (단지별 묶음)</option>`);
   complexNames.forEach(n => {
     const cnt = activeIn(byComplex[n]).length;
     qAptSel.insertAdjacentHTML("beforeend", `<option value="${esc(n)}">${esc(n)} (활성 ${cnt})</option>`);
@@ -581,12 +582,12 @@ renderTable();
     return dv < 0 ? `<span class="diff-down">${fmtMoney(dv)} (${pct}%)</span>`
          : dv > 0 ? `<span class="diff-up">+${fmtMoney(dv)} (+${pct}%)</span>` : "보합";
   }
-  function statusBadge(q) {
+  function statusNote(q) {   // 비고용: 상태 배지(없으면 빈 문자열)
     if (q.status === "gone") return `<span class="badge">내려감</span>`;
-    let b = "";
-    if (isRecent(q.first_seen)) b += `<span class="badge" style="background:#dcfce7;color:#15803d">신규</span> `;
-    if (q.relisted_count || q.relist_of) b += `<span class="badge" style="background:#e0e7ff;color:#4338ca">재등록</span> `;
-    return b || "·";
+    const b = [];
+    if (isRecent(q.first_seen)) b.push(`<span class="badge" style="background:#dcfce7;color:#15803d">신규</span>`);
+    if (q.relisted_count || q.relist_of) b.push(`<span class="badge" style="background:#e0e7ff;color:#4338ca">재등록</span>`);
+    return b.join(" ");
   }
   function qReps(list) {
     // unit_key로 묶고 대표(최저가→확인일 최신→article_no) 선택
@@ -602,42 +603,54 @@ renderTable();
       return g;
     }).sort((a, b) => a[0].price - b[0].price);
   }
+  // 매매 거래내역과 동일한 형식: 확인일 | 단지 | 전용 | 동·층 | 호가 | 직전대비 | 비고
   function renderQTable() {
     const mode = qAptSel.value;
     const showGone = document.getElementById("qShowGone").checked;
     const tbody = document.getElementById("qRows");
     tbody.innerHTML = "";
     let shown = 0;
-    const names = mode === "__all__" ? complexNames : [mode];
-    names.forEach(name => {
-      let list = (byComplex[name] || []).filter(q => showGone || q.status === "active");
-      if (!list.length) return;
-      // '전체 단지' 보기에서 어떤 단지의 호가인지 보이도록 단지명 헤더를 넣는다
-      if (mode === "__all__") {
-        const minP = Math.min(...list.map(q => q.price));
-        tbody.insertAdjacentHTML("beforeend",
-          `<tr class="grp"><td colspan="8">📍 ${esc(name)} — 활성 ${activeIn(byComplex[name]).length}건 · 최저 ${fmtMoney(minP)}원</td></tr>`);
-      }
-      qReps(list).forEach(group => {
+    const filt = list => (list || []).filter(q => showGone || q.status === "active");
+    const byDate = groups => groups.slice().sort((a, b) =>     // 최신순(확인일 desc), 동률 시 저가순
+      (b[0].confirm_ymd || "").localeCompare(a[0].confirm_ymd || "") || a[0].price - b[0].price);
+
+    function emitReps(groups) {
+      groups.forEach(group => {
         const rep = group[0], n = group.length;
         const dongFloor = `${rep.building_name !== "?" ? esc(rep.building_name) + "동 " : ""}${esc(rep.floor_self) || "?"}층`;
         const dupBadge = n > 1 ? ` <span class="badge" style="background:#f1f5f9;color:#475569;cursor:pointer">+${n - 1}곳</span>` : "";
+        const note = [statusNote(rep), rep.direction ? esc(rep.direction) + "향" : "", esc(rep.realtor)]
+          .filter(Boolean).join(" · ") + dupBadge;
         tbody.insertAdjacentHTML("beforeend", `
           <tr class="${rep.status === "gone" ? "cancelled" : ""}" ${n > 1 ? `style="cursor:pointer" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'"` : ""}>
-            <td>${statusBadge(rep)}</td><td>${dongFloor}${dupBadge}</td>
-            <td>${rep.area}</td><td>${esc(rep.direction) || "-"}</td>
-            <td><b>${fmtMoney(rep.price)}</b></td><td>${qChangeBadge(rep)}</td>
-            <td>${fmtYmd(rep.confirm_ymd)}</td><td>${esc(rep.realtor)}</td>
+            <td>${fmtYmd(rep.confirm_ymd)}</td><td>${esc(rep.complex)}</td>
+            <td>${rep.area}</td><td>${dongFloor}</td>
+            <td><b>${fmtMoney(rep.price)}</b></td><td>${qChangeBadge(rep) || "—"}</td>
+            <td>${note}</td>
           </tr>`);
         if (n > 1) {
           const inner = group.slice(1).map(q =>
             `<div style="padding:2px 0">· ${fmtMoney(q.price)}원 — ${esc(q.realtor) || "?"} (${fmtYmd(q.confirm_ymd)}) ${qChangeBadge(q)}</div>`).join("");
           tbody.insertAdjacentHTML("beforeend",
-            `<tr style="display:none"><td></td><td colspan="7" style="color:var(--sub);font-size:12px">${inner}</td></tr>`);
+            `<tr style="display:none"><td></td><td colspan="6" style="color:var(--sub);font-size:12px">${inner}</td></tr>`);
         }
         shown += n;
       });
-    });
+    }
+
+    if (mode === "__grouped__") {                       // 단지별 묶음(헤더 + 행)
+      complexNames.forEach(name => {
+        const groups = byDate(qReps(filt(byComplex[name])));
+        if (!groups.length) return;
+        const minP = Math.min(...groups.map(g => g[0].price));
+        tbody.insertAdjacentHTML("beforeend",
+          `<tr class="grp"><td colspan="7">📍 ${esc(name)} — 활성 ${activeIn(byComplex[name]).length}건 · 최저 ${fmtMoney(minP)}원</td></tr>`);
+        emitReps(groups);
+      });
+    } else {                                            // 전체(최신순) 또는 특정 단지
+      const list = mode === "__all__" ? QUOTES : (byComplex[mode] || []);
+      emitReps(byDate(qReps(filt(list))));
+    }
     document.getElementById("qRowCnt").textContent = `${shown}건`;
   }
   function fmtYmd(s) { return s && s.length === 8 ? `${s.slice(2, 4)}.${s.slice(4, 6)}.${s.slice(6)}` : "-"; }
