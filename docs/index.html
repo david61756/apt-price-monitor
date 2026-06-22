@@ -64,9 +64,12 @@
   .toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
   .toolbar .cnt { font-size: 12px; color: var(--sub); }
   /* 단지 관리 */
-  .cfg-row { display: grid; grid-template-columns: 1.2fr 1fr 1.2fr 0.7fr auto;
+  .cfg-row { display: grid; grid-template-columns: 1.1fr 0.9fr 1fr 0.6fr 0.95fr auto;
              gap: 8px; align-items: start; padding: 10px 0; border-bottom: 1px dashed var(--line); }
   .cfg-row input { width: 100%; }
+  .naver-cell { display: flex; gap: 4px; }
+  .naver-cell input { min-width: 0; }
+  .naver-cell .btn { padding: 9px 10px; white-space: nowrap; }
   .cfg-head { font-size: 12px; color: var(--sub); font-weight: 600; padding-bottom: 4px; }
   .hint { font-size: 11px; margin-top: 3px; min-height: 14px; }
   .hint.ok { color: var(--accent); } .hint.err { color: var(--up); }
@@ -172,7 +175,8 @@
     <h2>관심 단지 편집</h2>
     <div class="cfg-row cfg-head" style="border-bottom:1px solid var(--line)">
       <div>표시 이름</div><div>지역 (시군구명 또는 코드 5자리)</div>
-      <div>단지명 키워드 (쉼표 구분)</div><div>전용면적 ㎡ (쉼표)</div><div></div>
+      <div>단지명 키워드 (쉼표 구분)</div><div>전용면적 ㎡ (쉼표)</div>
+      <div>네이버 단지번호 (호가)</div><div></div>
     </div>
     <div id="cfgRows"></div>
     <div style="margin-top:12px">
@@ -200,6 +204,8 @@
         (GitHub Pages 갱신에 약간 시간이 걸리며, 안 보이면 Shift+새로고침으로 캐시를 비우세요).<br>
       · 단지명(match)은 <b>실제 등록명과 정확히 일치</b>해야 합니다(괄호·'촌' 등 포함).
         헷갈리면 로컬에서 <code>python search.py "지역명" 키워드</code> 로 실제 단지명·전용면적을 확인하세요.<br>
+      · <b>네이버 단지번호(호가)</b>가 비어 있으면 그 단지는 <b>호가가 수집되지 않습니다</b>.
+        직접 입력하거나 <b>🔍 찾기</b>를 눌러 자동 조회하세요(실패 시 새 탭이 열리니 주소의 번호를 복사).<br>
       · 토큰은 이 브라우저(localStorage)에만 저장되며 저장소에는 올라가지 않습니다. 공용 PC에서는 입력하지 마세요.
     </div>
   </div>
@@ -813,12 +819,15 @@ function addCfgRow(c) {
   const div = document.createElement("div");
   div.className = "cfg-row";
   div.innerHTML = `
-    <div><input type="text" class="f-name" value="${(c.name||"").replace(/"/g,'&quot;')}" placeholder="예: 송도더샵 (전용 84)">
-         <input type="hidden" class="f-naver" value="${(c.naver_id||"").replace(/"/g,'&quot;')}"></div>
+    <div><input type="text" class="f-name" value="${(c.name||"").replace(/"/g,'&quot;')}" placeholder="예: 송도더샵 (전용 84)"></div>
     <div><input type="text" class="f-region" value="${String(region).replace(/"/g,'&quot;')}" placeholder="예: 인천 연수구">
          <div class="hint f-hint"></div></div>
     <div><input type="text" class="f-match" value="${(c.match||[]).join(", ").replace(/"/g,'&quot;')}" placeholder="예: 송도더샵 (비우면 표시이름으로 매칭)"></div>
     <div><input type="text" class="f-areas" value="${(c.areas||[]).join(", ")}" placeholder="예: 84 (비우면 전체)"></div>
+    <div><div class="naver-cell">
+           <input type="text" class="f-naver" value="${(c.naver_id||"").replace(/"/g,'&quot;')}" placeholder="예: 166117 (호가 수집용)">
+           <button class="btn" type="button" onclick="lookupNaverId(this)" title="네이버에서 단지번호 찾기">🔍 찾기</button>
+         </div><div class="hint f-naver-hint"></div></div>
     <div><button class="btn danger" onclick="this.closest('.cfg-row').remove()">삭제</button></div>`;
   const regionInput = div.querySelector(".f-region");
   const hint = div.querySelector(".f-hint");
@@ -833,6 +842,67 @@ function addCfgRow(c) {
   document.getElementById("cfgRows").appendChild(div);
 }
 (CONFIG.complexes || []).forEach(addCfgRow);
+
+// 단지번호 조회용 검색어: 단지명 키워드(첫 항목) 우선, 없으면 표시이름에서 '전용…'·괄호 제거
+function naverQuery(row) {
+  const match = (row.querySelector(".f-match").value || "").split(",")[0].trim();
+  if (match) return match;
+  return (row.querySelector(".f-name").value || "")
+           .replace(/\s*전용.*$/, "").replace(/\s*\(.*$/, "").trim();
+}
+
+// 정적 페이지에서 네이버는 CORS로 직접 호출 불가 → 공개 프록시 경유(best-effort).
+// m.land 검색은 단지 상세(/complex/info/{번호})로 리다이렉트되므로 최종 URL/본문에서 번호를 추출.
+async function fetchNaverId(targetUrl) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 12000);
+  try {
+    const r = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent(targetUrl),
+                          {signal: ctrl.signal});
+    if (!r.ok) return null;
+    const d = await r.json();
+    const hay = ((d && d.status && d.status.url) ? d.status.url + " " : "") +
+                ((d && d.contents) ? d.contents : "");
+    const m = hay.match(/complex(?:es)?\/(?:info\/)?(\d{3,})/);
+    return m ? m[1] : null;
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+// 🔍 찾기: naver_lookup.py와 동일한 m.land 리다이렉트 방식으로 단지번호 자동 조회.
+// 프록시 실패 시 브라우저가 직접 리다이렉트를 따라가도록 새 탭으로 폴백.
+async function lookupNaverId(btn) {
+  const row = btn.closest(".cfg-row");
+  const input = row.querySelector(".f-naver");
+  const hint = row.querySelector(".f-naver-hint");
+  const q = naverQuery(row);
+  if (!q) {
+    hint.className = "hint f-naver-hint err";
+    hint.textContent = "⚠ 표시 이름이나 단지명 키워드를 먼저 입력하세요";
+    return;
+  }
+  const searchUrl = "https://m.land.naver.com/search/result/" + encodeURIComponent(q);
+  hint.className = "hint f-naver-hint";
+  hint.textContent = "조회 중… (" + q + ")";
+  btn.disabled = true;
+  try {
+    const id = await fetchNaverId(searchUrl);
+    if (id) {
+      input.value = id;
+      hint.className = "hint f-naver-hint ok";
+      hint.textContent = "✓ 단지번호 " + id + " (네이버에서 한 번 더 확인 권장)";
+      return;
+    }
+    throw new Error("not found");
+  } catch (e) {
+    window.open(searchUrl, "_blank", "noopener");
+    hint.className = "hint f-naver-hint err";
+    hint.innerHTML = "자동 조회 실패 — 새 탭 주소의 <code>…/complex/info/<b>번호</b></code> 에서 번호를 복사해 입력하세요";
+  } finally {
+    btn.disabled = false;
+  }
+}
 
 function gatherCfg() {
   const complexes = [], errors = [];
