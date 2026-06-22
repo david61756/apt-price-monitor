@@ -30,7 +30,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69,7 +69,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -147,7 +147,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -182,7 +182,7 @@
    "unit_key": "41465|수지삼성2차 전용74㎡(28평)|A1|204|고|74.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
+   "miss_count": 1,
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-06-14T00:40:02+09:00",
@@ -194,7 +194,7 @@
      "price": 120000
     }
    ],
-   "last_miss_date": null
+   "last_miss_date": "2026-06-22"
   },
   "2631709328": {
    "article_no": "2631709328",
@@ -217,7 +217,7 @@
    "cp_name": "텐컴즈",
    "feature": "27,샷시포함특올수리,하시입주,이매중,이매역",
    "confirm_ymd": "20260612",
-   "same_addr_cnt": 9,
+   "same_addr_cnt": 8,
    "unit_key": "41135|이매촌삼성 전용73㎡(27평)|A1|1008|4|73.0|동",
    "unit_key_confident": true,
    "status": "active",
@@ -225,7 +225,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -334,7 +334,7 @@
    "cp_name": "텐컴즈",
    "feature": "샷시포함올수리 정상입주 이매중",
    "confirm_ymd": "20260610",
-   "same_addr_cnt": 9,
+   "same_addr_cnt": 8,
    "unit_key": "41135|이매촌삼성 전용73㎡(27평)|A1|1008|4|73.0|동",
    "unit_key_confident": true,
    "status": "active",
@@ -342,7 +342,7 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -420,7 +420,7 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -490,7 +490,7 @@
    "cp_name": "텐컴즈",
    "feature": "27.샷시포함특올수리,고즈넉한정원뷰,이매중,판교진입수월,탄천",
    "confirm_ymd": "20260605",
-   "same_addr_cnt": 9,
+   "same_addr_cnt": 8,
    "unit_key": "41135|이매촌삼성 전용73㎡(27평)|A1|1008|4|73.0|동",
    "unit_key_confident": true,
    "status": "active",
@@ -498,7 +498,7 @@
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -650,7 +650,7 @@
    "unit_key": "41135|이매촌삼성 전용73㎡(27평)|A1|1008|4|73.0|동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
+   "miss_count": 1,
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
@@ -662,7 +662,7 @@
      "price": 175000
     }
    ],
-   "last_miss_date": null
+   "last_miss_date": "2026-06-22"
   },
   "2627742362": {
    "article_no": "2627742362",
@@ -689,7 +689,7 @@
    "unit_key": "41135|이매촌삼성 전용73㎡(27평)|A1|1008|4|73.0|동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
+   "miss_count": 1,
    "relisted_count": 0,
    "relist_of": "2631709328",
    "first_seen": "2026-06-14T00:40:02+09:00",
@@ -701,7 +701,7 @@
      "price": 175000
     }
    ],
-   "last_miss_date": null
+   "last_miss_date": "2026-06-22"
   },
   "2632468665": {
    "article_no": "2632468665",
@@ -763,7 +763,7 @@
    "cp_name": "텐컴즈",
    "feature": "샤시포함특올수리,하탑초,이매중,하시입주",
    "confirm_ymd": "20260616",
-   "same_addr_cnt": 4,
+   "same_addr_cnt": 3,
    "unit_key": "41135|이매촌삼성 전용73㎡(27평)|A1|1008|4|73.0|동",
    "unit_key_confident": true,
    "status": "active",
@@ -772,7 +772,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-06-16T13:10:05+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -841,7 +841,7 @@
    "cp_name": "텐컴즈",
    "feature": "27,샷시포함특올수리,하시입주가능,이매역,이매중",
    "confirm_ymd": "20260617",
-   "same_addr_cnt": 9,
+   "same_addr_cnt": 8,
    "unit_key": "41135|이매촌삼성 전용73㎡(27평)|A1|1008|4|73.0|동",
    "unit_key_confident": true,
    "status": "active",
@@ -850,7 +850,7 @@
    "relisted_count": 0,
    "relist_of": "2631777768",
    "first_seen": "2026-06-17T13:10:06+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -880,7 +880,7 @@
    "cp_name": "텐컴즈",
    "feature": "샷시포함특올수리 전망 이매중학교",
    "confirm_ymd": "20260617",
-   "same_addr_cnt": 9,
+   "same_addr_cnt": 8,
    "unit_key": "41135|이매촌삼성 전용73㎡(27평)|A1|1008|4|73.0|동",
    "unit_key_confident": true,
    "status": "active",
@@ -889,7 +889,7 @@
    "relisted_count": 0,
    "relist_of": "2631777768",
    "first_seen": "2026-06-17T13:10:06+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -919,7 +919,7 @@
    "cp_name": "텐컴즈",
    "feature": "27,샷시포함특올수리,하시입주가능,이매역,이매중",
    "confirm_ymd": "20260617",
-   "same_addr_cnt": 4,
+   "same_addr_cnt": 3,
    "unit_key": "41135|이매촌삼성 전용73㎡(27평)|A1|1008|4|73.0|동",
    "unit_key_confident": true,
    "status": "active",
@@ -928,7 +928,7 @@
    "relisted_count": 0,
    "relist_of": "2631777768",
    "first_seen": "2026-06-17T13:10:06+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -967,7 +967,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-06-18T09:10:06+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -997,7 +997,7 @@
    "cp_name": "텐컴즈",
    "feature": "27,샷시포함특올수리,입주가능",
    "confirm_ymd": "20260618",
-   "same_addr_cnt": 9,
+   "same_addr_cnt": 8,
    "unit_key": "41135|이매촌삼성 전용73㎡(27평)|A1|1008|4|73.0|동",
    "unit_key_confident": true,
    "status": "active",
@@ -1006,7 +1006,7 @@
    "relisted_count": 0,
    "relist_of": "2631777768",
    "first_seen": "2026-06-18T13:10:06+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -1036,7 +1036,7 @@
    "cp_name": "텐컴즈",
    "feature": "샷시포함특올수리 이매중 학세권 이매역 하시입주",
    "confirm_ymd": "20260619",
-   "same_addr_cnt": 4,
+   "same_addr_cnt": 3,
    "unit_key": "41135|이매촌삼성 전용73㎡(27평)|A1|1008|4|73.0|동",
    "unit_key_confident": true,
    "status": "active",
@@ -1045,7 +1045,7 @@
    "relisted_count": 0,
    "relist_of": "2631777768",
    "first_seen": "2026-06-19T13:10:06+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -1075,7 +1075,7 @@
    "cp_name": "텐컴즈",
    "feature": "27,샷시포함특올수리,하시입주가능,이매중,이매역인접",
    "confirm_ymd": "20260620",
-   "same_addr_cnt": 9,
+   "same_addr_cnt": 8,
    "unit_key": "41135|이매촌삼성 전용73㎡(27평)|A1|1008|4|73.0|동",
    "unit_key_confident": true,
    "status": "active",
@@ -1084,7 +1084,7 @@
    "relisted_count": 0,
    "relist_of": "2631777768",
    "first_seen": "2026-06-20T13:10:06+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -1114,7 +1114,7 @@
    "cp_name": "텐컴즈",
    "feature": "27 샷시포함특올수리,하시입주,이매중학군.",
    "confirm_ymd": "20260620",
-   "same_addr_cnt": 9,
+   "same_addr_cnt": 8,
    "unit_key": "41135|이매촌삼성 전용73㎡(27평)|A1|1008|4|73.0|동",
    "unit_key_confident": true,
    "status": "active",
@@ -1123,7 +1123,7 @@
    "relisted_count": 0,
    "relist_of": "2631777768",
    "first_seen": "2026-06-21T09:10:01+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -1162,7 +1162,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-06-21T09:10:01+09:00",
-   "last_seen": "2026-06-21T13:10:05+09:00",
+   "last_seen": "2026-06-22T09:10:06+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -1174,18 +1174,18 @@
  },
  "collected": {
   "신정7단지(상록) 전용59㎡(24평)": {
-   "last_ok": "2026-06-21T13:10:05+09:00",
+   "last_ok": "2026-06-22T09:10:06+09:00",
    "active_cnt": 0
   },
   "이매촌삼성 전용73㎡(27평)": {
-   "last_ok": "2026-06-21T13:10:05+09:00",
+   "last_ok": "2026-06-22T09:10:06+09:00",
    "active_cnt": 15
   },
   "수지삼성2차 전용74㎡(28평)": {
-   "last_ok": "2026-06-21T13:10:05+09:00",
+   "last_ok": "2026-06-22T09:10:06+09:00",
    "active_cnt": 5
   }
  },
  "tracking_since": "2026-06-14",
- "last_run": "2026-06-21T13:10:05+09:00"
+ "last_run": "2026-06-22T09:10:06+09:00"
 }
