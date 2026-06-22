@@ -22,6 +22,7 @@ complexes:
     region: "경기도 시흥시"
     match: ["리벤티움"]
     areas: [59]
+    naver_id: "166117"
 
 options:
   months_back: 1
