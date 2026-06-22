@@ -18,7 +18,7 @@ complexes:
     match: ["이매촌(삼성)"]
     areas: [73]
     naver_id: "2493"
-  - name: "조남리벤티움 전용59㎡(24평)"
+  - name: "리벤티움 전용59㎡(24평)"
     region: "경기도 시흥시"
     match: ["리벤티움"]
     areas: [59]
