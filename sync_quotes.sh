@@ -9,6 +9,20 @@ LOG="$PROJ/logs/sync.log"
 mkdir -p "$PROJ/logs"
 ts() { date '+%Y-%m-%d %H:%M:%S'; }
 
+# .env의 GitHub 토큰으로 인증(리모트 URL/.git/config에 토큰을 남기지 않음).
+# git HTTP는 Basic 인증 → extraheader로 모든 git 명령에 적용. 토큰 없으면 git 기본 자격증명 사용.
+gh_auth() {
+  local t
+  t=$(grep -E '^GITHUB_TOKEN=' "$PROJ/.env" 2>/dev/null | head -1 | cut -d= -f2-)
+  t=${t%\"}; t=${t#\"}; t=${t%\'}; t=${t#\'}
+  t=$(printf '%s' "$t" | tr -d '[:space:]')
+  [ -z "$t" ] && return 0
+  export GIT_CONFIG_COUNT=1
+  export GIT_CONFIG_KEY_0="http.https://github.com/.extraheader"
+  export GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$t" | base64 | tr -d '\n')"
+}
+gh_auth
+
 # 네트워크 준비 대기(wake 직후 Wi-Fi 지연 대비). 안 되면 조용히 종료 — 15분 뒤 다음 주기 재시도.
 wait_net() { for _ in $(seq 1 12); do curl -sf -m 5 -o /dev/null https://github.com && return 0; sleep 5; done; return 1; }
 wait_net || exit 0

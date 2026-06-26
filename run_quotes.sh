@@ -1,5 +1,6 @@
 #!/bin/bash
-# 네이버 호가 자동 수집 → 커밋 → 푸시. launchd(매일) 또는 수동(`bash run_quotes.sh`) 실행.
+# 실거래+호가 자동 갱신 → 변동 요약 Discord 알림 → 커밋 → 푸시.
+# launchd(매일 08:00/14:00/18:00 KST) 또는 수동(`bash run_quotes.sh`) 실행.
 set -u
 PROJ="$HOME/apt-price-monitor"
 cd "$PROJ" || exit 1
@@ -7,6 +8,20 @@ export PATH="/opt/anaconda3/bin:/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/
 LOG="$PROJ/logs/quotes.log"
 mkdir -p "$PROJ/logs"
 ts() { date '+%Y-%m-%d %H:%M:%S'; }
+
+# .env의 GitHub 토큰으로 인증(리모트 URL/.git/config에 토큰을 남기지 않음).
+# git HTTP는 Basic 인증 → extraheader로 모든 git 명령에 적용. 토큰 없으면 git 기본 자격증명 사용.
+gh_auth() {
+  local t
+  t=$(grep -E '^GITHUB_TOKEN=' "$PROJ/.env" 2>/dev/null | head -1 | cut -d= -f2-)
+  t=${t%\"}; t=${t#\"}; t=${t%\'}; t=${t#\'}
+  t=$(printf '%s' "$t" | tr -d '[:space:]')
+  [ -z "$t" ] && return 0
+  export GIT_CONFIG_COUNT=1
+  export GIT_CONFIG_KEY_0="http.https://github.com/.extraheader"
+  export GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$t" | base64 | tr -d '\n')"
+}
+gh_auth
 
 # 네트워크 준비 대기: 절전에서 깨어난 직후 Wi-Fi가 아직 안 올라온 상태로 실행되는 것 방지.
 # GitHub 접속이 될 때까지 최대 ~120초 대기. 끝내 안 되면 이번 회차는 건너뜀(데이터 보존).
@@ -39,14 +54,15 @@ if ! git pull --rebase --autostash origin main >> "$LOG" 2>&1; then
   fi
 fi
 
-python3 quotes_monitor.py >> "$LOG" 2>&1
-echo "quotes_monitor 종료코드: $?" >> "$LOG"
+# 실거래(monitor.py) + 호가(quotes_monitor.py) 갱신 후 변동사항을 Discord로 요약 전송
+python3 update.py >> "$LOG" 2>&1
+echo "update 종료코드: $?" >> "$LOG"
 
-git add quotes_state.json docs/index.html >> "$LOG" 2>&1
+git add state.json quotes_state.json docs/index.html >> "$LOG" 2>&1
 if git diff --cached --quiet; then
   echo "변경 없음 — 커밋 생략" >> "$LOG"
 else
-  git commit -m "chore: 호가 자동 갱신 ($(date '+%Y-%m-%d %H:%M') KST)" >> "$LOG" 2>&1
+  git commit -m "chore: 데이터 자동 갱신 — 실거래+호가 ($(date '+%Y-%m-%d %H:%M') KST)" >> "$LOG" 2>&1
   if ! git push origin main >> "$LOG" 2>&1; then
     git pull --rebase --autostash origin main >> "$LOG" 2>&1
     git push origin main >> "$LOG" 2>&1 || echo "$(ts) PUSH 실패 — 수동 확인 필요" >> "$LOG"

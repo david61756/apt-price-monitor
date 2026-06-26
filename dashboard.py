@@ -206,24 +206,20 @@ _TEMPLATE = """<!DOCTYPE html>
     <div class="save-grid">
       <div><label>저장소 소유자(아이디)</label><input type="text" id="ghOwner"></div>
       <div><label>저장소 이름</label><input type="text" id="ghRepo"></div>
-      <div><label>GitHub 토큰 (repo·workflow 권한)</label><input type="password" id="ghToken" placeholder="ghp_..."></div>
     </div>
-    <button class="btn primary" onclick="saveAndRun()">💾 저장하고 지금 실행 ▶</button>
-    <button class="btn" onclick="saveToGitHub()">저장만 (커밋)</button>
-    <button class="btn" onclick="runNow()">실행만</button>
-    <button class="btn" onclick="copyYaml()">📋 YAML 복사</button>
+    <button class="btn primary" onclick="copyYaml()">📋 YAML 복사</button>
     <a class="btn" id="editLink" style="text-decoration:none;display:inline-block" target="_blank">✏️ GitHub에서 직접 편집</a>
     <div id="saveStatus"></div>
     <div class="note">
-      · <b>"저장하고 지금 실행"</b>을 누르면 config.yaml 커밋 + 모니터링 실행이 한 번에 됩니다.
-        <b>저장만으로는 현황판이 바뀌지 않습니다</b> — 실제 데이터 조회·집계가 실행되어야 반영됩니다.<br>
-      · 실행 후 <b>2~3분 뒤</b> 이 페이지를 <b>새로고침</b>하면 결과가 보입니다
-        (GitHub Pages 갱신에 약간 시간이 걸리며, 안 보이면 Shift+새로고침으로 캐시를 비우세요).<br>
+      · 단지를 편집한 뒤 <b>"✏️ GitHub에서 직접 편집"</b>으로 config.yaml을 저장하면(또는 <b>"📋 YAML 복사"</b> 후 붙여넣기),
+        내 Mac이 변경을 감지해 <b>자동으로 데이터를 갱신</b>합니다(최대 15분, Mac이 켜져 있어야 함).<br>
+      · 갱신 후 <b>2~3분 뒤</b> 이 페이지를 <b>새로고침</b>하면 결과가 보입니다
+        (GitHub Pages 갱신에 약간 시간이 걸리며, 안 보이면 Shift+새로고침으로 캐시를 비우세요).
+        바로 받으려면 터미널에서 <code>bash run_quotes.sh</code> 실행.<br>
       · 단지명(match)은 <b>실제 등록명과 정확히 일치</b>해야 합니다(괄호·'촌' 등 포함).
         헷갈리면 로컬에서 <code>python search.py "지역명" 키워드</code> 로 실제 단지명·전용면적을 확인하세요.<br>
       · <b>네이버 단지번호(호가)</b>가 비어 있으면 그 단지는 <b>호가가 수집되지 않습니다</b>.
         직접 입력하거나 <b>🔍 찾기</b>를 눌러 자동 조회하세요(실패 시 새 탭이 열리니 주소의 번호를 복사).<br>
-      · 토큰은 이 브라우저(localStorage)에만 저장되며 저장소에는 올라가지 않습니다. 공용 PC에서는 입력하지 마세요.
     </div>
   </div>
 </div>
@@ -972,7 +968,6 @@ function buildYaml(complexes) {
 // GitHub 연동
 const ownerEl = document.getElementById("ghOwner");
 const repoEl = document.getElementById("ghRepo");
-const tokenEl = document.getElementById("ghToken");
 (function initRepoFields() {
   let owner = localStorage.getItem("gh_owner") || "";
   let repo = localStorage.getItem("gh_repo") || "";
@@ -981,7 +976,7 @@ const tokenEl = document.getElementById("ghToken");
     repo = location.pathname.split("/").filter(Boolean)[0] || repo;
   }
   ownerEl.value = owner; repoEl.value = repo;
-  tokenEl.value = localStorage.getItem("gh_token") || "";
+  localStorage.setItem("gh_owner", owner); localStorage.setItem("gh_repo", repo);
   updateEditLink();
 })();
 function updateEditLink() {
@@ -995,76 +990,6 @@ function setStatus(msg, ok) {
   const el = document.getElementById("saveStatus");
   el.textContent = msg;
   el.style.color = ok ? "var(--accent)" : "var(--up)";
-}
-
-async function gh(path, opts = {}) {
-  const r = await fetch(`https://api.github.com/repos/${ownerEl.value}/${repoEl.value}/${path}`, {
-    ...opts,
-    headers: {Authorization: `Bearer ${tokenEl.value.trim()}`,
-              Accept: "application/vnd.github+json", ...(opts.headers || {})},
-  });
-  if (!r.ok) {
-    const t = await r.text();
-    throw new Error(`GitHub API ${r.status}: ${t.slice(0, 200)}`);
-  }
-  return r.status === 204 ? null : r.json();
-}
-
-function persistFields() {
-  localStorage.setItem("gh_owner", ownerEl.value);
-  localStorage.setItem("gh_repo", repoEl.value);
-  localStorage.setItem("gh_token", tokenEl.value.trim());
-}
-
-function checkCreds() {
-  if (!ownerEl.value || !repoEl.value || !tokenEl.value.trim()) {
-    setStatus("저장소 소유자/이름/토큰을 모두 입력하세요", false); return false;
-  }
-  return true;
-}
-
-async function saveToGitHub(silent) {
-  const {complexes, errors} = gatherCfg();
-  if (errors.length) { setStatus("입력 오류:\\n· " + errors.join("\\n· "), false); return false; }
-  if (!checkCreds()) return false;
-  persistFields();
-  if (!silent) setStatus("저장 중...", true);
-  try {
-    const yaml = buildYaml(complexes);
-    const cur = await gh("contents/config.yaml?ref=main");
-    const bytes = new TextEncoder().encode(yaml);
-    let bin = ""; bytes.forEach(b => bin += String.fromCharCode(b));
-    await gh("contents/config.yaml", {method: "PUT", body: JSON.stringify({
-      message: "config: 대시보드에서 관심단지 수정",
-      content: btoa(bin), sha: cur.sha, branch: "main"})});
-    if (!silent) setStatus(`✅ 저장 완료 (단지 ${complexes.length}개). ` +
-      `현황판에 반영하려면 "실행만" 또는 "저장하고 지금 실행"을 누르세요.`, true);
-    return true;
-  } catch (e) { setStatus("❌ 저장 실패: " + e.message, false); return false; }
-}
-
-async function runNow(silent) {
-  if (!checkCreds()) return false;
-  persistFields();
-  if (!silent) setStatus("실행 요청 중...", true);
-  try {
-    await gh("actions/workflows/monitor.yml/dispatches",
-             {method: "POST", body: JSON.stringify({ref: "main"})});
-    setStatus("✅ 실행을 요청했습니다.\\n" +
-              "· 매매: 약 1~2분 뒤 갱신 (GitHub Actions)\\n" +
-              "· 호가: 내 Mac이 변경을 감지해 자동 수집 (최대 15분, Mac이 켜져 있어야 함)\\n" +
-              "2~3분 뒤(호가는 좀 더) 이 페이지를 Shift+새로고침 하세요. " +
-              "바로 받으려면 터미널에서 `bash run_quotes.sh` 실행.", true);
-    return true;
-  } catch (e) { setStatus("❌ 실행 요청 실패: " + e.message, false); return false; }
-}
-
-async function saveAndRun() {
-  if (!checkCreds()) return;
-  setStatus("① config 저장 중...", true);
-  if (!(await saveToGitHub(true))) return;
-  setStatus("② 저장 완료. 모니터링 실행 요청 중...", true);
-  await runNow(true);
 }
 
 function copyYaml() {

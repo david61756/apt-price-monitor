@@ -2,9 +2,12 @@ name: 아파트 실거래가 모니터링
 
 on:
   schedule:
-    # KST 09:00 (UTC 00:00). 08:00 KST로 바꾸려면 '0 23 * * *'
-    # GitHub Actions cron은 수분~수십분 지연될 수 있음
-    - cron: "0 0 * * *"
+    # 매일 08:00 / 14:00 / 18:00 KST (각각 UTC 23:00 전날 / 05:00 / 09:00).
+    # 로컬 Mac(launchd)이 같은 시각에 실거래+호가를 갱신하고 Discord로 알림.
+    # GitHub Actions는 Mac이 꺼져 있을 때를 대비한 실거래 클라우드 백업(보통 수분~수십분 지연).
+    - cron: "0 23 * * *"
+    - cron: "0 5 * * *"
+    - cron: "0 9 * * *"
   workflow_dispatch: {}
 
 permissions:
