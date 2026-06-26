@@ -2,9 +2,8 @@
 """네이버페이 부동산 호가(매물) 모니터링 — 엔트리포인트.
 
 사용법:
-    python quotes_monitor.py             # 호가 수집 → 중복제거/변동감지 → 저장 → 알림 → 대시보드
-    python quotes_monitor.py --dry-run   # 저장/알림 없이 감지 결과만
-    python quotes_monitor.py --no-notify # 알림 없이 저장만
+    python quotes_monitor.py             # 호가 수집 → 중복제거/변동감지 → 저장 → 대시보드
+    python quotes_monitor.py --dry-run   # 저장 없이 감지 결과만
 
 전제: .env에 로그인된 네이버 세션(NAVER_AUTH, NAVER_COOKIE)이 있어야 한다(README 참고).
 매매(monitor.py)와 별개 파일(quotes_state.json)에 누적하며 대시보드 '호가' 탭에 표시된다.
@@ -13,14 +12,14 @@ import argparse
 import sys
 from datetime import datetime
 
-import monitor                       # load_env/load_config/fmt_money/send_telegram/KST/STATE_PATH 재사용
+import monitor                       # load_env/load_config/fmt_money/print_changes/KST/STATE_PATH 재사용
 import naver_adapter
 import quotes as Q
 from dashboard import render_dashboard
 
 
 def build_quote_messages(events):
-    """reconcile 이벤트 → 텔레그램 메시지(HTML)."""
+    """reconcile 이벤트 → 사람이 읽는 변동 메시지."""
     msgs = []
     for ev in events:
         kind = ev[0]
@@ -98,8 +97,7 @@ def main():
     # 차단 의심 → 저장 스킵, 경고만
     if quotes is None:
         print("⚠ 차단 의심으로 저장을 건너뜁니다.")
-        if cfg["naver"].get("notify") and not (args.dry_run or args.no_notify):
-            monitor.send_telegram(build_quote_messages(events))
+        monitor.print_changes(build_quote_messages(events))
         return
 
     # 관심단지에서 빠진 매물 정리
@@ -121,14 +119,10 @@ def main():
                  for m in build_quote_messages([e])]
 
     if first_run:
-        print("ℹ 호가 최초 실행: 기준선으로 저장만 하고 알림은 보내지 않습니다.")
-    elif messages and not (args.dry_run or args.no_notify) and cfg["naver"].get("notify"):
-        monitor.send_telegram(messages)
+        print("ℹ 호가 최초 실행: 기준선으로 저장만 합니다.")
     elif messages:
-        print("\n[호가 알림 미리보기]")
-        for m in messages:
-            print("-" * 40)
-            print(m.replace("<b>", "").replace("</b>", ""))
+        print("\n[호가 변동]")
+        monitor.print_changes(messages)
 
     if args.dry_run:
         print("\n--dry-run: quotes_state.json/대시보드를 갱신하지 않았습니다.")

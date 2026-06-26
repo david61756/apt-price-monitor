@@ -2,7 +2,7 @@
 """아파트 매매 실거래가 자동 모니터링.
 
 국토교통부 '아파트 매매 실거래가 상세 자료' API(RTMSDataSvcAptTradeDev)로
-관심 단지의 신규 거래를 감지해 텔레그램으로 알리고 state.json에 누적 기록한다.
+관심 단지의 신규 거래를 감지해 state.json에 누적 기록한다(알림은 update.py가 Discord로 전송).
 
 사용법:
     python monitor.py                # 조회 → 신규 감지 → 알림 → state/대시보드 갱신
@@ -252,34 +252,11 @@ def build_cancel_message(rec):
     ])
 
 
-def send_telegram(messages):
-    token = os.environ.get("TELEGRAM_BOT_TOKEN")
-    chat_id = os.environ.get("TELEGRAM_CHAT_ID")
-    if not token or not chat_id:
-        print("⚠ TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID 미설정 — 콘솔 출력으로 대체합니다.")
-        for m in messages:
-            print("-" * 40)
-            print(m.replace("<b>", "").replace("</b>", ""))
-        return
-    url = f"https://api.telegram.org/bot{token}/sendMessage"
-    # 4096자 제한 → 여러 건이면 묶되 한도 내에서 분할 전송
-    chunks, cur = [], ""
+def print_changes(messages):
+    """변동 내역을 콘솔/로그에 출력. 외부 알림은 update.py가 Discord로 전송한다."""
     for m in messages:
-        if cur and len(cur) + len(m) + 2 > 3500:
-            chunks.append(cur)
-            cur = m
-        else:
-            cur = f"{cur}\n\n{m}" if cur else m
-    if cur:
-        chunks.append(cur)
-    for chunk in chunks:
-        resp = requests.post(url, json={
-            "chat_id": chat_id, "text": chunk,
-            "parse_mode": "HTML", "disable_web_page_preview": True,
-        }, timeout=30)
-        if not resp.ok:
-            print(f"⚠ 텔레그램 전송 실패: {resp.status_code} {resp.text[:200]}")
-        time.sleep(0.5)
+        print("-" * 40)
+        print(m.replace("<b>", "").replace("</b>", ""))
 
 
 # --------------------------------------------------------------------- main
@@ -364,16 +341,12 @@ def main():
         messages += [build_cancel_message(r) for r in cancelled_deals]
 
     if first_run:
-        print("ℹ 최초 실행: 기존 거래를 기준선으로 저장만 하고 알림은 보내지 않습니다.")
+        print("ℹ 최초 실행: 기존 거래를 기준선으로 저장만 합니다.")
     elif args.backfill:
-        print(f"ℹ 백필: 신규 {len(new_deals)}건을 알림 없이 저장합니다.")
-    elif messages and not (args.dry_run or args.no_notify):
-        send_telegram(messages)
+        print(f"ℹ 백필: 신규 {len(new_deals)}건을 저장합니다.")
     elif messages:
-        print("\n[알림 미리보기]")
-        for m in messages:
-            print("-" * 40)
-            print(m.replace("<b>", "").replace("</b>", ""))
+        print("\n[변동 감지]")
+        print_changes(messages)
 
     if args.dry_run:
         print("\n--dry-run: state.json/대시보드를 갱신하지 않았습니다.")

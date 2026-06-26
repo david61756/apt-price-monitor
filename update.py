@@ -6,7 +6,6 @@
 
 - launchd(매일 08:00/14:00/18:00 KST) 또는 수동(`python update.py`) 실행.
 - Discord 웹훅은 .env의 DISCORD_WEBHOOK_URL 사용(없으면 콘솔 출력으로 대체).
-- 실거래/호가 각각의 텔레그램 알림은 기존대로 유지되고, Discord 요약이 추가된다.
 
 사용법:
     python update.py            # 실거래+호가 갱신 → 변동 요약 Discord 전송
