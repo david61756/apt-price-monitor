@@ -39,6 +39,9 @@ _TEMPLATE = """<!DOCTYPE html>
                         color: #fff; font-weight: 600; }
   .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
            gap: 14px; margin-bottom: 24px; }
+  .region-head { grid-column: 1 / -1; font-size: 14px; font-weight: 700; color: var(--accent);
+                 margin: 10px 0 -2px; padding-bottom: 6px; border-bottom: 2px solid var(--line); }
+  .region-head:first-child { margin-top: 0; }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
           padding: 16px 18px; }
   .card h3 { margin: 0 0 2px; font-size: 15px; }
@@ -227,10 +230,13 @@ _TEMPLATE = """<!DOCTYPE html>
 <script>
 const DEALS = __DEALS__;
 const CONFIG = __CONFIG__;
+const REGION_MAP = __REGION_MAP__;
 const SGG = __SGG__;
 const WARNINGS = __WARNINGS__;
 const QUOTES = __QUOTES__;
 const QUOTES_META = __QUOTES_META__;
+// 카드 지역별 그룹핑: config 단지명 → 지역 라벨
+const regionOf = c => REGION_MAP[c] || "기타 지역";
 
 // ============================== 공통 유틸 ==============================
 function fmtMoney(man) {
@@ -294,10 +300,22 @@ QUOTES.filter(q => q.status === "active").forEach(q => {
 });
 
 const cardsEl = document.getElementById("cards");
-Object.entries(groups).forEach(([key, g]) => {
+let __cardRegion = null;
+Object.entries(groups)
+  .filter(([key, g]) => activeOf(g).length)
+  .sort((a, b) => {
+    const la = activeOf(a[1]).slice(-1)[0], lb = activeOf(b[1]).slice(-1)[0];
+    return regionOf(la.complex).localeCompare(regionOf(lb.complex))
+        || String(la.apt_nm).localeCompare(String(lb.apt_nm));
+  })
+  .forEach(([key, g]) => {
   const act = activeOf(g);
-  if (!act.length) return;
   const last = act[act.length - 1], prev = act[act.length - 2];
+  const __region = regionOf(last.complex);
+  if (__region !== __cardRegion) {
+    __cardRegion = __region;
+    cardsEl.insertAdjacentHTML("beforeend", `<div class="region-head">📍 ${esc(__region)}</div>`);
+  }
   let diffHtml = "<span class='meta'>직전 거래 없음</span>";
   if (prev) {
     const diff = last.amount - prev.amount, pct = (diff / prev.amount * 100).toFixed(1);
@@ -517,9 +535,17 @@ renderTable();
 
   // ---- ① 요약 카드 (config 단지별)
   const qCardsEl = document.getElementById("qCards");
-  complexNames.forEach(name => {
+  let __qRegion = null;
+  complexNames
+    .filter(name => activeIn(byComplex[name]).length)
+    .sort((a, b) => regionOf(a).localeCompare(regionOf(b)) || a.localeCompare(b))
+    .forEach(name => {
     const act = activeIn(byComplex[name]);
-    if (!act.length) return;
+    const __region = regionOf(name);
+    if (__region !== __qRegion) {
+      __qRegion = __region;
+      qCardsEl.insertAdjacentHTML("beforeend", `<div class="region-head">📍 ${esc(__region)}</div>`);
+    }
     const prices = act.map(q => q.price);
     const minP = Math.min(...prices);
     const maxP = Math.max(...prices);
@@ -1055,6 +1081,9 @@ def render_dashboard(state, cfg, out_path, quotes_state=None):
     def _js(obj):
         return json.dumps(obj, ensure_ascii=False).replace("<", "\\u003c")
 
+    # 카드 지역별 그룹핑용: config 단지명 → 지역 라벨(시군구)
+    region_map = {c["name"]: (c.get("region") or c.get("lawd_cd") or "기타 지역")
+                  for c in complexes}
     subs = {
         "LAST_RUN": state.get("last_run", "-"),
         "TOTAL": str(len(visible)),
@@ -1062,6 +1091,7 @@ def render_dashboard(state, cfg, out_path, quotes_state=None):
         "DEALS": _js(visible),
         "WARNINGS": _js(warnings),
         "CONFIG": _js(config_pub),
+        "REGION_MAP": _js(region_map),
         "SGG": _js(sgg),
         "QUOTES": _js(visible_quotes),
         "QUOTES_META": _js(quotes_meta),
