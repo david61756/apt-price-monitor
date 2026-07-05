@@ -33,9 +33,10 @@ complexes:
     match: ["서원마을현대홈타운"]
     areas: [59, 84]
     naver_id: "8692"
-  - name: "성동마을LG빌리지3차 (전용134㎡+ 대형)"
+  - name: "성동마을LG빌리지3차 전용134㎡(단지 최소·40평대)"
     region: "경기도 용인시 수지구"
     match: ["LG빌리지3"]
+    areas: [134]
     naver_id: "3715"
 
 options:
