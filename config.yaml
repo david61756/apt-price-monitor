@@ -3,41 +3,46 @@
 # match: 단지명 부분일치 키워드 / areas: 전용면적 ㎡ 정수 대역(생략 시 전체)
 
 complexes:
-  - name: "신정7단지(상록) 전용59㎡(24평)"
+  - name: "수지구청 신정7단지 24평"
     region: "경기도 용인시 수지구"
     match: ["신정7단지"]
     areas: [59]
     naver_id: "11231"
-  - name: "수지삼성2차 전용74㎡(28평)"
+  - name: "수지구청 수지삼성2차 28평"
     region: "경기도 용인시 수지구"
     match: ["수지삼성2차"]
     areas: [74]
     naver_id: "2220"
-  - name: "이매촌삼성 전용73㎡(27평)"
+  - name: "판교 이매촌삼성 27평"
     region: "경기도 성남시 분당구"
     match: ["이매촌(삼성)"]
     areas: [73]
     naver_id: "2493"
-  - name: "리벤티움 전용59㎡(24평)"
+  - name: "시흥목감 리벤티움 24평"
     region: "경기도 시흥시"
     match: ["리벤티움"]
     areas: [59]
     naver_id: "166117"
-  - name: "동천마을현대홈타운2차 전용84㎡(34평)"
+  - name: "동천역 현대홈타운2차 34평"
     region: "경기도 용인시 수지구"
     match: ["동천마을현대홈타운2차"]
     areas: [84]
     naver_id: "3706"
-  - name: "성복역현대홈타운(서원마을) 전용59·84㎡"
+  - name: "성복역 현대홈타운 24, 30평"
     region: "경기도 용인시 수지구"
     match: ["서원마을현대홈타운"]
     areas: [59, 84]
     naver_id: "8692"
-  - name: "성동마을LG빌리지3차 전용134㎡(단지 최소·40평대)"
+  - name: "성복역 LG빌리지3차 52평"
     region: "경기도 용인시 수지구"
     match: ["LG빌리지3"]
     areas: [134]
     naver_id: "3715"
+  - name: "수지구청 현대 22, 31평"
+    region: "경기도 용인시 수지구"
+    match: ["현대"]
+    areas: [60, 84]
+    naver_id: "2225"
 
 options:
   months_back: 1
