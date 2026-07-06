@@ -177,6 +177,7 @@ def reconcile(qstate, fetched_by_complex, scanned_complexes, now):
                 quotes[an] = rec
                 events.append(("NEW", rec))
             else:                                    # ── 기존 매물
+                prev["complex"] = rec["complex"]     # config 단지명 변경(리네임) 반영
                 prev["last_seen"] = iso
                 prev["miss_count"] = 0
                 prev["last_miss_date"] = None

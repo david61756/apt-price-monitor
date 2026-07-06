@@ -40,9 +40,14 @@ complexes:
     naver_id: "3715"
   - name: "수지구청 현대 22, 31평"
     region: "경기도 용인시 수지구"
-    match: ["현대"]
+    match: ["=현대"]
     areas: [60, 84]
     naver_id: "2225"
+  - name: "상현 서원마을3단지아이파크 34평"
+    region: "경기도 용인시 수지구"
+    match: ["서원마을3단지아이파크"]
+    areas: [84]
+    naver_id: "8425"
 
 options:
   months_back: 1
