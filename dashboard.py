@@ -267,7 +267,7 @@ const regionOf = c => REGION_MAP[c] || "기타 지역";
 function fmtMoney(man) {
   const sign = man < 0 ? "-" : ""; man = Math.abs(man);
   const eok = Math.floor(man / 10000), rest = man % 10000;
-  if (eok && rest) return sign + eok + "억 " + rest.toLocaleString();
+  if (eok && rest) return sign + eok + "억 " + rest.toLocaleString() + "만";
   if (eok) return sign + eok + "억";
   return sign + rest.toLocaleString() + "만";
 }
