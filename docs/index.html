@@ -22,9 +22,20 @@
                         color: #fff; font-weight: 600; }
   .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
            gap: 14px; margin-bottom: 24px; }
-  .region-head { grid-column: 1 / -1; font-size: 14px; font-weight: 700; color: var(--accent);
+  .region-head { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px;
+                 font-size: 14px; font-weight: 700; color: var(--accent);
                  margin: 10px 0 -2px; padding-bottom: 6px; border-bottom: 2px solid var(--line); }
   .region-head:first-child { margin-top: 0; }
+  /* 카드 순서 편집 UI */
+  .ord-bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+  .ord-bar .ord-hint { font-size: 11px; color: var(--sub); }
+  .ord-status { font-size: 12px; color: var(--accent); font-weight: 600; }
+  .region-head .reg-move { display: none; }
+  .region-head .reg-move button { border: 1px solid var(--line); background: #fff; border-radius: 6px;
+                 cursor: pointer; font-size: 11px; line-height: 1; padding: 2px 7px; }
+  body.editorder .region-head .reg-move { display: inline-flex; gap: 4px; }
+  body.editorder #cards .card, body.editorder #qCards .card { cursor: grab; }
+  .card.dragover { outline: 2px dashed var(--accent); outline-offset: 2px; }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
           padding: 16px 18px; }
   .card h3 { margin: 0 0 2px; font-size: 15px; }
@@ -108,6 +119,13 @@
 </div>
 
 <div id="tab-dash">
+  <div class="ord-bar">
+    <button class="btn ord-edit-btn" type="button" onclick="toggleOrderEdit()">🔀 순서 편집</button>
+    <button class="btn primary" type="button" onclick="saveCardOrder()">💾 순서 저장(로컬 공유)</button>
+    <button class="btn" type="button" onclick="resetCardOrder()">🔄 공유순서 불러오기</button>
+    <span class="ord-status"></span>
+    <span class="ord-hint">편집을 켜고 카드를 드래그(같은 지역 내)·지역 ▲▼로 바꾼 뒤 저장 → 로컬에서 <code>bash save_order.sh</code></span>
+  </div>
   <div class="cards" id="cards"></div>
 
   <div class="section">
@@ -142,6 +160,13 @@
   </div>
   <div id="quotesBody">
     <div id="qWarnBanner"></div>
+    <div class="ord-bar">
+      <button class="btn ord-edit-btn" type="button" onclick="toggleOrderEdit()">🔀 순서 편집</button>
+      <button class="btn primary" type="button" onclick="saveCardOrder()">💾 순서 저장(로컬 공유)</button>
+      <button class="btn" type="button" onclick="resetCardOrder()">🔄 공유순서 불러오기</button>
+      <span class="ord-status"></span>
+      <span class="ord-hint">지역/단지 순서는 매매·호가 탭 공통입니다.</span>
+    </div>
     <div class="cards" id="qCards"></div>
     <div class="section">
       <h2>호가 추이 <span class="legend" id="qTrackSince"></span></h2>
@@ -297,7 +322,9 @@ Object.entries(groups)
   const __region = regionOf(last.complex);
   if (__region !== __cardRegion) {
     __cardRegion = __region;
-    cardsEl.insertAdjacentHTML("beforeend", `<div class="region-head">📍 ${esc(__region)}</div>`);
+    cardsEl.insertAdjacentHTML("beforeend", `<div class="region-head" data-region="${esc(__region)}"><span>📍 ${esc(__region)}</span>` +
+      `<span class="reg-move"><button type="button" data-regmove="-1">▲</button>` +
+      `<button type="button" data-regmove="1">▼</button></span></div>`);
   }
   let diffHtml = "<span class='meta'>직전 거래 없음</span>";
   if (prev) {
@@ -328,7 +355,7 @@ Object.entries(groups)
   const thinHtml = act.length < 5
     ? `<div class="meta" style="color:#b45309">⚠ 실거래 표본 ${act.length}건 · 추세·갭은 참고용</div>` : "";
   cardsEl.insertAdjacentHTML("beforeend", `
-    <div class="card" data-key="${esc(key)}" data-apt="${esc(last.apt_nm)}">
+    <div class="card" data-key="${esc(key)}" data-apt="${esc(last.apt_nm)}" data-complex="${esc(last.complex)}" data-region="${esc(__region)}">
       <h3>${esc(last.apt_nm)} ${recBadge}</h3>
       <div class="band">전용 ${Math.floor(last.area)}㎡대 · ${esc(last.umd_nm)} · 기록 ${act.length}건</div>
       <div class="price">${fmtMoney(last.amount)}원 <span class="meta">실거래</span></div>
@@ -527,7 +554,9 @@ renderTable();
     const __region = regionOf(name);
     if (__region !== __qRegion) {
       __qRegion = __region;
-      qCardsEl.insertAdjacentHTML("beforeend", `<div class="region-head">📍 ${esc(__region)}</div>`);
+      qCardsEl.insertAdjacentHTML("beforeend", `<div class="region-head" data-region="${esc(__region)}"><span>📍 ${esc(__region)}</span>` +
+      `<span class="reg-move"><button type="button" data-regmove="-1">▲</button>` +
+      `<button type="button" data-regmove="1">▼</button></span></div>`);
     }
     const prices = act.map(q => q.price);
     const minP = Math.min(...prices);
@@ -554,7 +583,7 @@ renderTable();
     }
     const badge = (newCnt ? `🆕${newCnt} ` : "") + (cutCnt ? `🔻${cutCnt}` : "");
     qCardsEl.insertAdjacentHTML("beforeend", `
-      <div class="card" data-name="${esc(name)}">
+      <div class="card" data-name="${esc(name)}" data-complex="${esc(name)}" data-region="${esc(__region)}">
         <h3>${esc(name)}</h3>
         <div class="band">활성 매물 ${act.length}건 ${badge ? "· " + badge : ""}</div>
         <div class="price">${fmtMoney(minP)}원 <span class="meta">최저호가</span></div>
@@ -810,6 +839,151 @@ renderTable();
       `세션 만료·매물 소진·naver_id 오류일 수 있습니다. <code>python quotes_monitor.py</code> 재실행 또는 네이버 재로그인 후 세션 갱신을 확인하세요.</div>`;
   }
 })();
+
+// ============================== 카드 순서(지역·단지) 편집·저장 ==============================
+// 순서는 order.json으로 공유(모든 기기). 저장(커밋)은 로컬에서만: '순서 저장' → 클립보드 → `bash save_order.sh`.
+const CARD_ORDER = { regions: [], complexes: [] };
+let __editOrder = false;
+
+function __seedRegions() {
+  return [...document.querySelectorAll("#cards .region-head, #qCards .region-head")]
+    .map(h => h.dataset.region).filter((v, i, a) => v && a.indexOf(v) === i);
+}
+function __seedComplexes() {
+  const out = [];
+  document.querySelectorAll("#cards .card, #qCards .card").forEach(c => {
+    const k = c.dataset.complex;
+    if (k && !out.includes(k)) out.push(k);
+  });
+  return out;
+}
+const __rankR = r => { const i = CARD_ORDER.regions.indexOf(r); return i < 0 ? 9999 : i; };
+const __rankC = c => { const i = CARD_ORDER.complexes.indexOf(c); return i < 0 ? 9999 : i; };
+
+function applyOrder(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const heads = {}, cards = {};
+  [...el.children].forEach(n => {
+    if (n.classList && n.classList.contains("region-head")) heads[n.dataset.region] = n;
+    else if (n.dataset && n.dataset.region) (cards[n.dataset.region] = cards[n.dataset.region] || []).push(n);
+  });
+  Object.keys(heads).sort((a, b) => __rankR(a) - __rankR(b) || a.localeCompare(b)).forEach(r => {
+    el.appendChild(heads[r]);
+    (cards[r] || []).sort((a, b) => __rankC(a.dataset.complex) - __rankC(b.dataset.complex)
+        || String(a.dataset.complex).localeCompare(String(b.dataset.complex)))
+      .forEach(c => el.appendChild(c));
+  });
+}
+function applyOrderAll() { applyOrder("cards"); applyOrder("qCards"); }
+
+function __setOrderStatus(msg) { document.querySelectorAll(".ord-status").forEach(e => e.textContent = msg); }
+function markOrderDirty() {
+  localStorage.setItem("card_order", JSON.stringify(CARD_ORDER));
+  __setOrderStatus("● 변경됨 — 저장 필요");
+}
+
+async function loadCardOrder() {
+  const cached = localStorage.getItem("card_order");
+  if (cached) {
+    try { const o = JSON.parse(cached); CARD_ORDER.regions = o.regions || []; CARD_ORDER.complexes = o.complexes || []; } catch (e) {}
+  } else {
+    try {
+      const r = await fetch("order.json?_=" + Date.now());
+      if (r.ok) { const o = await r.json(); CARD_ORDER.regions = o.regions || []; CARD_ORDER.complexes = o.complexes || []; }
+    } catch (e) {}
+  }
+  applyOrderAll();
+}
+
+function toggleOrderEdit() {
+  __editOrder = !__editOrder;
+  document.body.classList.toggle("editorder", __editOrder);
+  document.querySelectorAll(".ord-edit-btn").forEach(b => b.textContent = __editOrder ? "✅ 편집 끝" : "🔀 순서 편집");
+  document.querySelectorAll("#cards .card, #qCards .card").forEach(c => c.draggable = __editOrder);
+  if (__editOrder) {
+    if (!CARD_ORDER.regions.length) CARD_ORDER.regions = __seedRegions();
+    if (!CARD_ORDER.complexes.length) CARD_ORDER.complexes = __seedComplexes();
+    __setOrderStatus("편집 중 — 드래그/▲▼로 변경 후 '순서 저장'");
+  }
+}
+
+function moveRegion(region, dir) {
+  if (!CARD_ORDER.regions.length) CARD_ORDER.regions = __seedRegions();
+  const arr = CARD_ORDER.regions, i = arr.indexOf(region), j = i + dir;
+  if (i < 0 || j < 0 || j >= arr.length) return;
+  [arr[i], arr[j]] = [arr[j], arr[i]];
+  applyOrderAll(); markOrderDirty();
+}
+
+let __dragEl = null;
+document.addEventListener("dragstart", e => {
+  const c = e.target.closest && e.target.closest(".card");
+  if (!c || !__editOrder) return;
+  __dragEl = c; e.dataTransfer.effectAllowed = "move";
+});
+document.addEventListener("dragover", e => {
+  if (!__editOrder || !__dragEl) return;
+  const over = e.target.closest && e.target.closest(".card");
+  if (!over || over === __dragEl || over.dataset.region !== __dragEl.dataset.region) return;
+  e.preventDefault(); over.classList.add("dragover");
+});
+document.addEventListener("dragleave", e => {
+  const over = e.target.closest && e.target.closest(".card");
+  if (over) over.classList.remove("dragover");
+});
+document.addEventListener("drop", e => {
+  if (!__editOrder || !__dragEl) return;
+  const over = e.target.closest && e.target.closest(".card");
+  document.querySelectorAll(".card.dragover").forEach(c => c.classList.remove("dragover"));
+  if (!over || over === __dragEl || over.dataset.region !== __dragEl.dataset.region) { __dragEl = null; return; }
+  e.preventDefault();
+  if (!CARD_ORDER.complexes.length) CARD_ORDER.complexes = __seedComplexes();
+  const arr = CARD_ORDER.complexes;
+  const from = arr.indexOf(__dragEl.dataset.complex), to = arr.indexOf(over.dataset.complex);
+  if (from >= 0 && to >= 0) { arr.splice(to, 0, arr.splice(from, 1)[0]); applyOrderAll(); markOrderDirty(); }
+  __dragEl = null;
+});
+document.addEventListener("dragend", () => {
+  document.querySelectorAll(".card.dragover").forEach(c => c.classList.remove("dragover"));
+  __dragEl = null;
+});
+document.addEventListener("click", e => {
+  const b = e.target.closest && e.target.closest("[data-regmove]");
+  if (!b) return;
+  const head = b.closest(".region-head");
+  if (head) moveRegion(head.dataset.region, parseInt(b.dataset.regmove, 10));
+});
+
+function saveCardOrder() {
+  if (!CARD_ORDER.regions.length) CARD_ORDER.regions = __seedRegions();
+  if (!CARD_ORDER.complexes.length) CARD_ORDER.complexes = __seedComplexes();
+  const json = JSON.stringify({ regions: CARD_ORDER.regions, complexes: CARD_ORDER.complexes }, null, 1);
+  localStorage.setItem("card_order", JSON.stringify(CARD_ORDER));
+  const done = () => __setOrderStatus("📋 복사됨 — 로컬 터미널에서 `bash save_order.sh` 실행 → 모든 기기 공유");
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(json).then(done).catch(() => __showOrderJson(json));
+  } else { __showOrderJson(json); }
+}
+function __showOrderJson(json) {
+  __setOrderStatus("아래 JSON을 docs/order.json 에 저장(복사)하세요");
+  let ta = document.getElementById("ordJsonBox");
+  if (!ta) {
+    ta = document.createElement("textarea");
+    ta.id = "ordJsonBox";
+    ta.style.cssText = "width:100%;height:120px;margin-top:8px;font-size:11px";
+    const c = document.getElementById("cards");
+    c.parentNode.insertBefore(ta, c.nextSibling);
+  }
+  ta.value = json; ta.focus(); ta.select();
+}
+function resetCardOrder() {
+  localStorage.removeItem("card_order");
+  __setOrderStatus("공유 순서를 불러옵니다…");
+  location.reload();
+}
+
+loadCardOrder();
 
 // ============================== 단지 관리 탭 ==============================
 // 시군구명 → 법정동코드 (lawd.py와 동일 로직)
