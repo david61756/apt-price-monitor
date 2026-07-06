@@ -141,7 +141,7 @@ _TEMPLATE = """<!DOCTYPE html>
     <button class="btn primary" type="button" onclick="saveCardOrder()">💾 순서 저장(로컬 공유)</button>
     <button class="btn" type="button" onclick="resetCardOrder()">🔄 공유순서 불러오기</button>
     <span class="ord-status"></span>
-    <span class="ord-hint">편집을 켜고 카드를 드래그(같은 지역 내)·지역 ▲▼로 바꾼 뒤 저장 → 로컬에서 <code>bash save_order.sh</code></span>
+    <span class="ord-hint">편집 켜고 카드 드래그(같은 지역 내)·지역 ▲▼로 변경 후 저장. 자동저장: <code>python3 order_server.py</code> 실행 후 <code>localhost:8787</code> 접속(저장 시 자동 커밋·공유). Pages접속 시엔 클립보드→<code>bash save_order.sh</code></span>
   </div>
   <div class="cards" id="cards"></div>
 
@@ -977,6 +977,17 @@ function saveCardOrder() {
   if (!CARD_ORDER.complexes.length) CARD_ORDER.complexes = __seedComplexes();
   const json = JSON.stringify({ regions: CARD_ORDER.regions, complexes: CARD_ORDER.complexes }, null, 1);
   localStorage.setItem("card_order", JSON.stringify(CARD_ORDER));
+  // 로컬 서버(order_server.py)로 접속했으면 자동 저장(커밋·푸시)
+  const isLocal = ["localhost", "127.0.0.1"].includes(location.hostname);
+  if (isLocal) {
+    __setOrderStatus("저장 중…");
+    fetch("/save-order", { method: "POST", headers: { "Content-Type": "application/json" }, body: json })
+      .then(r => r.json())
+      .then(o => __setOrderStatus((o.ok ? "✅ " : "❌ ") + o.msg + (o.ok ? " — 다른 기기는 '🔄 공유순서 불러오기'" : "")))
+      .catch(() => __setOrderStatus("❌ 로컬 서버 응답 없음 — `python3 order_server.py` 실행 확인"));
+    return;
+  }
+  // GitHub Pages 등: 클립보드 폴백 → 로컬에서 bash save_order.sh
   const done = () => __setOrderStatus("📋 복사됨 — 로컬 터미널에서 `bash save_order.sh` 실행 → 모든 기기 공유");
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(json).then(done).catch(() => __showOrderJson(json));
