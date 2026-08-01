@@ -33,6 +33,11 @@ complexes:
     match: ["성복역아이파크"]
     areas: [59, 84, 116]
     naver_id: "3707"
+  - name: "도담마을아이파크 25, 34, 42평"
+    region: "경기도 용인시 수지구"
+    match: ["도담마을아이파크"]
+    areas: [59, 84, 109]
+    naver_id: "2534"
 
 options:
   months_back: 1
