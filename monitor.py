@@ -24,7 +24,7 @@ import yaml
 
 from dashboard import render_dashboard
 from lawd import resolve_lawd_cd
-from matching import match_complex
+from matching import match_complex, matching_complex_name
 
 BASE_DIR = Path(__file__).resolve().parent
 CONFIG_PATH = BASE_DIR / "config.yaml"
@@ -300,15 +300,15 @@ def main():
                     fetched[rid] = r
 
     # 관심 단지 매칭 (단지별 매칭 수 진단)
+    # 한 거래가 여러 단지에 매칭되면 config에 먼저 나온 단지로 귀속(prune 재태깅과 동일 규칙).
     matched = {}
-    per_complex = {}
-    for c in cfg["complexes"]:
-        cnt = 0
-        for rid, r in fetched.items():
-            if match_complex(r, c):
-                matched[rid] = {**r, "complex": c["name"]}
-                cnt += 1
-        per_complex[c["name"]] = cnt
+    per_complex = {c["name"]: 0 for c in cfg["complexes"]}
+    for rid, r in fetched.items():
+        name = matching_complex_name(r, cfg["complexes"])
+        if name is None:
+            continue
+        matched[rid] = {**r, "complex": name}
+        per_complex[name] += 1
 
     print("\n=== 단지별 조회 기간 내 매칭 ===")
     for c in cfg["complexes"]:
@@ -352,13 +352,24 @@ def main():
         print("\n--dry-run: state.json/대시보드를 갱신하지 않았습니다.")
         return
 
-    # 관심단지에서 빠진(현재 config에 매칭 안 되는) 옛 거래는 정리해 state를 동기화
-    before = len(known)
-    known = {rid: d for rid, d in known.items()
-             if any(match_complex(d, c) for c in cfg["complexes"])}
+    # 관심단지에서 빠진(현재 config에 매칭 안 되는) 옛 거래는 정리해 state를 동기화.
+    # 남는 거래는 complex 이름을 현재 config 기준으로 재태깅(단지명 변경 시 옛 이름으로 쪼개지는 것 방지).
+    before, retagged = len(known), 0
+    pruned = {}
+    for rid, d in known.items():
+        name = matching_complex_name(d, cfg["complexes"])
+        if name is None:
+            continue
+        if d.get("complex") != name:
+            d = {**d, "complex": name}
+            retagged += 1
+        pruned[rid] = d
+    known = pruned
     state["deals"] = known
     if before - len(known):
         print(f"정리: 현재 관심단지에 없는 거래 {before - len(known)}건 제거")
+    if retagged:
+        print(f"재태깅: 옛 단지명 거래 {retagged}건을 현재 이름으로 통합")
 
     state["last_run"] = datetime.now(KST).isoformat(timespec="seconds")
     STATE_PATH.write_text(
