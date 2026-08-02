@@ -1,0 +1,16 @@
+{
+ "embargo": 45,
+ "horizon": 91,
+ "n": 2460,
+ "asofs": 45,
+ "coverage": 72.39837398373984,
+ "below": 7.113821138211382,
+ "above": 20.48780487804878,
+ "width": 19.626255217650566,
+ "center_bias": -4.6875,
+ "asof_med": 82.8125,
+ "asof_min": 0.0,
+ "asof_max": 100.0,
+ "naive_coverage": 81.96457326892109,
+ "deals_used": 984
+}

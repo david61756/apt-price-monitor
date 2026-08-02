@@ -68,13 +68,58 @@ def unit_key(d):
     return (d.get("complex", ""), int(d.get("area") or 0))
 
 
-def compute_analytics(deals, now_date=None):
+def _parse_cancel(s):
+    """해제일 'YY.MM.DD' → 'YYYY-MM-DD'. 형식이 아니면 None."""
+    if not s or s.count(".") != 2:
+        return None
+    y, m, dd = s.split(".")
+    if not (y.isdigit() and m.isdigit() and dd.isdigit()):
+        return None
+    return f"20{int(y):02d}-{int(m):02d}-{int(dd):02d}"
+
+
+def available_at(deals, asof=None, embargo_days=0):
+    """as-of 시점에 '실제로 알 수 있었던' 거래만 남긴다(백테스트용).
+
+    실거래는 계약일 기준이지만 신고는 지연된다(보유 데이터 실측 p90 ≈ 41일).
+    따라서 T 시점에 안다고 볼 수 있는 것은 계약일 ≤ T-embargo 인 건이다.
+    해제 정보도 같은 지연을 적용한다 — 해제일을 모르면 '아직 몰랐다'로 보아 포함한다
+    (지금은 해제로 알려졌다는 사실을 과거 시점에 쓰면 그 자체가 룩어헤드).
+
+    asof=None이면 라이브 렌더 모드: 현재 아는 것 전부 사용, 해제는 전량 제외.
+    """
+    if asof is None:
+        return [d for d in deals if not d.get("cancelled")]
+    cut = _shift(asof, -embargo_days)
+    out = []
+    for d in deals:
+        if d["date"] > cut:
+            continue
+        if d.get("cancelled"):
+            cd = _parse_cancel(d.get("cancel_date"))
+            if cd is not None and cd <= cut:     # 그 시점에 이미 해제로 알려짐
+                continue
+        out.append(d)
+    return out
+
+
+def _shift(date_str, days):
+    """YYYY-MM-DD를 days만큼 이동(달력 정확). 표준 라이브러리만 사용."""
+    from datetime import date, timedelta
+    y, m, d = (int(x) for x in date_str.split("-"))
+    return (date(y, m, d) + timedelta(days=days)).isoformat()
+
+
+def compute_analytics(deals, now_date=None, asof=None, embargo_days=0):
     """전체 거래 → 단위(단지×전용면적대)별 밴드·상대가치.
+
+    asof를 주면 그 시점에 알 수 있었던 데이터만으로 계산한다(워크포워드 백테스트용).
+    라이브 렌더는 asof=None(기본) — 현재 아는 것 전부를 쓰는 게 맞다.
 
     반환: {"units": {key: {...}}, "pooled": {...}, "caveats": [...]}
     key는 대시보드에서 쓰기 쉽게 "단지명|84" 형태 문자열.
     """
-    act = [d for d in deals if not d.get("cancelled") and d.get("amount")]
+    act = [d for d in available_at(deals, asof, embargo_days) if d.get("amount")]
     groups = defaultdict(list)
     for d in act:
         groups[unit_key(d)].append(d)
@@ -86,7 +131,12 @@ def compute_analytics(deals, now_date=None):
         "p90": _q(pooled, 0.90), "n": len(pooled),
     }
 
-    latest_date = max((d["date"] for d in act), default=now_date or "")
+    # '최근 90일' 창의 기준점. 백테스트에서는 as-of 컷오프에 고정해야 한다
+    # (마지막 거래일에 앵커하면 거래가 뜸한 단지일수록 창이 과거로 밀려 시차가 커진다).
+    if asof is not None:
+        latest_date = _shift(asof, -embargo_days)
+    else:
+        latest_date = max((d["date"] for d in act), default=now_date or "")
     units = {}
     for (cx, area), g in groups.items():
         g.sort(key=lambda x: x["date"])
@@ -153,6 +203,17 @@ def compute_analytics(deals, now_date=None):
                 "peers": len(lst),
             }
 
+    # 워크포워드 백테스트 실측치(있으면) — 밴드 성능을 숨기지 않고 그대로 노출
+    bt = None
+    try:
+        import json as _json
+        from pathlib import Path as _Path
+        p = _Path(__file__).resolve().parent / "band_backtest.json"
+        if p.exists():
+            bt = _json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        bt = None
+
     caveats = [
         "밴드는 예측이 아니라 과거 3개월 변동폭의 분포입니다. 폭이 넓어 점 예측을 대체하지 못합니다.",
         "하락기(2022)는 거래절벽으로 표본이 적어 밴드 하단이 낙관적으로 치우칠 수 있습니다.",
@@ -161,4 +222,12 @@ def compute_analytics(deals, now_date=None):
         "이후 12개월에 오히려 더 뒤처졌습니다(방향 적중률 29.9%, gap≤-15% 단지의 초과수익 중앙값 -6.5%). "
         "생활권·연식이 다른 상품의 영구적 품질차로 보는 것이 타당합니다.",
     ]
-    return {"units": units, "pooled": pooled_band, "caveats": caveats}
+    if bt:
+        caveats.insert(1,
+            f"이 밴드를 과거 시점에서 만들어 검증한 실측 적중률은 <b>{bt['coverage']:.0f}%</b>입니다"
+            f"(신고지연 {bt['embargo']}일 반영, {bt['n']:,}건 평가). "
+            f"특히 <b>상단을 뚫는 경우가 {bt['above']:.0f}%</b>로 하단({bt['below']:.0f}%)보다 훨씬 잦아, "
+            f"상승 국면에서는 밴드 위쪽으로 체결되는 일이 흔합니다. "
+            f"시점별 적중률은 {bt['asof_min']:.0f}~{bt['asof_max']:.0f}%로 크게 흩어집니다.")
+    return {"units": units, "pooled": pooled_band, "caveats": caveats,
+            "backtest": bt}
