@@ -24,6 +24,10 @@ MIN_PAIRS_OWN = 8                       # 자체 분포를 쓰기 위한 최소 
 MIN_DEALS_SHOW = 5                      # 이 미만이면 밴드 자체를 만들지 않음
 RECENT_DAYS = 90                        # 밴드 중심(최근 실거래 중앙값) 산정 구간
 PYEONG = 3.3058                         # ㎡ → 평
+# 개별 체결가 산포 하한: 동일 단지·평형·분기 내 로그가격 잔차 sd 실측 η=0.056(815건)
+# → ±1.2816η ≈ ±7.2%. 시장이 정지해 있어도 층·향·동에 따라 이만큼 흩어지므로
+#   밴드 반폭이 이보다 좁으면 비현실적이다(특히 상승장 표본에서 하단이 중심에 붙는 문제 보정).
+MIN_HALF_WIDTH_PCT = 7.2
 
 
 def _day(date_str):
@@ -108,11 +112,12 @@ def compute_analytics(deals, now_date=None):
 
         band = None
         if src and n >= MIN_DEALS_SHOW:
-            lo, hi = int(center * (1 + p10 / 100)), int(center * (1 + p90 / 100))
             # 상승장 표본이면 p10이 양수가 되어 '하단 > 현재가'가 된다(= 무조건 오른다는 주장).
-            # 표본 편향일 뿐 근거가 없으므로 밴드는 항상 현재가를 포함하도록 보정한다(보수적).
-            clamped = lo > center or hi < center
-            lo, hi = min(lo, center), max(hi, center)
+            # 단순히 현재가로 clamp만 하면 이번엔 '하단 = 현재가'(= 떨어질 수 없다)가 되어
+            # 여전히 비현실적이다. 그래서 개별 체결가 산포(η) 하한을 함께 적용한다.
+            lo_pct, hi_pct = min(p10, -MIN_HALF_WIDTH_PCT), max(p90, MIN_HALF_WIDTH_PCT)
+            clamped = (p10 > -MIN_HALF_WIDTH_PCT) or (p90 < MIN_HALF_WIDTH_PCT)
+            lo, hi = int(center * (1 + lo_pct / 100)), int(center * (1 + hi_pct / 100))
             band = {
                 "center": center, "lo": lo, "hi": hi,
                 "p10": round(p10, 1), "p90": round(p90, 1),
@@ -152,5 +157,8 @@ def compute_analytics(deals, now_date=None):
         "밴드는 예측이 아니라 과거 3개월 변동폭의 분포입니다. 폭이 넓어 점 예측을 대체하지 못합니다.",
         "하락기(2022)는 거래절벽으로 표본이 적어 밴드 하단이 낙관적으로 치우칠 수 있습니다.",
         "표본이 적은 단위는 전체 분포로 대체(pooled)하며 신뢰도가 낮습니다.",
+        "평단가 격차는 '저평가' 신호가 아닙니다. 보유 데이터로 검증한 결과 격차가 큰 단지가 "
+        "이후 12개월에 오히려 더 뒤처졌습니다(방향 적중률 29.9%, gap≤-15% 단지의 초과수익 중앙값 -6.5%). "
+        "생활권·연식이 다른 상품의 영구적 품질차로 보는 것이 타당합니다.",
     ]
     return {"units": units, "pooled": pooled_band, "caveats": caveats}

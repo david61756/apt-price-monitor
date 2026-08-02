@@ -102,4 +102,12 @@ res11 = A.compute_analytics(mix)
 chk("타지역과 비교 안 함(수지 단독 → rel 없음)", "rel" not in res11["units"]["수지단지|59"])
 chk("타지역과 비교 안 함(시흥 단독 → rel 없음)", "rel" not in res11["units"]["시흥단지|59"])
 
+# 12) 밴드 반폭은 개별 체결가 산포 하한(±7.2%) 아래로 좁아지지 않는다.
+#     상승장 표본에서 '하단=현재가'가 되어 "떨어질 수 없다"로 읽히는 것을 막는다.
+res12 = A.compute_analytics(bull)
+b12 = res12["units"]["U단지|84"]["band"]
+lo_pct = (b12["lo"] / b12["center"] - 1) * 100
+chk("하단이 최소 -7.2% 이하로 열려 있음", lo_pct <= -A.MIN_HALF_WIDTH_PCT + 0.01)
+chk("상단도 최소 +7.2% 이상", (b12["hi"] / b12["center"] - 1) * 100 >= A.MIN_HALF_WIDTH_PCT - 0.01)
+
 print("\n✅ 모든 테스트 통과")

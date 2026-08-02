@@ -406,17 +406,19 @@ Object.entries(groups)
                + (b.clamped ? " · 상승편향 보정" : "");
     bandHtml = `
       <div class="bandbox">
-        <div class="bandhead">3개월 예상 범위<span class="bandnote">${b.p10}%~${b.p90}%${note}</span></div>
+        <div class="bandhead">3개월 변동 참고범위<span class="bandnote">${b.p10}%~${b.p90}%${note}</span></div>
         <div class="bandbar"><i style="left:${pos}%"></i></div>
         <div class="bandends"><span>${fmtMoney(b.lo)}</span><span>${fmtMoney(b.hi)}</span></div>
       </div>`;
   }
   if (an && an.rel) {
+    // '저평가/고평가' 라벨은 붙이지 않는다. 보유 데이터로 검증한 결과 평단가 격차는
+    // 이후에 좁혀지지 않았다(방향 적중률 29.9%, beta 부호가 평균회귀와 반대).
+    // 따라서 가치판단 없이 '가격 위치'라는 사실만 진술한다.
     const g = an.rel.gap_pct;
     const cls = g < 0 ? "diff-down" : g > 0 ? "diff-up" : "";
-    const label = g <= -5 ? "저평가" : (g >= 5 ? "고평가" : "적정");
-    relHtml = `<div class="meta">⚖️ 동지역·동평형 ${an.rel.peers}곳 대비 `
-      + `<span class="${cls}">${g > 0 ? "+" : ""}${g}% ${label}</span>`
+    relHtml = `<div class="meta">⚖️ 동지역·동평형 ${an.rel.peers}곳 중 평단가 `
+      + `<span class="${cls}">${g > 0 ? "+" : ""}${g}%</span>`
       + ` <span style="color:#9ca3af">(중앙 ${an.rel.peer_median.toLocaleString()}만/평)</span></div>`;
   }
   cardsEl.insertAdjacentHTML("beforeend", `
@@ -441,7 +443,7 @@ Object.entries(groups)
   const c = (ANALYTICS.caveats || []);
   if (!c.length || !Object.keys(ANALYTICS.units || {}).length) return;
   const el = document.getElementById("bandCaveat");
-  el.innerHTML = "<b>📐 '3개월 예상 범위'를 읽는 법</b><ul style='margin:6px 0 0;padding-left:18px'>"
+  el.innerHTML = "<b>📐 지표를 읽는 법</b><ul style='margin:6px 0 0;padding-left:18px'>"
     + c.map(x => `<li>${esc(x)}</li>`).join("") + "</ul>";
   el.style.display = "";
 })();
