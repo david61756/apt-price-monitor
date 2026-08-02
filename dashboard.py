@@ -10,6 +10,7 @@
 import json
 from pathlib import Path
 
+from analytics import compute_analytics
 from matching import matching_complex_name
 from quotes import quote_in_config
 
@@ -60,6 +61,15 @@ _TEMPLATE = """<!DOCTYPE html>
   .card .price { font-size: 22px; font-weight: 700; }
   .card .meta { font-size: 12px; color: var(--sub); margin-top: 6px; }
   .card .pyeong { font-size: 12px; color: var(--accent); font-weight: 600; margin-top: 4px; }
+  /* 밴드(3개월 예상 범위): 막대 위 현재가 위치 표시. 예측이 아니라 과거 변동폭임을 문구로 고지 */
+  .bandbox { margin-top: 10px; padding-top: 9px; border-top: 1px dashed var(--line); }
+  .bandhead { font-size: 11px; color: var(--sub); display: flex; justify-content: space-between; gap: 6px; }
+  .bandnote { color: #b45309; }
+  .bandbar { position: relative; height: 6px; border-radius: 99px; margin: 6px 0 3px;
+             background: linear-gradient(90deg, #dbeafe, #e5e7eb 50%, #fee2e2); }
+  .bandbar i { position: absolute; top: -3px; width: 2px; height: 12px; background: var(--ink);
+               border-radius: 1px; transform: translateX(-1px); }
+  .bandends { display: flex; justify-content: space-between; font-size: 11px; color: var(--sub); }
   /* 요약 카드: 클릭 시 가격추이·거래내역을 해당 단지로 필터(다시 클릭 시 해제). 매매·호가 공통 */
   #cards .card, #qCards .card { cursor: pointer; transition: box-shadow .12s, border-color .12s; }
   #cards .card:hover, #qCards .card:hover { border-color: #94a3b8; }
@@ -144,6 +154,7 @@ _TEMPLATE = """<!DOCTYPE html>
     <span class="ord-hint">편집 켜고 카드 드래그(같은 지역 내)·지역 ▲▼로 변경 후 저장. 자동저장: <code>python3 order_server.py</code> 실행 후 <code>localhost:8787</code> 접속(저장 시 자동 커밋·공유). Pages접속 시엔 클립보드→<code>bash save_order.sh</code></span>
   </div>
   <div class="cards" id="cards"></div>
+  <div class="note" id="bandCaveat" style="display:none;margin:-8px 0 20px"></div>
 
   <div class="section">
     <h2>가격 추이</h2>
@@ -259,6 +270,7 @@ const REGION_MAP = __REGION_MAP__;
 const SGG = __SGG__;
 const WARNINGS = __WARNINGS__;
 const QUOTES = __QUOTES__;
+const ANALYTICS = __ANALYTICS__;
 const QUOTES_META = __QUOTES_META__;
 // 카드 지역별 그룹핑: config 단지명 → 지역 라벨
 const regionOf = c => REGION_MAP[c] || "기타 지역";
@@ -362,15 +374,51 @@ Object.entries(groups)
   // 평단가(만원/평) — 면적 다른 단지 비교용 핵심 지표
   const pyeong = last.area ? Math.round(last.amount * 3.3058 / last.area) : 0;
   const pyeongHtml = pyeong ? `<div class="pyeong">평단가 ${pyeong.toLocaleString()}만/평</div>` : "";
-  // #2 신고가/신저가 배지 — 추적기간 내 최신 거래가 최고/최저일 때(표본 5건 이상에서만)
+  // #2 신고가/신저가 배지 — 추적기간 내 최신 거래가 최고/최저일 때(표본 5건 이상에서만).
+  //    단, 시세중앙에서 15% 넘게 벗어난 특수거래 의심 건에는 붙이지 않는다(오도 방지).
+  const _an0 = (ANALYTICS.units || {})[last.complex + "|" + Math.floor(last.area)];
+  const _susp = _an0 && _an0.center
+    && Math.abs(last.amount - _an0.center) / _an0.center > 0.15;
   const amts = act.map(d => d.amount);
-  const isHigh = act.length >= 5 && last.amount === Math.max(...amts);
-  const isLow = act.length >= 5 && last.amount === Math.min(...amts);
+  const isHigh = !_susp && act.length >= 5 && last.amount === Math.max(...amts);
+  const isLow = !_susp && act.length >= 5 && last.amount === Math.min(...amts);
   const recBadge = isHigh ? `<span class="badge" style="background:#fee2e2;color:#b91c1c">🔺 신고가</span>`
                  : isLow ? `<span class="badge" style="background:#dbeafe;color:#1d4ed8">🔻 신저가</span>` : "";
   // #1 표본 부족 경고 — 거래 5건 미만이면 등락/호가갭이 불안정함을 고지
   const thinHtml = act.length < 5
     ? `<div class="meta" style="color:#b45309">⚠ 실거래 표본 ${act.length}건 · 추세·갭은 참고용</div>` : "";
+
+  // 밴드(3개월 예상 범위)·상대가치 — analytics.py 산출값(단지명|전용면적대 키)
+  const an = (ANALYTICS.units || {})[last.complex + "|" + Math.floor(last.area)];
+  // 최근 거래가 robust 중심(최근 90일/최근3건 중앙값)에서 크게 벗어나면 특수거래(증여·가족간 등) 의심.
+  // 사실은 그대로 보여주되, 이 값 하나로 시세를 판단하지 않도록 경고한다.
+  let outlierHtml = "";
+  if (an && an.center && Math.abs(last.amount - an.center) / an.center > 0.15) {
+    const dir = last.amount < an.center ? "낮" : "높";
+    outlierHtml = `<div class="meta" style="color:#b45309">⚠ 최근 1건이 시세중앙(${fmtMoney(an.center)})보다 `
+      + `크게 ${dir}습니다 — 특수거래 가능성, 시세로 단정 금지</div>`;
+  }
+  let bandHtml = "", relHtml = "";
+  if (an && an.band) {
+    const b = an.band, w = b.hi - b.lo;
+    const pos = w > 0 ? Math.max(2, Math.min(98, (b.center - b.lo) / w * 100)) : 50;
+    const note = (b.source === "pooled" ? " · 표본부족(지역분포 대체)" : "")
+               + (b.clamped ? " · 상승편향 보정" : "");
+    bandHtml = `
+      <div class="bandbox">
+        <div class="bandhead">3개월 예상 범위<span class="bandnote">${b.p10}%~${b.p90}%${note}</span></div>
+        <div class="bandbar"><i style="left:${pos}%"></i></div>
+        <div class="bandends"><span>${fmtMoney(b.lo)}</span><span>${fmtMoney(b.hi)}</span></div>
+      </div>`;
+  }
+  if (an && an.rel) {
+    const g = an.rel.gap_pct;
+    const cls = g < 0 ? "diff-down" : g > 0 ? "diff-up" : "";
+    const label = g <= -5 ? "저평가" : (g >= 5 ? "고평가" : "적정");
+    relHtml = `<div class="meta">⚖️ 동지역·동평형 ${an.rel.peers}곳 대비 `
+      + `<span class="${cls}">${g > 0 ? "+" : ""}${g}% ${label}</span>`
+      + ` <span style="color:#9ca3af">(중앙 ${an.rel.peer_median.toLocaleString()}만/평)</span></div>`;
+  }
   cardsEl.insertAdjacentHTML("beforeend", `
     <div class="card" data-key="${esc(key)}" data-apt="${esc(last.apt_nm)}" data-complex="${esc(last.complex)}" data-region="${esc(__region)}">
       <h3>${esc(last.apt_nm)} ${recBadge}</h3>
@@ -378,12 +426,25 @@ Object.entries(groups)
       <div class="price">${fmtMoney(last.amount)}원 <span class="meta">실거래</span></div>
       <div>${diffHtml}</div>
       ${pyeongHtml}
+      ${relHtml}
       ${askHtml}
+      ${outlierHtml}
       ${thinHtml}
+      ${bandHtml}
       <div class="meta">최근 계약 ${last.date} · ${last.floor || "?"}층</div>
       <div class="selhint">▸ 클릭하면 이 단지로 차트·내역 보기</div>
     </div>`);
 });
+
+// 밴드 한계 고지 — 예측으로 오독하지 않도록 카드 아래에 항상 노출
+(function bandCaveat() {
+  const c = (ANALYTICS.caveats || []);
+  if (!c.length || !Object.keys(ANALYTICS.units || {}).length) return;
+  const el = document.getElementById("bandCaveat");
+  el.innerHTML = "<b>📐 '3개월 예상 범위'를 읽는 법</b><ul style='margin:6px 0 0;padding-left:18px'>"
+    + c.map(x => `<li>${esc(x)}</li>`).join("") + "</ul>";
+  el.style.display = "";
+})();
 
 // 카드 클릭 → 가격추이(차트)·거래내역(표)을 해당 단지로 필터. 같은 카드 재클릭 시 해제(토글).
 let selCardKey = null;
@@ -1280,6 +1341,7 @@ def render_dashboard(state, cfg, out_path, quotes_state=None):
         "SGG": _js(sgg),
         "QUOTES": _js(visible_quotes),
         "QUOTES_META": _js(quotes_meta),
+        "ANALYTICS": _js(compute_analytics(visible)),
     }
     # 단일 패스 치환: 데이터 안에 우연히 __TOKEN__ 문자열이 있어도 재치환되지 않음.
     # 대문자/언더스코어 placeholder만 매칭 → JS의 __all__/__grouped__ 같은 소문자 센티넬은 안전.
