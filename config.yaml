@@ -27,6 +27,7 @@ complexes:
     region: "경기도 용인시 수지구"
     match: ["진산마을성원상떼빌"]
     areas: [84]
+    naver_id: "2221"
   - name: "서원마을3단지아이파크 33, 38평"
     region: "경기도 용인시 수지구"
     match: ["서원마을3단지아이파크"]
