@@ -13,39 +13,24 @@ complexes:
     match: ["서원마을현대홈타운"]
     areas: [59, 84]
     naver_id: "8692"
-  - name: "수지구청 현대 22, 31평"
-    region: "경기도 용인시 수지구"
-    match: ["=현대"]   # 정확일치: '현대홈타운' 등 다른 단지 오매칭 방지
-    areas: [60, 84]
-    naver_id: "2225"
   - name: "수지파크푸르지오 24평"
     region: "경기도 용인시 수지구"
     match: ["수지파크푸르지오"]
     areas: [59]
     naver_id: "114527"
-  - name: "성복역리버파크 24평"
-    region: "경기도 용인시 수지구"
-    match: ["성복역리버파크"]
-    areas: [59]
-    naver_id: "2215"
   - name: "성복역아이파크 25, 34, 44평"
     region: "경기도 용인시 수지구"
     match: ["성복역아이파크"]
     areas: [59, 84, 116]
     naver_id: "3707"
-  - name: "도담마을아이파크 25, 34, 42평"
-    region: "경기도 용인시 수지구"
-    match: ["도담마을아이파크"]
-    areas: [59, 84, 109]
-    naver_id: "2534"
   - name: "진산마을성원상떼빌 32평"
     region: "경기도 용인시 수지구"
     match: ["진산마을성원상떼빌"]
-    areas: [84]              # 전용 84.96㎡ = 32평(공급 기준). naver_id 자동조회 실패 → 실거래만 추적
+    areas: [84]
   - name: "서원마을3단지아이파크 33, 38평"
     region: "경기도 용인시 수지구"
     match: ["서원마을3단지아이파크"]
-    areas: [84, 127]         # 전용 84.94(33평) / 127.95(38평)
+    areas: [84, 127]
     naver_id: "8425"
 
 options:
@@ -55,3 +40,4 @@ options:
 naver:
   trade_types: ["A1"]
   notify: true
+
