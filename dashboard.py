@@ -943,6 +943,17 @@ function __seedComplexes() {
 const __rankR = r => { const i = CARD_ORDER.regions.indexOf(r); return i < 0 ? 9999 : i; };
 const __rankC = c => { const i = CARD_ORDER.complexes.indexOf(c); return i < 0 ? 9999 : i; };
 
+// 저장된 순서를 '현재 카드 목록'과 동기화한다: 사라진 단지는 빼고, 새 단지는 뒤에 덧붙인다.
+// (기존에는 배열이 비었을 때만 seed해서, config에 단지를 추가하면 순서 목록에 없는 상태가 되고
+//  drop 핸들러의 indexOf가 -1을 반환해 드래그가 조용히 무시되는 버그가 있었다.)
+function __syncOrder() {
+  const curR = __seedRegions(), curC = __seedComplexes();
+  CARD_ORDER.regions = CARD_ORDER.regions.filter(r => curR.includes(r))
+    .concat(curR.filter(r => !CARD_ORDER.regions.includes(r)));
+  CARD_ORDER.complexes = CARD_ORDER.complexes.filter(c => curC.includes(c))
+    .concat(curC.filter(c => !CARD_ORDER.complexes.includes(c)));
+}
+
 function applyOrder(id) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -976,6 +987,7 @@ async function loadCardOrder() {
       if (r.ok) { const o = await r.json(); CARD_ORDER.regions = o.regions || []; CARD_ORDER.complexes = o.complexes || []; }
     } catch (e) {}
   }
+  __syncOrder();          // 저장본에 없는 새 단지도 목록에 편입(드래그 가능해짐)
   applyOrderAll();
 }
 
@@ -985,14 +997,13 @@ function toggleOrderEdit() {
   document.querySelectorAll(".ord-edit-btn").forEach(b => b.textContent = __editOrder ? "✅ 편집 끝" : "🔀 순서 편집");
   document.querySelectorAll("#cards .card, #qCards .card").forEach(c => c.draggable = __editOrder);
   if (__editOrder) {
-    if (!CARD_ORDER.regions.length) CARD_ORDER.regions = __seedRegions();
-    if (!CARD_ORDER.complexes.length) CARD_ORDER.complexes = __seedComplexes();
+    __syncOrder();
     __setOrderStatus("편집 중 — 드래그/▲▼로 변경 후 '순서 저장'");
   }
 }
 
 function moveRegion(region, dir) {
-  if (!CARD_ORDER.regions.length) CARD_ORDER.regions = __seedRegions();
+  __syncOrder();
   const arr = CARD_ORDER.regions, i = arr.indexOf(region), j = i + dir;
   if (i < 0 || j < 0 || j >= arr.length) return;
   [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -1021,7 +1032,7 @@ document.addEventListener("drop", e => {
   document.querySelectorAll(".card.dragover").forEach(c => c.classList.remove("dragover"));
   if (!over || over === __dragEl || over.dataset.region !== __dragEl.dataset.region) { __dragEl = null; return; }
   e.preventDefault();
-  if (!CARD_ORDER.complexes.length) CARD_ORDER.complexes = __seedComplexes();
+  __syncOrder();
   const arr = CARD_ORDER.complexes;
   const from = arr.indexOf(__dragEl.dataset.complex), to = arr.indexOf(over.dataset.complex);
   if (from >= 0 && to >= 0) { arr.splice(to, 0, arr.splice(from, 1)[0]); applyOrderAll(); markOrderDirty(); }
@@ -1039,8 +1050,7 @@ document.addEventListener("click", e => {
 });
 
 function saveCardOrder() {
-  if (!CARD_ORDER.regions.length) CARD_ORDER.regions = __seedRegions();
-  if (!CARD_ORDER.complexes.length) CARD_ORDER.complexes = __seedComplexes();
+  __syncOrder();
   const json = JSON.stringify({ regions: CARD_ORDER.regions, complexes: CARD_ORDER.complexes }, null, 1);
   localStorage.setItem("card_order", JSON.stringify(CARD_ORDER));
   // 로컬 서버(order_server.py)로 접속했으면 자동 저장(커밋·푸시)
