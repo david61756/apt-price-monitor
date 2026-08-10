@@ -47,6 +47,7 @@ def run(deals, embargo, horizon, verbose=True):
     asofs = month_ends(_shift(dates[0], 365), _shift(dates[-1], -horizon))
     rows = []          # (asof, 적중여부) — 개별 체결가 단위
     per_asof = defaultdict(lambda: [0, 0])
+    per_unit = defaultdict(lambda: [0, 0])   # "단지명|면적대" → [적중, 전체] (카드별 표기용)
     widths, below, above = [], 0, 0
     center_bias = []
 
@@ -70,6 +71,8 @@ def run(deals, embargo, horizon, verbose=True):
                 rows.append(hit)
                 per_asof[T][0] += hit
                 per_asof[T][1] += 1
+                per_unit[key][0] += hit
+                per_unit[key][1] += 1
                 if d["amount"] < b["lo"]:
                     below += 1
                 elif d["amount"] > b["hi"]:
@@ -88,6 +91,9 @@ def run(deals, embargo, horizon, verbose=True):
         "width": median(widths), "center_bias": median(center_bias),
         "asof_med": median(by) if by else None,
         "asof_min": min(by) if by else None, "asof_max": max(by) if by else None,
+        # 단지×평형별 적중률 — 평가 30건 이상만 신뢰(그 미만은 카드에 전역값을 '전체' 라벨로 표시)
+        "units": {k: {"coverage": c / t * 100, "n": t}
+                  for k, (c, t) in per_unit.items() if t >= 30},
     }
     if verbose:
         print(f"\n── 임베고 {embargo}일 / 지평 {horizon}일 ──")

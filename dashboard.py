@@ -271,9 +271,17 @@ const SGG = __SGG__;
 const WARNINGS = __WARNINGS__;
 const QUOTES = __QUOTES__;
 const ANALYTICS = __ANALYTICS__;
-// 밴드 성능은 숨기지 않는다: 워크포워드 백테스트로 잰 실측 적중률을 제목에 함께 표기
-const BT_LABEL = ANALYTICS.backtest
-  ? `<span style="color:#b45309;font-weight:600">과거검증 적중 ${Math.round(ANALYTICS.backtest.coverage)}%</span>` : "";
+// 밴드 성능은 숨기지 않는다: 워크포워드 백테스트로 잰 실측 적중률을 제목에 표기.
+// 이 단지×평형의 자체 표본(평가 30건+)이 있으면 그 값을, 없으면 전역값을 '전체' 라벨로 구분해 보여준다
+// (예전엔 전역 72%를 모든 카드에 똑같이 붙여 '이 단지의 적중률'로 오독됐다).
+function btLabel(unitKey) {
+  const bt = ANALYTICS.backtest;
+  if (!bt) return "";
+  const u = (bt.units || {})[unitKey];
+  if (u) return `<span style="color:#b45309;font-weight:600">이 평형 과거검증 ${Math.round(u.coverage)}%</span>`
+    + `<span style="color:#9ca3af;font-weight:400"> (${u.n}건)</span>`;
+  return `<span style="color:#9ca3af;font-weight:600">전체평균 과거검증 ${Math.round(bt.coverage)}%</span>`;
+}
 const QUOTES_META = __QUOTES_META__;
 // 카드 지역별 그룹핑: config 단지명 → 지역 라벨
 const regionOf = c => REGION_MAP[c] || "기타 지역";
@@ -409,7 +417,7 @@ Object.entries(groups)
                + (b.clamped ? " · 상승편향 보정" : "");
     bandHtml = `
       <div class="bandbox">
-        <div class="bandhead">3개월 변동 참고범위 ${BT_LABEL}<span class="bandnote">${b.p10}%~${b.p90}%${note}</span></div>
+        <div class="bandhead">3개월 변동 참고범위 ${btLabel(last.complex + "|" + Math.floor(last.area))}<span class="bandnote">${b.p10}%~${b.p90}%${note}</span></div>
         <div class="bandbar"><i style="left:${pos}%"></i></div>
         <div class="bandends"><span>${fmtMoney(b.lo)}</span><span>${fmtMoney(b.hi)}</span></div>
       </div>`;
