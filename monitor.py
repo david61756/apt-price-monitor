@@ -79,6 +79,9 @@ def load_config():
         c["match"] = c.get("match") or [c["name"]]
         c["areas"] = [int(a) for a in (c.get("areas") or [])]
         c["naver_id"] = str(c["naver_id"]).strip() if c.get("naver_id") else None
+        # 목표가({전용면적:만원})·관심 매물번호 목록 — 없으면 빈 값으로 정규화
+        c["targets"] = {int(k): int(v) for k, v in (c.get("targets") or {}).items()}
+        c["watch"] = [str(w).strip() for w in (c.get("watch") or [])]
     cfg["options"] = cfg.get("options") or {}
     naver = cfg.get("naver") or {}
     naver.setdefault("trade_types", ["A1"])

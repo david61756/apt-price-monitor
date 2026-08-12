@@ -137,6 +137,7 @@ _TEMPLATE = """<!DOCTYPE html>
 <h1>🏠 아파트 실거래가 모니터</h1>
 <div class="sub">매매 갱신: __LAST_RUN__ · 관심단지 __WATCHED__곳 · 표시 거래 __TOTAL__건<span id="quotesRunHdr"></span></div>
 
+<div id="staleBanner"></div>
 <div id="warnBanner"></div>
 
 <div class="tabs">
@@ -188,6 +189,14 @@ _TEMPLATE = """<!DOCTYPE html>
   </div>
   <div id="quotesBody">
     <div id="qWarnBanner"></div>
+    <div class="section" id="watchSec" style="display:none">
+      <h2>📌 관심 매물 <span class="legend">(config의 watch 매물번호 — 가격변동·소멸 개별 알림)</span></h2>
+      <table>
+        <thead><tr><th>상태</th><th>단지</th><th>전용(㎡)</th><th>동·층</th>
+                   <th>현재호가</th><th>변동이력</th><th>매물번호</th></tr></thead>
+        <tbody id="watchRows"></tbody>
+      </table>
+    </div>
     <div class="ord-bar">
       <button class="btn ord-edit-btn" type="button" onclick="toggleOrderEdit()">🔀 순서 편집</button>
       <button class="btn primary" type="button" onclick="saveCardOrder()">💾 순서 저장(로컬 공유)</button>
@@ -286,6 +295,16 @@ const QUOTES_META = __QUOTES_META__;
 // 카드 지역별 그룹핑: config 단지명 → 지역 라벨
 const regionOf = c => REGION_MAP[c] || "기타 지역";
 
+// 거래유형 분리 — 전세(B1) 수집 도입 후 매매 최저호가·차트에 전세가 섞이지 않도록 전 구간에서 구분해 쓴다
+const SALE_Q = QUOTES.filter(q => (q.trade_code || "A1") === "A1");
+const JEONSE_Q = QUOTES.filter(q => q.trade_code === "B1");
+// 목표가("단지명|면적대"→만원)·관심 매물번호(📌) 룩업
+const TARGETS = {}, WATCH = new Set();
+(CONFIG.complexes || []).forEach(c => {
+  Object.entries(c.targets || {}).forEach(([a, p]) => { TARGETS[c.name + "|" + a] = p; });
+  (c.watch || []).forEach(w => WATCH.add(String(w)));
+});
+
 // ============================== 공통 유틸 ==============================
 function fmtMoney(man) {
   const sign = man < 0 ? "-" : ""; man = Math.abs(man);
@@ -303,6 +322,27 @@ function esc(s) {
   return String(s == null ? "" : s).replace(/[&<>"']/g,
     c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
 }
+
+// 데이터 신선도 경고 — 수집이 24시간 넘게 멈추면 화면이 스스로 알린다.
+// (예전엔 launchd가 멈춰도 오래된 값이 정상처럼 보여 알아채기 어려웠다)
+(function staleCheck() {
+  const pairs = [["매매", "__LAST_RUN__"], ["호가", (QUOTES_META || {}).last_run || ""]];
+  const now = Date.now(), bad = [];
+  pairs.forEach(([label, iso]) => {
+    if (!iso || iso === "-") { bad.push(`${label}: 기록 없음`); return; }
+    const t = Date.parse(iso);
+    if (isNaN(t)) return;
+    const hrs = (now - t) / 3600000;
+    if (hrs >= 24) bad.push(`${label} ${Math.floor(hrs / 24)}일 ${Math.floor(hrs % 24)}시간 전`);
+  });
+  if (!bad.length) return;
+  document.getElementById("staleBanner").innerHTML = `
+    <div class="warn">⚠ <b>데이터가 최신이 아닙니다</b> — ${bad.map(esc).join(" · ")}.
+      자동 수집(launchd)이 멈췄거나 Mac이 꺼져 있었을 수 있습니다.
+      터미널에서 <code>bash run_quotes.sh</code> 를 실행하거나
+      <code>launchctl list | grep aptmonitor</code> 로 스케줄러를 확인하세요.
+      <b>아래 수치는 위 시점 기준</b>이며 현재 시세와 다를 수 있습니다.</div>`;
+})();
 
 function showTab(name) {
   for (const t of ["dash", "quotes", "manage"]) {
@@ -341,10 +381,11 @@ const activeOf = g => g.filter(d => !d.cancelled);
 
 // ============================== 요약 카드 ==============================
 // 단지(config)별 현재 최저호가 — 매매 카드에 함께 구분 표시
-const askMinByComplex = {};
-QUOTES.filter(q => q.status === "active").forEach(q => {
-  if (askMinByComplex[q.complex] == null || q.price < askMinByComplex[q.complex])
-    askMinByComplex[q.complex] = q.price;
+// 단지×면적대별 최저호가 — 매매만(SALE_Q). (기존엔 단지 전체 min이라 다른 평형 호가가 섞였다)
+const askMinByUnit = {};
+SALE_Q.filter(q => q.status === "active").forEach(q => {
+  const k = q.complex + "|" + Math.floor(q.area);
+  if (askMinByUnit[k] == null || q.price < askMinByUnit[k]) askMinByUnit[k] = q.price;
 });
 
 const cardsEl = document.getElementById("cards");
@@ -373,14 +414,47 @@ Object.entries(groups)
              : diff < 0 ? `<span class="diff-down">▼ ${fmtMoney(-diff)} (${pct}%)</span>`
              : "<span>― 보합</span>";
   }
-  // 같은 단지의 현재 최저호가(있으면) — 실거래와 구분해 표시
-  const ask = askMinByComplex[last.complex];
+  // 같은 단지·같은 면적대의 현재 최저호가(매매만) — 실거래와 구분해 표시
+  const unitK = last.complex + "|" + Math.floor(last.area);
+  const ask = askMinByUnit[unitK];
   let askHtml = "";
   if (ask != null) {
     const gap = ask - last.amount, p = (gap / last.amount * 100).toFixed(1);
     const cls = gap > 0 ? "diff-up" : gap < 0 ? "diff-down" : "";
     askHtml = `<div class="meta">🏷️ 현재 최저호가 <b>${fmtMoney(ask)}</b>`
       + ` <span class="${cls}">(${gap >= 0 ? "+" : ""}${p}%)</span></div>`;
+  }
+  // 🎯 목표가 — config targets에 있으면 상태를 항상 표시, 도달 시 강조
+  let targetHtml = "";
+  const tgt = TARGETS[unitK];
+  if (tgt) {
+    if (ask != null && ask <= tgt) {
+      targetHtml = `<div class="meta" style="color:#15803d;font-weight:700">🎯 목표가 도달! `
+        + `최저호가 ${fmtMoney(ask)} ≤ 목표 ${fmtMoney(tgt)}</div>`;
+    } else {
+      const ref = ask != null ? ask : last.amount;
+      targetHtml = `<div class="meta">🎯 목표 ${fmtMoney(tgt)} — `
+        + `${ask != null ? "최저호가" : "최근실거래"}와 <b>${fmtMoney(ref - tgt)}</b> 차이</div>`;
+    }
+  }
+  // 수급(재고개월) — 활성 매매호가 ÷ 최근 6개월 월평균 실거래. 협상력 판단의 핵심 지표
+  let supplyHtml = "";
+  {
+    const listings = SALE_Q.filter(q => q.status === "active"
+      && q.complex === last.complex && Math.floor(q.area) === Math.floor(last.area)).length;
+    const cut = new Date(new Date(last.date) - 183 * 86400000).toISOString().slice(0, 10);
+    const monthly = act.filter(d => d.date >= cut).length / 6;
+    if (listings > 0 || monthly > 0) {
+      let badge = "", inv = null;
+      if (monthly > 0) {
+        inv = listings / monthly;
+        badge = inv < 1 ? `<span class="badge" style="background:#fee2e2;color:#b91c1c">🔥 품귀</span>`
+              : inv > 4 ? `<span class="badge" style="background:#fdf4e3;color:#9a6b1f">⚠ 적체</span>`
+              : `<span class="badge" style="background:#f1f5f9;color:#475569">보통</span>`;
+      }
+      supplyHtml = `<div class="meta">📦 수급 ${badge} 매물 ${listings}건 · 월평균 거래 ${monthly.toFixed(1)}건`
+        + (inv != null && listings > 0 ? ` → 재고 ${inv.toFixed(1)}개월` : "") + `</div>`;
+    }
   }
   // 평단가(만원/평) — 면적 다른 단지 비교용 핵심 지표
   const pyeong = last.area ? Math.round(last.amount * 3.3058 / last.area) : 0;
@@ -441,6 +515,8 @@ Object.entries(groups)
       ${pyeongHtml}
       ${relHtml}
       ${askHtml}
+      ${targetHtml}
+      ${supplyHtml}
       ${outlierHtml}
       ${thinHtml}
       ${bandHtml}
@@ -623,15 +699,21 @@ renderTable();
   const dayMs = 86400000;
   const isRecent = iso => runDate && iso &&
     (new Date(runDate) - new Date(iso.slice(0, 10))) <= 7 * dayMs;
+  // 호가 탭 전체는 '매매(A1)'만 다룬다. 전세(B1)는 아래 별도 집계로 분리(가격 척도가 달라 섞으면 안 됨).
   const byComplex = {};
-  QUOTES.forEach(q => (byComplex[q.complex] = byComplex[q.complex] || []).push(q));
-  const complexNames = Object.keys(byComplex).sort();
+  SALE_Q.forEach(q => (byComplex[q.complex] = byComplex[q.complex] || []).push(q));
+  const jeonseBy = {};
+  JEONSE_Q.filter(q => q.status === "active")
+    .forEach(q => (jeonseBy[q.complex] = jeonseBy[q.complex] || []).push(q));
+  const complexNames = [...new Set(Object.keys(byComplex).concat(Object.keys(jeonseBy)))].sort();
+  complexNames.forEach(n => { byComplex[n] = byComplex[n] || []; });
   const activeIn = list => list.filter(q => q.status === "active");
-  // 매매 최신가 (같은 config 단지)
-  const dealLatest = {};
+  // 매매 최신가 — '단지|면적대' 단위로 잡는다(단지 단위로 잡으면 다른 평형 거래와 비교돼 갭이 왜곡된다)
+  const dealLatestUnit = {};
   DEALS.filter(d => !d.cancelled).forEach(d => {
-    const c = dealLatest[d.complex];
-    if (!c || d.date > c.date) dealLatest[d.complex] = d;
+    const k = d.complex + "|" + Math.floor(d.area);
+    const c = dealLatestUnit[k];
+    if (!c || d.date > c.date) dealLatestUnit[k] = d;
   });
 
   // ---- ① 요약 카드 (config 단지별)
@@ -662,25 +744,80 @@ renderTable();
     const newCnt = act.filter(q => isRecent(q.first_seen)).length;
     const cutCnt = act.filter(q => q.price_history && q.price_history.length >= 2 &&
       q.price_history[q.price_history.length - 1].price < q.price_history[q.price_history.length - 2].price).length;
+    // 갭 비교는 '최저호가와 같은 면적대'의 최신 실거래와만 한다
     let gapHtml = "";
-    const dl = dealLatest[name];
+    const dl = dealLatestUnit[name + "|" + Math.floor(cheap.area)];
     if (dl) {
       const gap = minP - dl.amount, pct = (gap / dl.amount * 100).toFixed(1);
       const cls = gap > 0 ? "diff-up" : gap < 0 ? "diff-down" : "";
-      gapHtml = `<div class="meta">최근 실거래 ${fmtMoney(dl.amount)} (${dl.date})` +
+      gapHtml = `<div class="meta">${Math.floor(cheap.area)}㎡ 최근 실거래 ${fmtMoney(dl.amount)} (${dl.date})` +
         ` → 최저호가 <span class="${cls}">${gap >= 0 ? "+" : ""}${fmtMoney(gap)} (${pct > 0 ? "+" : ""}${pct}%)</span></div>`;
     } else {
-      gapHtml = `<div class="meta">실거래 기록 없음</div>`;
+      gapHtml = `<div class="meta">해당 면적대 실거래 기록 없음</div>`;
     }
     const badge = (newCnt ? `🆕${newCnt} ` : "") + (cutCnt ? `🔻${cutCnt}` : "");
+
+    // 🎯 목표가 — 이 단지에 설정된 면적대 중 하나라도 있으면 상태 표시
+    let qTargetHtml = "";
+    Object.keys(TARGETS).filter(k => k.startsWith(name + "|")).forEach(k => {
+      const area = k.split("|")[1], tgt = TARGETS[k];
+      const cand = act.filter(q => Math.floor(q.area) === +area).map(q => q.price);
+      if (!cand.length) return;
+      const lo = Math.min(...cand);
+      qTargetHtml += lo <= tgt
+        ? `<div class="meta" style="color:#15803d;font-weight:700">🎯 ${area}㎡ 목표가 도달! ${fmtMoney(lo)} ≤ ${fmtMoney(tgt)}</div>`
+        : `<div class="meta">🎯 ${area}㎡ 목표 ${fmtMoney(tgt)} — 최저호가와 <b>${fmtMoney(lo - tgt)}</b> 차이</div>`;
+    });
+
+    // 📦 수급(재고개월) — 매물 ÷ 최근 6개월 월평균 실거래. 협상력 판단 지표
+    let qSupplyHtml = "";
+    {
+      const cut = new Date(Date.now() - 183 * 86400000).toISOString().slice(0, 10);
+      const monthly = DEALS.filter(d => !d.cancelled && d.complex === name && d.date >= cut).length / 6;
+      if (monthly > 0) {
+        const inv = act.length / monthly;
+        const b = inv < 1 ? `<span class="badge" style="background:#fee2e2;color:#b91c1c">🔥 품귀</span>`
+                : inv > 4 ? `<span class="badge" style="background:#fdf4e3;color:#9a6b1f">⚠ 적체</span>`
+                : `<span class="badge" style="background:#f1f5f9;color:#475569">보통</span>`;
+        qSupplyHtml = `<div class="meta">📦 수급 ${b} 재고 <b>${inv.toFixed(1)}개월</b>`
+          + ` <span style="color:#9ca3af">(월평균 거래 ${monthly.toFixed(1)}건)</span></div>`;
+      }
+    }
+
+    // 🔑 전세가율 — 같은 면적대끼리만(전세/매매 모두 최저호가 기준). 면적대가 섞이면 무의미하다.
+    let jeonseHtml = "";
+    {
+      const ca = Math.floor(cheap.area);
+      const js = (jeonseBy[name] || []).filter(q => Math.floor(q.area) === ca);
+      const sameAreaSale = act.filter(q => Math.floor(q.area) === ca).map(q => q.price);
+      if (js.length && sameAreaSale.length) {
+        const jlo = Math.min(...js.map(q => q.price)), slo = Math.min(...sameAreaSale);
+        jeonseHtml = `<div class="meta">🔑 ${ca}㎡ 전세 최저 ${fmtMoney(jlo)} · 전세가율 `
+          + `<b>${(jlo / slo * 100).toFixed(0)}%</b> <span style="color:#9ca3af">(갭 ${fmtMoney(slo - jlo)})</span></div>`;
+      }
+    }
+    // 면적대가 2개 이상이면 '최저호가'가 어느 평형인지 밝혀 오독을 막는다
+    const areasIn = [...new Set(act.map(q => Math.floor(q.area)))].sort((a, b) => a - b);
+    const minAreaLabel = areasIn.length > 1
+      ? ` <span style="color:#9ca3af;font-size:12px">(${Math.floor(cheap.area)}㎡ 기준)</span>` : "";
+    const areaBreak = areasIn.length > 1
+      ? `<div class="meta">면적대별 최저: ` + areasIn.map(a => {
+          const lo = Math.min(...act.filter(q => Math.floor(q.area) === a).map(q => q.price));
+          return `${a}㎡ <b>${fmtMoney(lo)}</b>`;
+        }).join(" · ") + `</div>` : "";
+
     qCardsEl.insertAdjacentHTML("beforeend", `
       <div class="card" data-name="${esc(name)}" data-complex="${esc(name)}" data-region="${esc(__region)}">
         <h3>${esc(name)}</h3>
         <div class="band">활성 매물 ${act.length}건 ${badge ? "· " + badge : ""}</div>
-        <div class="price">${fmtMoney(minP)}원 <span class="meta">최저호가</span></div>
+        <div class="price">${fmtMoney(minP)}원 <span class="meta">최저호가</span>${minAreaLabel}</div>
+        ${areaBreak}
         ${rangeHtml}
         ${pyeongQHtml}
         ${gapHtml}
+        ${qTargetHtml}
+        ${qSupplyHtml}
+        ${jeonseHtml}
         <div class="selhint">▸ 클릭하면 이 단지로 호가추이·목록 보기</div>
       </div>`);
   });
@@ -829,7 +966,13 @@ renderTable();
         const rep = group[0], n = group.length;
         const dongFloor = `${rep.building_name !== "?" ? esc(rep.building_name) + "동 " : ""}${esc(rep.floor_self) || "?"}층`;
         const dupBadge = n > 1 ? ` <span class="badge" style="background:#f1f5f9;color:#475569;cursor:pointer">+${n - 1}곳</span>` : "";
-        const note = [statusNote(rep), rep.direction ? esc(rep.direction) + "향" : "", esc(rep.realtor)]
+        // 📌 관심매물 / 🎯 목표가 도달 배지 — 협상 대상을 목록에서 바로 식별
+        const pin = group.some(q => WATCH.has(String(q.article_no)))
+          ? `<span class="badge" style="background:#e0e7ff;color:#4338ca">📌 관심</span> ` : "";
+        const tg = TARGETS[rep.complex + "|" + Math.floor(rep.area)];
+        const tgBadge = (tg != null && rep.price <= tg)
+          ? `<span class="badge" style="background:#dcfce7;color:#15803d">🎯 목표가</span> ` : "";
+        const note = [pin + tgBadge + statusNote(rep), rep.direction ? esc(rep.direction) + "향" : "", esc(rep.realtor)]
           .filter(Boolean).join(" · ") + dupBadge;
         tbody.insertAdjacentHTML("beforeend", `
           <tr class="${rep.status === "gone" ? "cancelled" : ""}" ${n > 1 ? `style="cursor:pointer" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'"` : ""}>
@@ -839,8 +982,10 @@ renderTable();
             <td>${note}</td>
           </tr>`);
         if (n > 1) {
-          const inner = group.slice(1).map(q =>
-            `<div style="padding:2px 0">· ${fmtMoney(q.price)}원 — ${esc(q.realtor) || "?"} (${fmtYmd(q.confirm_ymd)}) ${qChangeBadge(q)}</div>`).join("");
+          // 펼침 행에 매물번호를 노출 — config의 watch에 넣을 값을 여기서 복사한다
+          const inner = group.map(q =>
+            `<div style="padding:2px 0">· ${fmtMoney(q.price)}원 — ${esc(q.realtor) || "?"} (${fmtYmd(q.confirm_ymd)}) ${qChangeBadge(q)}`
+            + ` <code style="font-size:11px;color:#9ca3af">#${esc(q.article_no)}</code></div>`).join("");
           tbody.insertAdjacentHTML("beforeend",
             `<tr style="display:none"><td></td><td colspan="6" style="color:var(--sub);font-size:12px">${inner}</td></tr>`);
         }
@@ -890,6 +1035,35 @@ renderTable();
     qAptSel.value = name; renderQTable();
     document.getElementById("qChart").scrollIntoView({ behavior: "smooth", block: "center" });
   });
+
+  // ---- ③-b 📌 관심 매물 — config watch에 지정한 매물번호만 별도 추적
+  (function watchSection() {
+    if (!WATCH.size) return;
+    const rows = QUOTES.filter(q => WATCH.has(String(q.article_no)));
+    const tb = document.getElementById("watchRows");
+    if (!rows.length) {
+      tb.innerHTML = `<tr><td colspan="7" style="color:var(--sub)">`
+        + `지정한 매물번호(${[...WATCH].map(esc).join(", ")})가 현재 수집 목록에 없습니다 — 내려갔거나 번호가 잘못됐을 수 있습니다.</td></tr>`;
+    } else {
+      rows.sort((a, b) => a.price - b.price).forEach(q => {
+        const h = q.price_history || [];
+        const trail = h.length >= 2
+          ? h.map(x => fmtMoney(x.price)).join(" → ")
+          : `<span style="color:var(--sub)">변동 없음</span>`;
+        const st = q.status === "gone"
+          ? `<span class="badge">내려감</span>`
+          : `<span class="badge" style="background:#dcfce7;color:#15803d">추적중</span>`;
+        const dongFloor = `${q.building_name !== "?" ? esc(q.building_name) + "동 " : ""}${esc(q.floor_self) || "?"}층`;
+        tb.insertAdjacentHTML("beforeend", `
+          <tr class="${q.status === "gone" ? "cancelled" : ""}">
+            <td>${st}</td><td>${esc(q.complex)}</td><td>${fmtArea(q.area)}</td><td>${dongFloor}</td>
+            <td><b>${fmtMoney(q.price)}</b></td><td>${trail}</td>
+            <td><code style="font-size:11px">#${esc(q.article_no)}</code></td>
+          </tr>`);
+      });
+    }
+    document.getElementById("watchSec").style.display = "";
+  })();
 
   // ---- ④ 호가 변동·소멸 이력
   const hist = [];
@@ -1338,6 +1512,8 @@ def render_dashboard(state, cfg, out_path, quotes_state=None):
              **({"region": c["region"]} if c.get("region") else {"lawd_cd": c["lawd_cd"]}),
              "match": c.get("match") or [],
              "areas": c.get("areas") or [],
+             "targets": {str(k): v for k, v in (c.get("targets") or {}).items()},
+             "watch": c.get("watch") or [],
              **({"naver_id": c["naver_id"]} if c.get("naver_id") else {})}
             for c in complexes
         ],

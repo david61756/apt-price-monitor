@@ -85,7 +85,8 @@ def diff_quotes(before, after):
 
 def _q_label(q):
     floor = q.get("floor_self") or "?"
-    return f"{q.get('complex', q.get('apt_nm', '?'))} · {q.get('area', '?')}㎡ {floor}층"
+    tt = "" if q.get("trade_code", "A1") == "A1" else f" [{q.get('trade_type', '전세')}]"
+    return f"{q.get('complex', q.get('apt_nm', '?'))} · {q.get('area', '?')}㎡ {floor}층{tt}"
 
 
 def _d_label(d):
@@ -100,6 +101,20 @@ def _bullets(items, render):
     return lines
 
 
+def _load_alert_rules():
+    """config에서 목표가({(단지,면적):만원})와 관심 매물번호(set)를 읽는다. 실패 시 빈 값."""
+    try:
+        cfg = monitor.load_config()
+    except SystemExit:
+        return {}, set()
+    targets, watch = {}, set()
+    for c in cfg.get("complexes", []):
+        for area, price in (c.get("targets") or {}).items():
+            targets[(c["name"], int(area))] = int(price)
+        watch.update(c.get("watch") or [])
+    return targets, watch
+
+
 def build_summary(now, deal_diff, quote_diff, failures):
     new_d, cancel_d = deal_diff
     new_q, down_q, up_q, gone_q = quote_diff
@@ -107,6 +122,38 @@ def build_summary(now, deal_diff, quote_diff, failures):
 
     if failures:
         out.append("⚠ " + " / ".join(failures))
+
+    targets, watch = _load_alert_rules()
+
+    def _hits_target(q):
+        t = targets.get((q.get("complex"), int(q.get("area") or 0)))
+        return (t is not None and q.get("trade_code", "A1") == "A1"
+                and q.get("price") is not None and q["price"] <= t)
+
+    # 🎯 목표가 도달 — 신규 등록 또는 인하로 목표 이하가 된 매매 매물 (최우선 섹션)
+    hit = [q for q in new_q if _hits_target(q)] + \
+          [t[0] for t in down_q if _hits_target(t[0])]
+    if hit:
+        out.append("\n🎯 **목표가 도달**")
+        out += _bullets(hit, lambda q: f"{_q_label(q)} — {fmt_money(q['price'])}원 "
+                        f"(목표 {fmt_money(targets[(q['complex'], int(q['area']))])})")
+
+    # 📌 관심 매물(워치) 변동 — 축약 없이 전부 표기
+    if watch:
+        wlines = []
+        for q in new_q:
+            if q.get("article_no") in watch:
+                wlines.append(f"• 📌 {_q_label(q)} — 신규 {fmt_money(q['price'])}원")
+        for q, pp, cp in down_q + up_q:
+            if q.get("article_no") in watch:
+                arrow = "🔻" if cp < pp else "🔺"
+                wlines.append(f"• 📌 {arrow} {_q_label(q)} — {fmt_money(pp)}→{fmt_money(cp)}원")
+        for q in gone_q:
+            if q.get("article_no") in watch:
+                wlines.append(f"• 📌 ⬇️ {_q_label(q)} — {fmt_money(q['price'])}원 내려감")
+        if wlines:
+            out.append("\n📌 **관심 매물**")
+            out += wlines
 
     changed = any([new_d, cancel_d, new_q, down_q, up_q, gone_q])
     if not changed:
