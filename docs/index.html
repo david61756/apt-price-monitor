@@ -117,7 +117,7 @@
 </head>
 <body>
 <h1>🏠 아파트 실거래가 모니터</h1>
-<div class="sub">매매 갱신: 2026-08-13T18:00:07+09:00 · 관심단지 7곳 · 표시 거래 908건<span id="quotesRunHdr"></span></div>
+<div class="sub">매매 갱신: 2026-08-13T18:59:07+09:00 · 관심단지 7곳 · 표시 거래 908건<span id="quotesRunHdr"></span></div>
 
 <div id="staleBanner"></div>
 <div id="warnBanner"></div>
@@ -308,7 +308,7 @@ function esc(s) {
 // 데이터 신선도 경고 — 수집이 24시간 넘게 멈추면 화면이 스스로 알린다.
 // (예전엔 launchd가 멈춰도 오래된 값이 정상처럼 보여 알아채기 어려웠다)
 (function staleCheck() {
-  const pairs = [["매매", "2026-08-13T18:00:07+09:00"], ["호가", (QUOTES_META || {}).last_run || ""]];
+  const pairs = [["매매", "2026-08-13T18:59:07+09:00"], ["호가", (QUOTES_META || {}).last_run || ""]];
   const now = Date.now(), bad = [];
   pairs.forEach(([label, iso]) => {
     if (!iso || iso === "-") { bad.push(`${label}: 기록 없음`); return; }
