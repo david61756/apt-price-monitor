@@ -12263,7 +12263,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-06T14:00:09+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -12497,7 +12497,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-06T14:00:09+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -12536,7 +12536,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-06T14:00:09+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -13991,7 +13991,7 @@
    "relisted_count": 0,
    "relist_of": "2636057719",
    "first_seen": "2026-08-10T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -14541,7 +14541,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-11T14:00:05+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -15273,7 +15273,7 @@
    "cp_name": "아실",
    "feature": "로얄동.햇살밝은집.깨끗.이현학군지.성복역도보가능",
    "confirm_ymd": "20260806",
-   "same_addr_cnt": 12,
+   "same_addr_cnt": 13,
    "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|105|18|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -15282,7 +15282,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-12T08:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -15550,8 +15550,8 @@
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|B1|304|15|127.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-12T08:00:07+09:00",
@@ -15667,8 +15667,8 @@
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남서",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2639897857",
    "first_seen": "2026-08-12T14:00:06+09:00",
@@ -16014,7 +16014,7 @@
    "cp_name": "부동산써브",
    "feature": "",
    "confirm_ymd": "20260812",
-   "same_addr_cnt": 12,
+   "same_addr_cnt": 13,
    "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|105|18|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -16023,7 +16023,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-12T14:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -16491,7 +16491,7 @@
    "relisted_count": 0,
    "relist_of": "2639074407",
    "first_seen": "2026-08-13T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -16530,7 +16530,7 @@
    "relisted_count": 0,
    "relist_of": "2631778247",
    "first_seen": "2026-08-13T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -16764,7 +16764,7 @@
    "relisted_count": 0,
    "relist_of": "2641044980",
    "first_seen": "2026-08-13T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -17271,7 +17271,7 @@
    "relisted_count": 0,
    "relist_of": "2631775253",
    "first_seen": "2026-08-14T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -17310,7 +17310,7 @@
    "relisted_count": 0,
    "relist_of": "2631778247",
    "first_seen": "2026-08-14T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -17578,7 +17578,7 @@
    "cp_name": "부동산뱅크",
    "feature": "밝은남향고층집,대단지,생활권편리,이현초중우수학군,입주협의",
    "confirm_ymd": "20260814",
-   "same_addr_cnt": 12,
+   "same_addr_cnt": 13,
    "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|105|18|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -17587,7 +17587,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-08-14T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -17617,7 +17617,7 @@
    "cp_name": "부동산써브",
    "feature": "급매물입니다",
    "confirm_ymd": "20260814",
-   "same_addr_cnt": 12,
+   "same_addr_cnt": 13,
    "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|105|18|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -17626,7 +17626,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-08-14T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -17938,7 +17938,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-08-14T18:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -17977,7 +17977,7 @@
    "relisted_count": 0,
    "relist_of": "2631978809",
    "first_seen": "2026-08-14T18:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -18289,7 +18289,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-15T14:00:08+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -18644,7 +18644,7 @@
    "relisted_count": 0,
    "relist_of": "2635976621",
    "first_seen": "2026-08-15T14:00:08+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -18752,7 +18752,7 @@
    "cp_name": "부동산써브",
    "feature": "로얄동. 밝고 깨끗한 집. 입주일협의. 우수학군아파트",
    "confirm_ymd": "20260815",
-   "same_addr_cnt": 12,
+   "same_addr_cnt": 13,
    "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|105|18|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -18761,7 +18761,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-08-15T14:00:08+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -19190,7 +19190,7 @@
    "relisted_count": 0,
    "relist_of": "2635945811",
    "first_seen": "2026-08-17T14:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -19775,7 +19775,7 @@
    "relisted_count": 0,
    "relist_of": "2635614547",
    "first_seen": "2026-08-18T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -19879,7 +19879,7 @@
    "price": 110000,
    "price_raw": "11억",
    "rent_man": 0,
-   "realtor": "하나공인중개사",
+   "realtor": "하나(단지내265-5353)공인중개사사무소",
    "cp_name": "아실",
    "feature": "방확장, 전체샷시 포함 올수리,탁 트인 전망 굿,신분당선",
    "confirm_ymd": "20260818",
@@ -19892,7 +19892,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-18T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -19961,11 +19961,11 @@
    "price": 52000,
    "price_raw": "5억 2,000",
    "rent_man": 0,
-   "realtor": "하나공인중개사",
+   "realtor": "하나(단지내265-5353)공인중개사사무소",
    "cp_name": "아실",
    "feature": "남향,관리비 저렴,신분당선,최고 학군 ,조용하고 쾌적해요.",
    "confirm_ymd": "20260818",
-   "same_addr_cnt": 12,
+   "same_addr_cnt": 13,
    "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|105|18|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -19974,7 +19974,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-08-18T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -20442,7 +20442,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-18T18:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -20585,7 +20585,7 @@
    "price": 105000,
    "price_raw": "10억 5,000",
    "rent_man": 0,
-   "realtor": "하나공인중개사",
+   "realtor": "하나(단지내265-5353)공인중개사사무소",
    "cp_name": "아실",
    "feature": "",
    "confirm_ymd": "20260818",
@@ -20598,7 +20598,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-18T18:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -20667,7 +20667,7 @@
    "cp_name": "매경부동산",
    "feature": "1,744세대 대단지 아파트로 관리비 저렴하고 학군 좋은 귀한 전세입니다",
    "confirm_ymd": "20260818",
-   "same_addr_cnt": 12,
+   "same_addr_cnt": 13,
    "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|105|고|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -20676,7 +20676,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-18T18:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -20784,7 +20784,7 @@
    "cp_name": "부동산써브",
    "feature": "초중고 인접,수변산책로, 신안산선목감역 계통예정",
    "confirm_ymd": "20260819",
-   "same_addr_cnt": 10,
+   "same_addr_cnt": 15,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|중|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -20793,7 +20793,7 @@
    "relisted_count": 0,
    "relist_of": "2635945811",
    "first_seen": "2026-08-19T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -21213,7 +21213,7 @@
    "cp_name": "부동산뱅크",
    "feature": "인테리어기간 협의, 바로입주가능,초품아 10분내 성복역",
    "confirm_ymd": "20260819",
-   "same_addr_cnt": 4,
+   "same_addr_cnt": 5,
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|303|14|127.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -21222,7 +21222,7 @@
    "relisted_count": 0,
    "relist_of": "2640895857",
    "first_seen": "2026-08-19T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -21447,7 +21447,7 @@
    "cp_name": "매경부동산",
    "feature": "중심상권 ,체육센터,초,중,고,학원,병 의원,수영장 어울림센터 인접,",
    "confirm_ymd": "20260819",
-   "same_addr_cnt": 10,
+   "same_addr_cnt": 15,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -21456,7 +21456,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-19T18:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -21642,7 +21642,7 @@
    "cp_name": "매경부동산",
    "feature": "초등학교 인접, 단지옆 상권    학원 마트 병원 이용 편리.",
    "confirm_ymd": "20260819",
-   "same_addr_cnt": 10,
+   "same_addr_cnt": 15,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -21651,7 +21651,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-20T08:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -21681,7 +21681,7 @@
    "cp_name": "매경부동산",
    "feature": "추천입주 트인조망 주변상권 교통이용편리 학교 학원 병원인접",
    "confirm_ymd": "20260819",
-   "same_addr_cnt": 10,
+   "same_addr_cnt": 15,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -21690,7 +21690,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-20T08:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -21807,7 +21807,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-08-20T14:00:08+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -22392,7 +22392,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-20T14:00:08+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -22782,7 +22782,7 @@
    "relisted_count": 0,
    "relist_of": "2636026240",
    "first_seen": "2026-08-20T18:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -22899,7 +22899,7 @@
    "relisted_count": 0,
    "relist_of": "2641126203",
    "first_seen": "2026-08-20T18:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -23172,7 +23172,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-08-21T14:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -23211,7 +23211,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-08-21T14:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -23280,7 +23280,7 @@
    "cp_name": "매경부동산",
    "feature": "유치원과초중고,어울림센터 ,편의시설,목감역이 가까운 목감의 대단지 아파",
    "confirm_ymd": "20260821",
-   "same_addr_cnt": 10,
+   "same_addr_cnt": 15,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|중|59.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -23289,7 +23289,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-21T14:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -23601,7 +23601,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-21T14:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -23952,7 +23952,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-21T14:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -24186,7 +24186,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-22T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -25083,7 +25083,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-24T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -25122,7 +25122,7 @@
    "relisted_count": 0,
    "relist_of": "2639913191",
    "first_seen": "2026-08-24T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -25161,7 +25161,7 @@
    "relisted_count": 0,
    "relist_of": "2640550928",
    "first_seen": "2026-08-24T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -25200,7 +25200,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-24T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -25351,8 +25351,8 @@
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2644588006",
    "first_seen": "2026-08-25T14:00:07+09:00",
@@ -25434,7 +25434,7 @@
    "relisted_count": 0,
    "relist_of": "2639723831",
    "first_seen": "2026-08-25T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -26604,7 +26604,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-08-25T18:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -26643,7 +26643,7 @@
    "relisted_count": 0,
    "relist_of": "2636111405",
    "first_seen": "2026-08-25T18:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -26799,7 +26799,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-26T08:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -27033,7 +27033,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-26T08:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -28133,7 +28133,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-26T08:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -28250,7 +28250,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-26T08:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -28289,7 +28289,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-26T08:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -28406,7 +28406,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-08-26T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -28445,7 +28445,7 @@
    "relisted_count": 0,
    "relist_of": "2639074407",
    "first_seen": "2026-08-26T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -28787,7 +28787,7 @@
    "cp_name": "매경부동산",
    "feature": "48P 빠른입주가능매물 인테리어기간협조가능 초품아 성복역도보권",
    "confirm_ymd": "20260826",
-   "same_addr_cnt": 4,
+   "same_addr_cnt": 5,
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|303|14|127.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -28796,7 +28796,7 @@
    "relisted_count": 0,
    "relist_of": "2640895857",
    "first_seen": "2026-08-26T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -29147,7 +29147,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-27T08:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -29610,8 +29610,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|204|고|84.0|남",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2636057719",
    "first_seen": "2026-08-27T14:00:10+09:00",
@@ -29887,7 +29887,7 @@
    "cp_name": "부동산써브",
    "feature": "정상입주,  수리깨끗,명문학군, 신분당선도보이용",
    "confirm_ymd": "20260827",
-   "same_addr_cnt": 12,
+   "same_addr_cnt": 13,
    "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|105|18|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -29896,7 +29896,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-08-27T14:00:10+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -29969,8 +29969,8 @@
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|303|14|127.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2640895857",
    "first_seen": "2026-08-27T14:00:10+09:00",
@@ -30325,7 +30325,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-27T18:00:08+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -31300,7 +31300,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-28T14:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -31573,7 +31573,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-28T14:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -32119,7 +32119,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-29T08:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -32344,7 +32344,7 @@
    "cp_name": "매경부동산",
    "feature": "추천,트인조망,초중고인접,상권이용편리,수영장,어울림센터,목감역개통예정",
    "confirm_ymd": "20260829",
-   "same_addr_cnt": 10,
+   "same_addr_cnt": 15,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -32353,7 +32353,7 @@
    "relisted_count": 0,
    "relist_of": "2644588006",
    "first_seen": "2026-08-29T14:00:10+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -32392,7 +32392,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-08-29T14:00:10+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -33289,7 +33289,7 @@
    "relisted_count": 0,
    "relist_of": "2635613484",
    "first_seen": "2026-08-31T08:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -33319,7 +33319,7 @@
    "cp_name": "매경부동산",
    "feature": "U 황금손 관리 잘되고 수변산책로진입굳 초중고 인접 광역버스이용편리",
    "confirm_ymd": "20260831",
-   "same_addr_cnt": 10,
+   "same_addr_cnt": 15,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남서",
    "unit_key_confident": true,
    "status": "active",
@@ -33328,7 +33328,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-08-31T14:00:10+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -33362,8 +33362,8 @@
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2644588006",
    "first_seen": "2026-08-31T14:00:10+09:00",
@@ -33401,8 +33401,8 @@
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2644588006",
    "first_seen": "2026-08-31T14:00:10+09:00",
@@ -33523,7 +33523,7 @@
    "relisted_count": 0,
    "relist_of": "2635722713",
    "first_seen": "2026-09-01T08:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -33874,7 +33874,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -33991,7 +33991,7 @@
    "relisted_count": 0,
    "relist_of": "2638938551",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34147,7 +34147,7 @@
    "relisted_count": 0,
    "relist_of": "2641044980",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34225,7 +34225,7 @@
    "relisted_count": 0,
    "relist_of": "2645649976",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34264,7 +34264,7 @@
    "relisted_count": 0,
    "relist_of": "2645649976",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34303,7 +34303,7 @@
    "relisted_count": 0,
    "relist_of": "2645649976",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34342,7 +34342,7 @@
    "relisted_count": 0,
    "relist_of": "2645657128",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34381,7 +34381,7 @@
    "relisted_count": 0,
    "relist_of": "2644969436",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34420,7 +34420,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34459,7 +34459,7 @@
    "relisted_count": 0,
    "relist_of": "2645744322",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34576,7 +34576,7 @@
    "relisted_count": 0,
    "relist_of": "2645823676",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34615,7 +34615,7 @@
    "relisted_count": 0,
    "relist_of": "2645662328",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34654,7 +34654,7 @@
    "relisted_count": 0,
    "relist_of": "2645823707",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34693,7 +34693,7 @@
    "relisted_count": 0,
    "relist_of": "2645744322",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34732,7 +34732,7 @@
    "relisted_count": 0,
    "relist_of": "2645823707",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34771,7 +34771,7 @@
    "relisted_count": 0,
    "relist_of": "2645691069",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34810,7 +34810,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34849,7 +34849,7 @@
    "relisted_count": 0,
    "relist_of": "2645823707",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34888,7 +34888,7 @@
    "relisted_count": 0,
    "relist_of": "2645823676",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34927,7 +34927,7 @@
    "relisted_count": 0,
    "relist_of": "2645691069",
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -34966,7 +34966,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-01T14:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -35000,8 +35000,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|201|1|84.0|동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2635613484",
    "first_seen": "2026-09-01T18:00:07+09:00",
@@ -35122,7 +35122,7 @@
    "relisted_count": 0,
    "relist_of": "2645691069",
    "first_seen": "2026-09-01T18:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -35161,7 +35161,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-09-01T18:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -35239,7 +35239,7 @@
    "relisted_count": 0,
    "relist_of": "2645742857",
    "first_seen": "2026-09-01T18:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -35317,7 +35317,7 @@
    "relisted_count": 0,
    "relist_of": "2645823707",
    "first_seen": "2026-09-02T08:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -35356,7 +35356,7 @@
    "relisted_count": 0,
    "relist_of": "2645823676",
    "first_seen": "2026-09-02T08:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -35395,7 +35395,7 @@
    "relisted_count": 0,
    "relist_of": "2645823776",
    "first_seen": "2026-09-02T08:00:06+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -35429,8 +35429,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|205|20|84.0|동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2635722713",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -35468,8 +35468,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|206|18|59.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -35507,8 +35507,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|205|20|84.0|동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2635722713",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -35546,8 +35546,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|201|1|84.0|동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2635613484",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -35585,8 +35585,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|201|17|84.0|동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2643643546",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -35629,7 +35629,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-02T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -35663,8 +35663,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|204|고|59.0|남",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2638038600",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -35707,7 +35707,7 @@
    "relisted_count": 0,
    "relist_of": "2643923857",
    "first_seen": "2026-09-02T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -35746,7 +35746,7 @@
    "relisted_count": 0,
    "relist_of": "2635613416",
    "first_seen": "2026-09-02T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -35780,8 +35780,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|204|중|84.0|남",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2643899248",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -35819,8 +35819,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|205|중|84.0|동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2643923857",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -35858,8 +35858,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|204|고|84.0|남",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2636057719",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -35897,8 +35897,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|206|고|59.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2635976683",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -35932,7 +35932,7 @@
    "cp_name": "매경부동산",
    "feature": "입주협의 융자무 밝고환함.이현초 이현중 우수학군",
    "confirm_ymd": "20260902",
-   "same_addr_cnt": 12,
+   "same_addr_cnt": 13,
    "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|105|18|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -35941,7 +35941,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-02T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -35975,8 +35975,8 @@
    "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|105|18|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -36010,7 +36010,7 @@
    "cp_name": "부동산써브",
    "feature": "빠른입주가능 기본 성복역 수지구청역 도보 가능 이현초 오래거주가능",
    "confirm_ymd": "20260902",
-   "same_addr_cnt": 12,
+   "same_addr_cnt": 13,
    "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|105|18|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -36019,7 +36019,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-02T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -36053,8 +36053,8 @@
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|301|3|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2641045282",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -36092,8 +36092,8 @@
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|302|중|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2641044980",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -36136,7 +36136,7 @@
    "relisted_count": 0,
    "relist_of": "2641048355",
    "first_seen": "2026-09-02T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -36170,8 +36170,8 @@
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|303|고|127.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2641045372",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -36209,8 +36209,8 @@
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|304|중|127.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2641045200",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -36248,8 +36248,8 @@
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|B1|304|15|127.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2643017411",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -36292,7 +36292,7 @@
    "relisted_count": 0,
    "relist_of": "2643017411",
    "first_seen": "2026-09-02T14:00:07+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -36326,8 +36326,8 @@
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|B1|306|고|127.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2643104985",
    "first_seen": "2026-09-02T14:00:07+09:00",
@@ -36374,7 +36374,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-02T18:00:05+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -36413,7 +36413,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-02T18:00:05+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -36452,7 +36452,7 @@
    "relisted_count": 0,
    "relist_of": "2635976683",
    "first_seen": "2026-09-02T18:00:05+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -36491,7 +36491,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-02T18:00:05+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -36521,7 +36521,7 @@
    "cp_name": "부동산써브",
    "feature": "입주협의   융자무 밝고환함.이현초 이현중 우수학군",
    "confirm_ymd": "20260902",
-   "same_addr_cnt": 12,
+   "same_addr_cnt": 13,
    "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|105|18|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -36530,7 +36530,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-02T18:00:05+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -36569,7 +36569,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-02T18:00:05+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -36603,8 +36603,8 @@
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|303|2|127.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-02T18:00:05+09:00",
@@ -36647,7 +36647,7 @@
    "relisted_count": 0,
    "relist_of": "2641044980",
    "first_seen": "2026-09-02T18:00:05+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -36681,8 +36681,8 @@
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|302|고|84.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-09-03",
    "relisted_count": 0,
    "relist_of": "2641048355",
    "first_seen": "2026-09-02T18:00:05+09:00",
@@ -36725,7 +36725,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-09-03T08:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -36764,12 +36764,1338 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-03T08:00:04+09:00",
-   "last_seen": "2026-09-03T08:00:04+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-09-03",
      "price": 195000
+    }
+   ]
+  },
+  "2647471661": {
+   "article_no": "2647471661",
+   "complex": "시흥목감 리벤티움 24평",
+   "apt_nm": "리벤티움",
+   "lawd_cd": "41390",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 85.0,
+   "area": 59.0,
+   "area_name": "85A2",
+   "floor_self": "14",
+   "floor_total": "21",
+   "direction": "남",
+   "building_name": "1109",
+   "price": 45000,
+   "price_raw": "4억 5,000",
+   "rent_man": 0,
+   "realtor": "목감공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": ".  목 감 . 트인뷰 . 중심상권 교통편리. 초등 고등 학원가 인접",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 15,
+   "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2644588006",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 45000
+    }
+   ]
+  },
+  "2647503936": {
+   "article_no": "2647503936",
+   "complex": "시흥목감 리벤티움 24평",
+   "apt_nm": "리벤티움",
+   "lawd_cd": "41390",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 85.0,
+   "area": 59.0,
+   "area_name": "85A2",
+   "floor_self": "14",
+   "floor_total": "21",
+   "direction": "남",
+   "building_name": "1109",
+   "price": 45000,
+   "price_raw": "4억 5,000",
+   "rent_man": 0,
+   "realtor": "목감 황금손 공인중개사사무소",
+   "cp_name": "부동산포스",
+   "feature": "U 황금손 목감역 도보O 광역버스O 학원가O",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 15,
+   "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2644588006",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 45000
+    }
+   ]
+  },
+  "2647462971": {
+   "article_no": "2647462971",
+   "complex": "시흥목감 리벤티움 24평",
+   "apt_nm": "리벤티움",
+   "lawd_cd": "41390",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 85.0,
+   "area": 59.0,
+   "area_name": "85A2",
+   "floor_self": "14",
+   "floor_total": "21",
+   "direction": "남",
+   "building_name": "1109",
+   "price": 45000,
+   "price_raw": "4억 5,000",
+   "rent_man": 0,
+   "realtor": "호반베르디움공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": "트인조망굿,주인거주로관리잘된집,학원병원인접",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 15,
+   "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2644588006",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 45000
+    }
+   ]
+  },
+  "2647465349": {
+   "article_no": "2647465349",
+   "complex": "시흥목감 리벤티움 24평",
+   "apt_nm": "리벤티움",
+   "lawd_cd": "41390",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 85.0,
+   "area": 59.0,
+   "area_name": "85A1",
+   "floor_self": "12",
+   "floor_total": "21",
+   "direction": "남서",
+   "building_name": "1111",
+   "price": 45000,
+   "price_raw": "4억 5,000",
+   "rent_man": 0,
+   "realtor": "호반베르디움공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": "트인조망, 채광좋음, 주인거주관리잘된집",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 12,
+   "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남서",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2638978838",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 45000
+    }
+   ]
+  },
+  "2647515494": {
+   "article_no": "2647515494",
+   "complex": "시흥목감 리벤티움 24평",
+   "apt_nm": "리벤티움",
+   "lawd_cd": "41390",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 85.0,
+   "area": 59.0,
+   "area_name": "85A2",
+   "floor_self": "14",
+   "floor_total": "21",
+   "direction": "남",
+   "building_name": "1109",
+   "price": 45000,
+   "price_raw": "4억 5,000",
+   "rent_man": 0,
+   "realtor": "목감 황금손 공인중개사사무소",
+   "cp_name": "부동산써브",
+   "feature": "정원뷰, 로얄동, 주인세대 거주, 깨끗하게 관리 잘 된 집",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 15,
+   "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2644588006",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 45000
+    }
+   ]
+  },
+  "2647569062": {
+   "article_no": "2647569062",
+   "complex": "시흥목감 리벤티움 24평",
+   "apt_nm": "리벤티움",
+   "lawd_cd": "41390",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 85.0,
+   "area": 59.0,
+   "area_name": "85A2",
+   "floor_self": "14",
+   "floor_total": "21",
+   "direction": "남",
+   "building_name": "1109",
+   "price": 45000,
+   "price_raw": "4억 5,000",
+   "rent_man": 0,
+   "realtor": "한신더휴공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": "추천, 짜임새있는 구조, 중심상권 접, 호수공원산책로 접,대중교통 편리",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 15,
+   "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2644588006",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 45000
+    }
+   ]
+  },
+  "2647497588": {
+   "article_no": "2647497588",
+   "complex": "시흥목감 리벤티움 24평",
+   "apt_nm": "리벤티움",
+   "lawd_cd": "41390",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 85.0,
+   "area": 59.0,
+   "area_name": "85A2",
+   "floor_self": "14",
+   "floor_total": "21",
+   "direction": "남동",
+   "building_name": "1109",
+   "price": 45000,
+   "price_raw": "4억 5,000",
+   "rent_man": 0,
+   "realtor": "호반센트럴 공인중개사사무소",
+   "cp_name": "부동산뱅크",
+   "feature": "마트. 병원 .상권 편리. 채광 좋은 집.",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 15,
+   "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": null,
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 45000
+    }
+   ]
+  },
+  "2647508858": {
+   "article_no": "2647508858",
+   "complex": "시흥목감 리벤티움 24평",
+   "apt_nm": "리벤티움",
+   "lawd_cd": "41390",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 85.0,
+   "area": 59.0,
+   "area_name": "85A2",
+   "floor_self": "14",
+   "floor_total": "21",
+   "direction": "남",
+   "building_name": "1109",
+   "price": 45000,
+   "price_raw": "4억 5,000",
+   "rent_man": 0,
+   "realtor": "레이크푸르지오공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": "채광좋은트인뷰,관리잘된집,수변산책로,생활인프라좋음,운흥초인접,협의입주",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 15,
+   "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2644588006",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 45000
+    }
+   ]
+  },
+  "2647467240": {
+   "article_no": "2647467240",
+   "complex": "시흥목감 리벤티움 24평",
+   "apt_nm": "리벤티움",
+   "lawd_cd": "41390",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 85.0,
+   "area": 59.0,
+   "area_name": "85A2",
+   "floor_self": "14",
+   "floor_total": "21",
+   "direction": "남서",
+   "building_name": "1109",
+   "price": 45000,
+   "price_raw": "4억 5,000",
+   "rent_man": 0,
+   "realtor": "대박 공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": "11월16일 이후 입주협의 , 상권과 교통이 편리, 조용하고 살기 편함",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 15,
+   "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남서",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": null,
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 45000
+    }
+   ]
+  },
+  "2647503870": {
+   "article_no": "2647503870",
+   "complex": "성복역 현대홈타운 24, 30평",
+   "apt_nm": "성복역현대홈타운",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 108.0,
+   "area": 84.0,
+   "area_name": "108",
+   "floor_self": "1",
+   "floor_total": "20",
+   "direction": "동",
+   "building_name": "201",
+   "price": 105000,
+   "price_raw": "10억 5,000",
+   "rent_man": 0,
+   "realtor": "골드(898-0770) 공인중개사사무소",
+   "cp_name": "부동산렛츠",
+   "feature": "주인거주,샷시포함 특올수리,확장됨,초역세권,초품아",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 4,
+   "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|201|1|84.0|동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2635613484",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 105000
+    }
+   ]
+  },
+  "2647476439": {
+   "article_no": "2647476439",
+   "complex": "성복역 현대홈타운 24, 30평",
+   "apt_nm": "성복역현대홈타운",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 108.0,
+   "area": 84.0,
+   "area_name": "108",
+   "floor_self": "17",
+   "floor_total": "20",
+   "direction": "동",
+   "building_name": "201",
+   "price": 120000,
+   "price_raw": "12억",
+   "rent_man": 0,
+   "realtor": "가나(266-1155)공인중개사사무소",
+   "cp_name": "부동산렛츠",
+   "feature": "최근올수리 전망좋은 실입주 매물",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 1,
+   "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|201|17|84.0|동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2643643546",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 120000
+    }
+   ]
+  },
+  "2647477776": {
+   "article_no": "2647477776",
+   "complex": "성복역 현대홈타운 24, 30평",
+   "apt_nm": "성복역현대홈타운",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 108.0,
+   "area": 84.0,
+   "area_name": "108",
+   "floor_self": "20",
+   "floor_total": "20",
+   "direction": "동",
+   "building_name": "205",
+   "price": 120000,
+   "price_raw": "12억",
+   "rent_man": 0,
+   "realtor": "가나(266-1155)공인중개사사무소",
+   "cp_name": "부동산렛츠",
+   "feature": "실입주가능한 탑층 올수리 성복역롯데몰도보5분 초품아",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 3,
+   "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|205|20|84.0|동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2635722713",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 120000
+    }
+   ]
+  },
+  "2647477299": {
+   "article_no": "2647477299",
+   "complex": "성복역 현대홈타운 24, 30평",
+   "apt_nm": "성복역현대홈타운",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 81.0,
+   "area": 59.0,
+   "area_name": "81",
+   "floor_self": "18",
+   "floor_total": "18",
+   "direction": "남동",
+   "building_name": "206",
+   "price": 110000,
+   "price_raw": "11억",
+   "rent_man": 0,
+   "realtor": "가나(266-1155)공인중개사사무소",
+   "cp_name": "부동산렛츠",
+   "feature": "실입주매물 성복역롯데몰도보5분 초품아",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 1,
+   "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|206|18|59.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": null,
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 110000
+    }
+   ]
+  },
+  "2647442656": {
+   "article_no": "2647442656",
+   "complex": "성복역 현대홈타운 24, 30평",
+   "apt_nm": "성복역현대홈타운",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 108.0,
+   "area": 84.0,
+   "area_name": "108",
+   "floor_self": "20",
+   "floor_total": "20",
+   "direction": "동",
+   "building_name": "205",
+   "price": 120000,
+   "price_raw": "12억",
+   "rent_man": 0,
+   "realtor": "현대홈타운031-262-7100공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": "입지최고,전체올수리,방확장,주방확장,지하주차장연결편리해요,",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 3,
+   "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|205|20|84.0|동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2635722713",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 120000
+    }
+   ]
+  },
+  "2647441049": {
+   "article_no": "2647441049",
+   "complex": "성복역 현대홈타운 24, 30평",
+   "apt_nm": "성복역현대홈타운",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 108.0,
+   "area": 84.0,
+   "area_name": "108",
+   "floor_self": "1",
+   "floor_total": "20",
+   "direction": "동",
+   "building_name": "201",
+   "price": 105000,
+   "price_raw": "10억 5,000",
+   "rent_man": 0,
+   "realtor": "현대홈타운031-262-7100공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": "샷시포함확장고급자재로특올수리,성복역롯데몰바로인접,층간소음없는1층입니다",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 4,
+   "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|201|1|84.0|동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2635613484",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 105000
+    }
+   ]
+  },
+  "2647443130": {
+   "article_no": "2647443130",
+   "complex": "성복역 현대홈타운 24, 30평",
+   "apt_nm": "성복역현대홈타운",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 81.0,
+   "area": 59.0,
+   "area_name": "81",
+   "floor_self": "고",
+   "floor_total": "20",
+   "direction": "남",
+   "building_name": "204",
+   "price": 110000,
+   "price_raw": "11억",
+   "rent_man": 0,
+   "realtor": "현대홈타운031-262-7100공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": "전세안고,남향 로얄동로얄층성복역초역세권",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 2,
+   "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|204|고|59.0|남",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2638038600",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 110000
+    }
+   ]
+  },
+  "2647504408": {
+   "article_no": "2647504408",
+   "complex": "성복역 현대홈타운 24, 30평",
+   "apt_nm": "성복역현대홈타운",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 108.0,
+   "area": 84.0,
+   "area_name": "108",
+   "floor_self": "고",
+   "floor_total": "20",
+   "direction": "남",
+   "building_name": "204",
+   "price": 123000,
+   "price_raw": "12억 3,000",
+   "rent_man": 0,
+   "realtor": "골드(898-0770) 공인중개사사무소",
+   "cp_name": "부동산렛츠",
+   "feature": "성복역 도보7분, 초품아, 로얄동 로얄층,일부인테리어,주인거주 트인뷰",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 5,
+   "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|204|고|84.0|남",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2636057719",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 123000
+    }
+   ]
+  },
+  "2647476989": {
+   "article_no": "2647476989",
+   "complex": "성복역 현대홈타운 24, 30평",
+   "apt_nm": "성복역현대홈타운",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 108.0,
+   "area": 84.0,
+   "area_name": "108",
+   "floor_self": "중",
+   "floor_total": "20",
+   "direction": "남",
+   "building_name": "204",
+   "price": 119000,
+   "price_raw": "11억 9,000",
+   "rent_man": 0,
+   "realtor": "가나(266-1155)공인중개사사무소",
+   "cp_name": "부동산렛츠",
+   "feature": "정남향 조용한로얄동 부분수리 초품아 성복역롯데몰도보5분",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 1,
+   "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|204|중|84.0|남",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2643899248",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 119000
+    }
+   ]
+  },
+  "2647443274": {
+   "article_no": "2647443274",
+   "complex": "성복역 현대홈타운 24, 30평",
+   "apt_nm": "성복역현대홈타운",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 108.0,
+   "area": 84.0,
+   "area_name": "108",
+   "floor_self": "중",
+   "floor_total": "20",
+   "direction": "동",
+   "building_name": "205",
+   "price": 115000,
+   "price_raw": "11억 5,000",
+   "rent_man": 0,
+   "realtor": "현대홈타운031-262-7100공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": "싱크대 신발장 전등 도배장판 앞뒤 베란다페인트칠 화장실수리,집상태굿",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 1,
+   "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|205|중|84.0|동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2643923857",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 115000
+    }
+   ]
+  },
+  "2647475927": {
+   "article_no": "2647475927",
+   "complex": "성복역 현대홈타운 24, 30평",
+   "apt_nm": "성복역현대홈타운",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 108.0,
+   "area": 84.0,
+   "area_name": "108",
+   "floor_self": "고",
+   "floor_total": "20",
+   "direction": "남",
+   "building_name": "204",
+   "price": 118000,
+   "price_raw": "11억 8,000",
+   "rent_man": 0,
+   "realtor": "가나(266-1155)공인중개사사무소",
+   "cp_name": "부동산렛츠",
+   "feature": "남향 로얄동  성복역롯데몰 초품아",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 1,
+   "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|204|고|84.0|남",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2636057719",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 118000
+    }
+   ]
+  },
+  "2647511132": {
+   "article_no": "2647511132",
+   "complex": "성복역 현대홈타운 24, 30평",
+   "apt_nm": "성복역현대홈타운",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 81.0,
+   "area": 59.0,
+   "area_name": "81",
+   "floor_self": "고",
+   "floor_total": "18",
+   "direction": "남동",
+   "building_name": "206",
+   "price": 100000,
+   "price_raw": "10억",
+   "rent_man": 0,
+   "realtor": "포레나공인중개사",
+   "cp_name": "아실",
+   "feature": "추천,24형,최근올수리,깨끗하고 관리잘된집,세안고",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 3,
+   "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|206|고|59.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2635976683",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 100000
+    }
+   ]
+  },
+  "2647403866": {
+   "article_no": "2647403866",
+   "complex": "진산마을성원상떼빌 32, 48평",
+   "apt_nm": "진산마을성원상떼빌",
+   "lawd_cd": "41465",
+   "trade_type": "전세",
+   "trade_code": "B1",
+   "area_supply": 108.0,
+   "area": 84.0,
+   "area_name": "108",
+   "floor_self": "18",
+   "floor_total": "20",
+   "direction": "남동",
+   "building_name": "105",
+   "price": 52000,
+   "price_raw": "5억 2,000",
+   "rent_man": 0,
+   "realtor": "신봉114(단지내031-278-0114)공인중개사사무소",
+   "cp_name": "부동산써브",
+   "feature": "급구, 로열층 남동향 채광우수 즉시입주가능",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 13,
+   "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|105|18|84.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2642492592",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 52000
+    }
+   ]
+  },
+  "2647483388": {
+   "article_no": "2647483388",
+   "complex": "진산마을성원상떼빌 32, 48평",
+   "apt_nm": "진산마을성원상떼빌",
+   "lawd_cd": "41465",
+   "trade_type": "전세",
+   "trade_code": "B1",
+   "area_supply": 108.0,
+   "area": 84.0,
+   "area_name": "108",
+   "floor_self": "18",
+   "floor_total": "20",
+   "direction": "남동",
+   "building_name": "105",
+   "price": 52000,
+   "price_raw": "5억 2,000",
+   "rent_man": 0,
+   "realtor": "광교아이파크유진부동산중개사무소",
+   "cp_name": "매경부동산",
+   "feature": "32, 로얄동, 관리잘된밝은집, 이현초, 이현중학군지, 성복역도보",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 13,
+   "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|105|18|84.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2642492592",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 52000
+    }
+   ]
+  },
+  "2647450884": {
+   "article_no": "2647450884",
+   "complex": "서원마을3단지아이파크 33, 38평",
+   "apt_nm": "서원마을3단지아이파크",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 159.0,
+   "area": 127.0,
+   "area_name": "159",
+   "floor_self": "14",
+   "floor_total": "17",
+   "direction": "남동",
+   "building_name": "303",
+   "price": 122000,
+   "price_raw": "12억 2,000",
+   "rent_man": 0,
+   "realtor": "현대홈타운031-262-7100공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": "공실, 키보관,심곡초품아,성복역롯데몰인접,잔금전수리협의가능",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 5,
+   "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|303|14|127.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2640895857",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 122000
+    }
+   ]
+  },
+  "2647530737": {
+   "article_no": "2647530737",
+   "complex": "서원마을3단지아이파크 33, 38평",
+   "apt_nm": "서원마을3단지아이파크",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 159.0,
+   "area": 127.0,
+   "area_name": "159",
+   "floor_self": "14",
+   "floor_total": "17",
+   "direction": "남동",
+   "building_name": "303",
+   "price": 122000,
+   "price_raw": "12억 2,000",
+   "rent_man": 0,
+   "realtor": "스마트(031-266-9977)공인중개사사무소",
+   "cp_name": "한경부동산",
+   "feature": "입주가능 인테리어기간협의가능 성복역후문도보8분 초품아",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 5,
+   "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|303|14|127.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2640895857",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 122000
+    }
+   ]
+  },
+  "2647473866": {
+   "article_no": "2647473866",
+   "complex": "서원마을3단지아이파크 33, 38평",
+   "apt_nm": "서원마을3단지아이파크",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 113.0,
+   "area": 84.0,
+   "area_name": "113",
+   "floor_self": "3",
+   "floor_total": "20",
+   "direction": "남동",
+   "building_name": "301",
+   "price": 125000,
+   "price_raw": "12억 5,000",
+   "rent_man": 0,
+   "realtor": "가나(266-1155)공인중개사사무소",
+   "cp_name": "부동산렛츠",
+   "feature": "귀한 실입주화장실씽크대일부수리 성복역 롯데몰도보7분 초품아",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 1,
+   "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|301|3|84.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2641045282",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 125000
+    }
+   ]
+  },
+  "2647472598": {
+   "article_no": "2647472598",
+   "complex": "서원마을3단지아이파크 33, 38평",
+   "apt_nm": "서원마을3단지아이파크",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 159.0,
+   "area": 127.0,
+   "area_name": "159",
+   "floor_self": "2",
+   "floor_total": "17",
+   "direction": "남동",
+   "building_name": "303",
+   "price": 116000,
+   "price_raw": "11억 6,000",
+   "rent_man": 0,
+   "realtor": "가나(266-1155)공인중개사사무소",
+   "cp_name": "부동산렛츠",
+   "feature": "실입주가능 아늑한초록전망 성복역롯데몰도보8분 초품아",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 2,
+   "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|303|2|127.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": null,
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 116000
+    }
+   ]
+  },
+  "2647532911": {
+   "article_no": "2647532911",
+   "complex": "서원마을3단지아이파크 33, 38평",
+   "apt_nm": "서원마을3단지아이파크",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 113.0,
+   "area": 84.0,
+   "area_name": "113",
+   "floor_self": "고",
+   "floor_total": "20",
+   "direction": "남동",
+   "building_name": "302",
+   "price": 124000,
+   "price_raw": "12억 4,000",
+   "rent_man": 0,
+   "realtor": "스마트(031-266-9977)공인중개사사무소",
+   "cp_name": "한경부동산",
+   "feature": "입주가능 확트인조망 심곡초 성복역 후문도보8분",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 2,
+   "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|302|고|84.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2641048355",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 124000
+    }
+   ]
+  },
+  "2647474240": {
+   "article_no": "2647474240",
+   "complex": "서원마을3단지아이파크 33, 38평",
+   "apt_nm": "서원마을3단지아이파크",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 113.0,
+   "area": 84.0,
+   "area_name": "113",
+   "floor_self": "중",
+   "floor_total": "20",
+   "direction": "남동",
+   "building_name": "302",
+   "price": 132000,
+   "price_raw": "13억 2,000",
+   "rent_man": 0,
+   "realtor": "가나(266-1155)공인중개사사무소",
+   "cp_name": "부동산렛츠",
+   "feature": "34 완벽하게올수리한집 최신트랜드로수리한집이예요",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 4,
+   "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|302|중|84.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2641044980",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 132000
+    }
+   ]
+  },
+  "2647473352": {
+   "article_no": "2647473352",
+   "complex": "서원마을3단지아이파크 33, 38평",
+   "apt_nm": "서원마을3단지아이파크",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 159.0,
+   "area": 127.0,
+   "area_name": "159",
+   "floor_self": "중",
+   "floor_total": "17",
+   "direction": "남동",
+   "building_name": "304",
+   "price": 137000,
+   "price_raw": "13억 7,000",
+   "rent_man": 0,
+   "realtor": "가나(266-1155)공인중개사사무소",
+   "cp_name": "부동산렛츠",
+   "feature": "샷시포함전체올수리 올확장 고급진올수리 성복역롯데몰도보8분 초품아",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 1,
+   "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|304|중|127.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2641045200",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 137000
+    }
+   ]
+  },
+  "2647473024": {
+   "article_no": "2647473024",
+   "complex": "서원마을3단지아이파크 33, 38평",
+   "apt_nm": "서원마을3단지아이파크",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 159.0,
+   "area": 127.0,
+   "area_name": "159",
+   "floor_self": "고",
+   "floor_total": "17",
+   "direction": "남동",
+   "building_name": "303",
+   "price": 122000,
+   "price_raw": "12억 2,000",
+   "rent_man": 0,
+   "realtor": "가나(266-1155)공인중개사사무소",
+   "cp_name": "부동산렛츠",
+   "feature": "귀한실입주매물 인테리어기간협의가능 성복역롯데몰도보8분",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 5,
+   "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|303|고|127.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2641045372",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 122000
+    }
+   ]
+  },
+  "2647474598": {
+   "article_no": "2647474598",
+   "complex": "서원마을3단지아이파크 33, 38평",
+   "apt_nm": "서원마을3단지아이파크",
+   "lawd_cd": "41465",
+   "trade_type": "전세",
+   "trade_code": "B1",
+   "area_supply": 159.0,
+   "area": 127.0,
+   "area_name": "159",
+   "floor_self": "15",
+   "floor_total": "17",
+   "direction": "남동",
+   "building_name": "304",
+   "price": 75000,
+   "price_raw": "7억 5,000",
+   "rent_man": 0,
+   "realtor": "가나(266-1155)공인중개사사무소",
+   "cp_name": "부동산렛츠",
+   "feature": "필요한수리해드려요 성복역롯데몰도보8분 초품아",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 3,
+   "unit_key": "41465|서원마을3단지아이파크 33, 38평|B1|304|15|127.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2643017411",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 75000
+    }
+   ]
+  },
+  "2647484359": {
+   "article_no": "2647484359",
+   "complex": "서원마을3단지아이파크 33, 38평",
+   "apt_nm": "서원마을3단지아이파크",
+   "lawd_cd": "41465",
+   "trade_type": "전세",
+   "trade_code": "B1",
+   "area_supply": 159.0,
+   "area": 127.0,
+   "area_name": "159",
+   "floor_self": "15",
+   "floor_total": "17",
+   "direction": "남동",
+   "building_name": "304",
+   "price": 75000,
+   "price_raw": "7억 5,000",
+   "rent_man": 0,
+   "realtor": "현대(272-5200)공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": "48P 도배 장판 다른곳 수리협의해드려요 초품아 성복역도보권",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 3,
+   "unit_key": "41465|서원마을3단지아이파크 33, 38평|B1|304|15|127.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2643017411",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 75000
+    }
+   ]
+  },
+  "2647441492": {
+   "article_no": "2647441492",
+   "complex": "서원마을3단지아이파크 33, 38평",
+   "apt_nm": "서원마을3단지아이파크",
+   "lawd_cd": "41465",
+   "trade_type": "전세",
+   "trade_code": "B1",
+   "area_supply": 159.0,
+   "area": 127.0,
+   "area_name": "159",
+   "floor_self": "고",
+   "floor_total": "17",
+   "direction": "남동",
+   "building_name": "306",
+   "price": 73000,
+   "price_raw": "7억 3,000",
+   "rent_man": 0,
+   "realtor": "현대홈타운031-262-7100공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": "로얄동,집상태굿,융무,화장실2교체,앞뒤베란다타일교체,방1확장,전등교체,",
+   "confirm_ymd": "20260903",
+   "same_addr_cnt": 1,
+   "unit_key": "41465|서원마을3단지아이파크 33, 38평|B1|306|고|127.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2643104985",
+   "first_seen": "2026-09-03T14:00:07+09:00",
+   "last_seen": "2026-09-03T14:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-09-03",
+     "price": 73000
     }
    ]
   }
@@ -36832,12 +38158,12 @@
    "active_cnt": 14
   },
   "시흥목감 리벤티움 24평": {
-   "last_ok": "2026-09-03T08:00:04+09:00",
-   "active_cnt": 38
+   "last_ok": "2026-09-03T14:00:07+09:00",
+   "active_cnt": 47
   },
   "성복역 현대홈타운 24, 30평": {
-   "last_ok": "2026-09-03T08:00:04+09:00",
-   "active_cnt": 25
+   "last_ok": "2026-09-03T14:00:07+09:00",
+   "active_cnt": 37
   },
   "수지구청 신정7단지 24평": {
    "last_ok": "2026-08-01T18:00:25+09:00",
@@ -36864,8 +38190,8 @@
    "active_cnt": 8
   },
   "서원마을3단지아이파크 33, 38평": {
-   "last_ok": "2026-09-03T08:00:04+09:00",
-   "active_cnt": 23
+   "last_ok": "2026-09-03T14:00:07+09:00",
+   "active_cnt": 34
   },
   "진산마을성원상떼빌 32평": {
    "last_ok": "2026-08-11T18:00:07+09:00",
@@ -36876,18 +38202,18 @@
    "active_cnt": 20
   },
   "진산마을성원상떼빌 32, 48평": {
-   "last_ok": "2026-09-03T08:00:04+09:00",
-   "active_cnt": 21
+   "last_ok": "2026-09-03T14:00:07+09:00",
+   "active_cnt": 23
   },
   "분당 시범우성 29, 32평": {
    "last_ok": "2026-08-25T18:00:07+09:00",
    "active_cnt": 130
   },
   "e편한세상광교 39, 41평": {
-   "last_ok": "2026-09-03T08:00:04+09:00",
+   "last_ok": "2026-09-03T14:00:07+09:00",
    "active_cnt": 33
   }
  },
  "tracking_since": "2026-06-14",
- "last_run": "2026-09-03T08:00:04+09:00"
+ "last_run": "2026-09-03T14:00:07+09:00"
 }
