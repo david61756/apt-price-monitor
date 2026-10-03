@@ -36380,14 +36380,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1110|1|59.0|남",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-02T18:00:05+09:00",
    "last_seen": "2026-10-02T18:00:08+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-09-02",
@@ -36896,8 +36896,8 @@
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2644588006",
    "first_seen": "2026-09-03T14:00:07+09:00",
@@ -36939,8 +36939,8 @@
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남서",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-09-03T14:00:07+09:00",
@@ -39596,7 +39596,7 @@
    "relisted_count": 0,
    "relist_of": "2645691069",
    "first_seen": "2026-09-04T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -41195,7 +41195,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-05T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -42104,7 +42104,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-07T18:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -42143,7 +42143,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-07T18:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -45037,7 +45037,7 @@
    "relisted_count": 0,
    "relist_of": "2639072702",
    "first_seen": "2026-09-09T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -45115,7 +45115,7 @@
    "relisted_count": 0,
    "relist_of": "2644867388",
    "first_seen": "2026-09-09T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -45977,7 +45977,7 @@
    "relisted_count": 0,
    "relist_of": "2644867388",
    "first_seen": "2026-09-10T14:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -46956,7 +46956,7 @@
    "relisted_count": 0,
    "relist_of": "2639913191",
    "first_seen": "2026-09-11T08:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -47736,7 +47736,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-11T14:00:05+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -49148,7 +49148,7 @@
    "relisted_count": 0,
    "relist_of": "2631978809",
    "first_seen": "2026-09-11T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -49650,7 +49650,7 @@
    "cp_name": "매경부동산",
    "feature": "초등학교 인접, 단지옆 상권    학원 마트 병원 이용 편리.",
    "confirm_ymd": "20260912",
-   "same_addr_cnt": 15,
+   "same_addr_cnt": 14,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -49659,7 +49659,7 @@
    "relisted_count": 0,
    "relist_of": "2644588006",
    "first_seen": "2026-09-12T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -49702,7 +49702,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-12T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -50564,7 +50564,7 @@
    "relisted_count": 0,
    "relist_of": "2645662848",
    "first_seen": "2026-09-12T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -50642,7 +50642,7 @@
    "relisted_count": 0,
    "relist_of": "2643202220",
    "first_seen": "2026-09-12T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -50837,7 +50837,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-14T14:00:05+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -51023,7 +51023,7 @@
    "cp_name": "부동산뱅크",
    "feature": "마트. 병원 .상권 편리. 채광 좋은 집.",
    "confirm_ymd": "20260914",
-   "same_addr_cnt": 15,
+   "same_addr_cnt": 14,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -51032,7 +51032,7 @@
    "relisted_count": 0,
    "relist_of": "2644588006",
    "first_seen": "2026-09-14T18:00:05+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -51075,7 +51075,7 @@
    "relisted_count": 0,
    "relist_of": "2639072702",
    "first_seen": "2026-09-14T18:00:05+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -51300,7 +51300,7 @@
    "cp_name": "매경부동산",
    "feature": "추천입주 트인조망 주변상권 교통이용편리 학교 학원 병원인접",
    "confirm_ymd": "20260915",
-   "same_addr_cnt": 15,
+   "same_addr_cnt": 14,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -51309,7 +51309,7 @@
    "relisted_count": 0,
    "relist_of": "2644588006",
    "first_seen": "2026-09-15T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -51898,7 +51898,7 @@
    "relisted_count": 0,
    "relist_of": "2643141259",
    "first_seen": "2026-09-15T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -51937,7 +51937,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-15T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -51976,7 +51976,7 @@
    "relisted_count": 0,
    "relist_of": "2641126203",
    "first_seen": "2026-09-15T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -53029,7 +53029,7 @@
    "relisted_count": 0,
    "relist_of": "2639913191",
    "first_seen": "2026-09-15T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -53653,7 +53653,7 @@
    "relisted_count": 0,
    "relist_of": "2644384063",
    "first_seen": "2026-09-16T14:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -54121,7 +54121,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-16T14:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -54160,7 +54160,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-16T14:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -54589,7 +54589,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-16T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -54697,7 +54697,7 @@
    "cp_name": "매경부동산",
    "feature": ". 목 감 . 상 권. 입지 좋은 단지.  초등 고등 인접. 컨디션좋은집",
    "confirm_ymd": "20260917",
-   "same_addr_cnt": 11,
+   "same_addr_cnt": 10,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남서",
    "unit_key_confident": true,
    "status": "active",
@@ -54706,7 +54706,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-09-17T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -54862,7 +54862,7 @@
    "relisted_count": 0,
    "relist_of": "2635945811",
    "first_seen": "2026-09-17T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -55168,14 +55168,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|205|고|84.0|동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2635611879",
    "first_seen": "2026-09-17T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-09-17",
@@ -55408,7 +55408,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-17T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -56539,7 +56539,7 @@
    "relisted_count": 0,
    "relist_of": "2639615937",
    "first_seen": "2026-09-18T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -56578,7 +56578,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-18T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -56617,7 +56617,7 @@
    "relisted_count": 0,
    "relist_of": "2639356646",
    "first_seen": "2026-09-18T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -56656,7 +56656,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-18T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -57973,7 +57973,7 @@
    "cp_name": "매경부동산",
    "feature": "一목감역예정지도보권一 마트.학원.편의시설인접,거주만족도좋음,초중고인접",
    "confirm_ymd": "20260918",
-   "same_addr_cnt": 11,
+   "same_addr_cnt": 10,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남서",
    "unit_key_confident": true,
    "status": "active",
@@ -57982,7 +57982,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-09-18T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -58177,7 +58177,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-18T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -58372,7 +58372,7 @@
    "relisted_count": 0,
    "relist_of": "2639913191",
    "first_seen": "2026-09-19T08:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -59308,7 +59308,7 @@
    "relisted_count": 0,
    "relist_of": "2635614547",
    "first_seen": "2026-09-19T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -59581,7 +59581,7 @@
    "relisted_count": 0,
    "relist_of": "2640895857",
    "first_seen": "2026-09-19T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -59884,7 +59884,7 @@
    "cp_name": "매경부동산",
    "feature": "중심상권 ,체육센터,초,중,고,학원,병 의원,수영장 어울림센터 인접,",
    "confirm_ymd": "20260919",
-   "same_addr_cnt": 15,
+   "same_addr_cnt": 14,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -59893,7 +59893,7 @@
    "relisted_count": 0,
    "relist_of": "2644588006",
    "first_seen": "2026-09-19T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60200,7 +60200,7 @@
    "cp_name": "부동산써브",
    "feature": "정원뷰, 로얄동, 주인세대 거주, 깨끗하게 관리 잘 된 집",
    "confirm_ymd": "20260921",
-   "same_addr_cnt": 15,
+   "same_addr_cnt": 14,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -60209,7 +60209,7 @@
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-09-21T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60282,7 +60282,7 @@
    "cp_name": "부동산써브",
    "feature": "초중고 인접,수변산책로, 신안산선목감역 계통예정",
    "confirm_ymd": "20260921",
-   "same_addr_cnt": 15,
+   "same_addr_cnt": 14,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|중|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -60291,7 +60291,7 @@
    "relisted_count": 0,
    "relist_of": "2635945811",
    "first_seen": "2026-09-21T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60330,7 +60330,7 @@
    "relisted_count": 0,
    "relist_of": "2636111405",
    "first_seen": "2026-09-21T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60360,7 +60360,7 @@
    "cp_name": "매경부동산",
    "feature": "유치원과초중고인근,어울림센터 수영장 남동향 탁트인뷰 로얄동 로얄동",
    "confirm_ymd": "20260921",
-   "same_addr_cnt": 15,
+   "same_addr_cnt": 14,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|중|59.0|남동",
    "unit_key_confident": true,
    "status": "active",
@@ -60369,7 +60369,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-21T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60529,7 +60529,7 @@
    "relisted_count": 0,
    "relist_of": "2635945811",
    "first_seen": "2026-09-22T08:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60568,7 +60568,7 @@
    "relisted_count": 0,
    "relist_of": "2635945811",
    "first_seen": "2026-09-22T08:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60685,7 +60685,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-22T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60754,7 +60754,7 @@
    "cp_name": "매경부동산",
    "feature": "U 황금손 관리 잘되고 수변산책로진입굳 초중고 인접 광역버스이용편리",
    "confirm_ymd": "20260922",
-   "same_addr_cnt": 15,
+   "same_addr_cnt": 14,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남서",
    "unit_key_confident": true,
    "status": "active",
@@ -60763,7 +60763,7 @@
    "relisted_count": 0,
    "relist_of": "2646737476",
    "first_seen": "2026-09-22T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60832,7 +60832,7 @@
    "cp_name": "매경부동산",
    "feature": "채광, 조망 좋음, 상권이용 편리, 초, 고교 인접",
    "confirm_ymd": "20260922",
-   "same_addr_cnt": 11,
+   "same_addr_cnt": 10,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남서",
    "unit_key_confident": true,
    "status": "active",
@@ -60841,7 +60841,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-09-22T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60871,7 +60871,7 @@
    "cp_name": "매경부동산",
    "feature": "채광좋은트인뷰,관리잘된집,수변산책로,생활인프라좋음,운흥초인접,협의입주",
    "confirm_ymd": "20260922",
-   "same_addr_cnt": 15,
+   "same_addr_cnt": 14,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -60880,7 +60880,7 @@
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-09-22T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60919,7 +60919,7 @@
    "relisted_count": 0,
    "relist_of": "2635945811",
    "first_seen": "2026-09-22T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -62011,7 +62011,7 @@
    "relisted_count": 0,
    "relist_of": "2644969436",
    "first_seen": "2026-09-22T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -62089,7 +62089,7 @@
    "relisted_count": 0,
    "relist_of": "2644969436",
    "first_seen": "2026-09-22T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -63103,7 +63103,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-22T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -63133,7 +63133,7 @@
    "cp_name": "매경부동산",
    "feature": "탁트인전망, 초중고 인접, 교통 상권 이용편리, 이사협의",
    "confirm_ymd": "20260922",
-   "same_addr_cnt": 11,
+   "same_addr_cnt": 10,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남서",
    "unit_key_confident": true,
    "status": "active",
@@ -63142,7 +63142,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-09-22T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -63647,14 +63647,14 @@
    "same_addr_cnt": 7,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|11|59.0|남",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-23T14:00:08+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-09-23",
@@ -63722,7 +63722,7 @@
    "cp_name": "매경부동산",
    "feature": "입 주,트인조망,목감역예정지도보가능,상권.교통 편리한 단지,집상태 깔끔",
    "confirm_ymd": "20260923",
-   "same_addr_cnt": 11,
+   "same_addr_cnt": 10,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남서",
    "unit_key_confident": true,
    "status": "active",
@@ -63731,7 +63731,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-09-23T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -63848,7 +63848,7 @@
    "relisted_count": 0,
    "relist_of": "2644867388",
    "first_seen": "2026-09-23T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -63878,7 +63878,7 @@
    "cp_name": "매경부동산",
    "feature": "11월16일 이후 입주협의 , 상권과 교통이 편리, 조용하고 살기 편함",
    "confirm_ymd": "20260923",
-   "same_addr_cnt": 15,
+   "same_addr_cnt": 14,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남서",
    "unit_key_confident": true,
    "status": "active",
@@ -63887,7 +63887,7 @@
    "relisted_count": 0,
    "relist_of": "2646737476",
    "first_seen": "2026-09-23T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -63956,7 +63956,7 @@
    "cp_name": "매경부동산",
    "feature": "트인조망. 수변산책로. 초중고 인접. 상권편리. 상태최상. 빠른입주협의",
    "confirm_ymd": "20260923",
-   "same_addr_cnt": 11,
+   "same_addr_cnt": 10,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남서",
    "unit_key_confident": true,
    "status": "active",
@@ -63965,7 +63965,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-09-23T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -65009,7 +65009,7 @@
    "cp_name": "매경부동산",
    "feature": "유치원과초중고,어울림센터 ,편의시설,목감역이 가까운 목감의 대단지 아파",
    "confirm_ymd": "20260928",
-   "same_addr_cnt": 11,
+   "same_addr_cnt": 10,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|중|59.0|남서",
    "unit_key_confident": true,
    "status": "active",
@@ -65018,7 +65018,7 @@
    "relisted_count": 0,
    "relist_of": "2639723831",
    "first_seen": "2026-09-28T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -65057,7 +65057,7 @@
    "relisted_count": 0,
    "relist_of": "2639781076",
    "first_seen": "2026-09-28T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -65100,7 +65100,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-28T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -65139,7 +65139,7 @@
    "relisted_count": 0,
    "relist_of": "2635017501",
    "first_seen": "2026-09-28T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -65529,7 +65529,7 @@
    "relisted_count": 0,
    "relist_of": "2639913191",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -65607,7 +65607,7 @@
    "relisted_count": 0,
    "relist_of": "2648544595",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66108,14 +66108,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|B1|205|저|84.0|동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2649479105",
    "first_seen": "2026-09-29T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-09-29",
@@ -66153,7 +66153,7 @@
    "relisted_count": 0,
    "relist_of": "2642907420",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66192,7 +66192,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66270,7 +66270,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66309,7 +66309,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66426,7 +66426,7 @@
    "relisted_count": 0,
    "relist_of": "2647368925",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66465,7 +66465,7 @@
    "relisted_count": 0,
    "relist_of": "2640895857",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66621,7 +66621,7 @@
    "relisted_count": 0,
    "relist_of": "2641044980",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66654,14 +66654,14 @@
    "same_addr_cnt": 3,
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|B1|304|15|127.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2643017411",
    "first_seen": "2026-09-29T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-09-29",
@@ -66738,7 +66738,7 @@
    "relisted_count": 0,
    "relist_of": "2643017411",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66771,14 +66771,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|B1|306|고|127.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2643104985",
    "first_seen": "2026-09-29T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-09-29",
@@ -67206,7 +67206,7 @@
    "relisted_count": 0,
    "relist_of": "2650522436",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -67278,14 +67278,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41117|e편한세상광교 39, 41평|A1|6108|저|100.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2647095753",
    "first_seen": "2026-09-29T14:00:07+09:00",
    "last_seen": "2026-10-03T14:00:08+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-09-29",
@@ -67401,7 +67401,7 @@
    "relisted_count": 0,
    "relist_of": "2645691069",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -67908,7 +67908,7 @@
    "relisted_count": 0,
    "relist_of": "2644946015",
    "first_seen": "2026-09-29T18:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -68142,7 +68142,7 @@
    "relisted_count": 0,
    "relist_of": "2640895857",
    "first_seen": "2026-09-30T08:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -68682,14 +68682,14 @@
    "same_addr_cnt": 2,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|204|고|59.0|남",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2638038600",
    "first_seen": "2026-09-30T14:00:09+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-09-30",
@@ -68721,14 +68721,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|204|저|84.0|남",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2635613416",
    "first_seen": "2026-09-30T14:00:09+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-09-30",
@@ -68760,14 +68760,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|205|중|84.0|동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2643923857",
    "first_seen": "2026-09-30T14:00:09+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-09-30",
@@ -68844,7 +68844,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-30T14:00:09+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -68961,7 +68961,7 @@
    "relisted_count": 0,
    "relist_of": "2638938551",
    "first_seen": "2026-09-30T14:00:09+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69072,14 +69072,14 @@
    "same_addr_cnt": 2,
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|302|고|84.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2641048355",
    "first_seen": "2026-09-30T14:00:09+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-09-30",
@@ -69117,7 +69117,7 @@
    "relisted_count": 0,
    "relist_of": "2641044980",
    "first_seen": "2026-09-30T14:00:09+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69195,7 +69195,7 @@
    "relisted_count": 0,
    "relist_of": "2641048355",
    "first_seen": "2026-09-30T14:00:09+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69312,7 +69312,7 @@
    "relisted_count": 0,
    "relist_of": "2648544595",
    "first_seen": "2026-09-30T18:00:11+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69429,7 +69429,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-30T18:00:11+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69468,7 +69468,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-30T18:00:11+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69537,7 +69537,7 @@
    "cp_name": "매경부동산",
    "feature": ".  목 감 . 트인뷰 . 중심상권 교통편리. 초등 고등 학원가 인접",
    "confirm_ymd": "20261001",
-   "same_addr_cnt": 15,
+   "same_addr_cnt": 14,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -69546,7 +69546,7 @@
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-10-01T14:00:09+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69654,7 +69654,7 @@
    "cp_name": "매경부동산",
    "feature": "트인조망,초중인접,상권이용편리,교통편리",
    "confirm_ymd": "20261001",
-   "same_addr_cnt": 11,
+   "same_addr_cnt": 10,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -69663,7 +69663,7 @@
    "relisted_count": 0,
    "relist_of": "2639074407",
    "first_seen": "2026-10-01T14:00:09+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69702,7 +69702,7 @@
    "relisted_count": 0,
    "relist_of": "2639913191",
    "first_seen": "2026-10-01T14:00:09+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69735,14 +69735,14 @@
    "same_addr_cnt": 4,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|205|20|84.0|동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2635722713",
    "first_seen": "2026-10-01T14:00:09+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-01",
@@ -69774,14 +69774,14 @@
    "same_addr_cnt": 4,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|206|18|59.0|남",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2648544595",
    "first_seen": "2026-10-01T14:00:09+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-01",
@@ -69930,14 +69930,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|205|중|84.0|동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2643923857",
    "first_seen": "2026-10-01T14:00:09+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-01",
@@ -69969,14 +69969,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|205|중|84.0|동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2643923857",
    "first_seen": "2026-10-01T14:00:09+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-01",
@@ -70008,14 +70008,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|203|고|84.0|남",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2647656588",
    "first_seen": "2026-10-01T14:00:09+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-01",
@@ -70242,14 +70242,14 @@
    "same_addr_cnt": 6,
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|303|14|127.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2640895857",
    "first_seen": "2026-10-01T14:00:09+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-01",
@@ -70560,7 +70560,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-10-01T18:00:10+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -70593,14 +70593,14 @@
    "same_addr_cnt": 15,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-10-02T08:00:06+09:00",
    "last_seen": "2026-10-02T18:00:08+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -70638,7 +70638,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-02T08:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -70668,7 +70668,7 @@
    "cp_name": "부동산포스",
    "feature": "U 황금손 목감역 도보O 광역버스O 학원가O",
    "confirm_ymd": "20261002",
-   "same_addr_cnt": 15,
+   "same_addr_cnt": 14,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -70677,7 +70677,7 @@
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -70710,14 +70710,14 @@
    "same_addr_cnt": 11,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2639074407",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -70755,7 +70755,7 @@
    "relisted_count": 0,
    "relist_of": "2635722713",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -70788,14 +70788,14 @@
    "same_addr_cnt": 4,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|205|20|84.0|동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2635722713",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -70827,14 +70827,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|201|17|84.0|동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2643643546",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -70866,14 +70866,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|203|5|84.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2650745894",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -70905,14 +70905,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|204|중|84.0|남",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2643899248",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -70944,14 +70944,14 @@
    "same_addr_cnt": 4,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|206|고|59.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2635976683",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -70989,7 +70989,7 @@
    "relisted_count": 0,
    "relist_of": "2636057719",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71022,14 +71022,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|204|고|84.0|남",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2636057719",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -71061,14 +71061,14 @@
    "same_addr_cnt": 3,
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|206|고|59.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2635976683",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -71106,7 +71106,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71145,7 +71145,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71178,14 +71178,14 @@
    "same_addr_cnt": 2,
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|301|3|84.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2641045282",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -71217,14 +71217,14 @@
    "same_addr_cnt": 2,
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|303|2|127.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2647368925",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -71262,7 +71262,7 @@
    "relisted_count": 0,
    "relist_of": "2641045282",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71295,14 +71295,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|304|중|127.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2641045200",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -71340,7 +71340,7 @@
    "relisted_count": 0,
    "relist_of": "2641045372",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71373,14 +71373,14 @@
    "same_addr_cnt": 3,
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|302|중|84.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2641044980",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -71412,14 +71412,14 @@
    "same_addr_cnt": 6,
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|A1|303|고|127.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2641045372",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -71451,14 +71451,14 @@
    "same_addr_cnt": 3,
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|B1|304|15|127.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2643017411",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-03T08:00:06+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -71496,7 +71496,7 @@
    "relisted_count": 0,
    "relist_of": "2645662848",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71535,7 +71535,7 @@
    "relisted_count": 0,
    "relist_of": "2645662848",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71574,7 +71574,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71613,7 +71613,7 @@
    "relisted_count": 0,
    "relist_of": "2645657128",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71652,7 +71652,7 @@
    "relisted_count": 0,
    "relist_of": "2645662848",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71691,7 +71691,7 @@
    "relisted_count": 0,
    "relist_of": "2645691069",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71730,7 +71730,7 @@
    "relisted_count": 0,
    "relist_of": "2645744322",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71769,7 +71769,7 @@
    "relisted_count": 0,
    "relist_of": "2645823676",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71808,7 +71808,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71847,7 +71847,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71886,7 +71886,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71925,7 +71925,7 @@
    "relisted_count": 0,
    "relist_of": "2645744322",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71964,7 +71964,7 @@
    "relisted_count": 0,
    "relist_of": "2645823676",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72003,7 +72003,7 @@
    "relisted_count": 0,
    "relist_of": "2650522436",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72042,7 +72042,7 @@
    "relisted_count": 0,
    "relist_of": "2645691069",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72081,7 +72081,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72114,14 +72114,14 @@
    "same_addr_cnt": 3,
    "unit_key": "41117|e편한세상광교 39, 41평|A1|6116|저|101.0|남서",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-02T18:00:08+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -72159,7 +72159,7 @@
    "relisted_count": 0,
    "relist_of": "2650522436",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72198,7 +72198,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72231,14 +72231,14 @@
    "same_addr_cnt": 1,
    "unit_key": "41117|e편한세상광교 39, 41평|A1|6112|고|101.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-02T18:00:08+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -72276,7 +72276,7 @@
    "relisted_count": 0,
    "relist_of": "2651305967",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72315,7 +72315,7 @@
    "relisted_count": 0,
    "relist_of": "2651305967",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72354,7 +72354,7 @@
    "relisted_count": 0,
    "relist_of": "2651305967",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72387,14 +72387,14 @@
    "same_addr_cnt": 4,
    "unit_key": "41117|e편한세상광교 39, 41평|B1|6103|저|100.0|남동",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2650024760",
    "first_seen": "2026-10-02T14:00:07+09:00",
    "last_seen": "2026-10-02T18:00:08+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -72432,7 +72432,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-02T18:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72465,14 +72465,14 @@
    "same_addr_cnt": 11,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남서",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-10-02T18:00:08+09:00",
    "last_seen": "2026-10-02T18:00:08+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -72501,7 +72501,7 @@
    "cp_name": "매경부동산",
    "feature": "추천,트인조망,초중고인접,상권이용편리,수영장,어울림센터,목감역개통예정",
    "confirm_ymd": "20261002",
-   "same_addr_cnt": 15,
+   "same_addr_cnt": 14,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -72510,7 +72510,7 @@
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-10-02T18:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72549,7 +72549,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-02T18:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72588,7 +72588,7 @@
    "relisted_count": 0,
    "relist_of": "2635976683",
    "first_seen": "2026-10-02T18:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72627,7 +72627,7 @@
    "relisted_count": 0,
    "relist_of": "2645823676",
    "first_seen": "2026-10-02T18:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72666,7 +72666,7 @@
    "relisted_count": 0,
    "relist_of": "2645742857",
    "first_seen": "2026-10-02T18:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72705,7 +72705,7 @@
    "relisted_count": 0,
    "relist_of": "2645744322",
    "first_seen": "2026-10-02T18:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72738,14 +72738,14 @@
    "same_addr_cnt": 4,
    "unit_key": "41117|e편한세상광교 39, 41평|A1|6116|저|101.0|남서",
    "unit_key_confident": true,
-   "status": "active",
-   "miss_count": 1,
-   "last_miss_date": "2026-10-03",
+   "status": "gone",
+   "miss_count": 2,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-02T18:00:08+09:00",
    "last_seen": "2026-10-02T18:00:08+09:00",
-   "gone_date": null,
+   "gone_date": "2026-10-04",
    "price_history": [
     {
      "date": "2026-10-02",
@@ -72783,7 +72783,7 @@
    "relisted_count": 0,
    "relist_of": "2650522436",
    "first_seen": "2026-10-02T18:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72822,7 +72822,7 @@
    "relisted_count": 0,
    "relist_of": "2645823776",
    "first_seen": "2026-10-02T18:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72856,8 +72856,8 @@
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-10-03T08:00:06+09:00",
@@ -72895,8 +72895,8 @@
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남서",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-10-04",
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-10-03T08:00:06+09:00",
@@ -72939,7 +72939,7 @@
    "relisted_count": 0,
    "relist_of": "2635722713",
    "first_seen": "2026-10-03T08:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72978,7 +72978,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-03T08:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73017,7 +73017,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-03T08:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73056,7 +73056,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-03T08:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73095,7 +73095,7 @@
    "relisted_count": 0,
    "relist_of": "2650024760",
    "first_seen": "2026-10-03T08:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73134,7 +73134,7 @@
    "relisted_count": 0,
    "relist_of": "2651204591",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73164,7 +73164,7 @@
    "cp_name": "부동산뱅크",
    "feature": "추천 확트인전망 주인거주 목감예정역도보가능 초중고인접",
    "confirm_ymd": "20261003",
-   "same_addr_cnt": 11,
+   "same_addr_cnt": 10,
    "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남",
    "unit_key_confident": true,
    "status": "active",
@@ -73173,7 +73173,7 @@
    "relisted_count": 0,
    "relist_of": "2639074407",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73212,7 +73212,7 @@
    "relisted_count": 0,
    "relist_of": "2648544595",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73251,7 +73251,7 @@
    "relisted_count": 0,
    "relist_of": "2635722713",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73290,7 +73290,7 @@
    "relisted_count": 0,
    "relist_of": "2643643546",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73329,7 +73329,7 @@
    "relisted_count": 0,
    "relist_of": "2635722713",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73368,7 +73368,7 @@
    "relisted_count": 0,
    "relist_of": "2643923857",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73407,7 +73407,7 @@
    "relisted_count": 0,
    "relist_of": "2635611879",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73446,7 +73446,7 @@
    "relisted_count": 0,
    "relist_of": "2635976683",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73485,7 +73485,7 @@
    "relisted_count": 0,
    "relist_of": "2643923857",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73524,7 +73524,7 @@
    "relisted_count": 0,
    "relist_of": "2635613416",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73563,7 +73563,7 @@
    "relisted_count": 0,
    "relist_of": "2643899248",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73602,7 +73602,7 @@
    "relisted_count": 0,
    "relist_of": "2643923857",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73641,7 +73641,7 @@
    "relisted_count": 0,
    "relist_of": "2638038600",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73680,7 +73680,7 @@
    "relisted_count": 0,
    "relist_of": "2647656588",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73719,7 +73719,7 @@
    "relisted_count": 0,
    "relist_of": "2649479105",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73758,7 +73758,7 @@
    "relisted_count": 0,
    "relist_of": "2647368925",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73797,7 +73797,7 @@
    "relisted_count": 0,
    "relist_of": "2641045282",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73836,7 +73836,7 @@
    "relisted_count": 0,
    "relist_of": "2640895857",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73875,7 +73875,7 @@
    "relisted_count": 0,
    "relist_of": "2641044980",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73914,7 +73914,7 @@
    "relisted_count": 0,
    "relist_of": "2641048355",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73953,7 +73953,7 @@
    "relisted_count": 0,
    "relist_of": "2641045200",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73992,7 +73992,7 @@
    "relisted_count": 0,
    "relist_of": "2641045372",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -74031,7 +74031,7 @@
    "relisted_count": 0,
    "relist_of": "2643017411",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -74070,7 +74070,7 @@
    "relisted_count": 0,
    "relist_of": "2643017411",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -74109,7 +74109,7 @@
    "relisted_count": 0,
    "relist_of": "2643104985",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -74148,7 +74148,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-03T18:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -74187,12 +74187,90 @@
    "relisted_count": 0,
    "relist_of": "2647095753",
    "first_seen": "2026-10-03T18:00:06+09:00",
-   "last_seen": "2026-10-03T18:00:06+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-10-03",
      "price": 195000
+    }
+   ]
+  },
+  "2653331902": {
+   "article_no": "2653331902",
+   "complex": "시흥목감 리벤티움 24평",
+   "apt_nm": "리벤티움",
+   "lawd_cd": "41390",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 85.0,
+   "area": 59.0,
+   "area_name": "85A2",
+   "floor_self": "14",
+   "floor_total": "21",
+   "direction": "남",
+   "building_name": "1109",
+   "price": 44500,
+   "price_raw": "4억 4,500",
+   "rent_man": 0,
+   "realtor": "한신더휴공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": "추천, 짜임새있는 구조, 은행 병의원 등 중심상권 접, 대중교통 편리",
+   "confirm_ymd": "20261004",
+   "same_addr_cnt": 14,
+   "unit_key": "41390|시흥목감 리벤티움 24평|A1|1109|14|59.0|남",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2644591838",
+   "first_seen": "2026-10-04T08:00:07+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-10-04",
+     "price": 44500
+    }
+   ]
+  },
+  "2653332725": {
+   "article_no": "2653332725",
+   "complex": "시흥목감 리벤티움 24평",
+   "apt_nm": "리벤티움",
+   "lawd_cd": "41390",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 85.0,
+   "area": 59.0,
+   "area_name": "85A1",
+   "floor_self": "12",
+   "floor_total": "21",
+   "direction": "남서",
+   "building_name": "1111",
+   "price": 45000,
+   "price_raw": "4억 5,000",
+   "rent_man": 0,
+   "realtor": "한신더휴공인중개사사무소",
+   "cp_name": "매경부동산",
+   "feature": "추천, 해잘들고 탁트인뷰, 집상태 굿, 유초중고학원 등 학세권, 교통편리",
+   "confirm_ymd": "20261004",
+   "same_addr_cnt": 10,
+   "unit_key": "41390|시흥목감 리벤티움 24평|A1|1111|12|59.0|남서",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2638978838",
+   "first_seen": "2026-10-04T08:00:07+09:00",
+   "last_seen": "2026-10-04T08:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-10-04",
+     "price": 45000
     }
    ]
   }
@@ -74255,12 +74333,12 @@
    "active_cnt": 14
   },
   "시흥목감 리벤티움 24평": {
-   "last_ok": "2026-10-03T18:00:06+09:00",
-   "active_cnt": 54
+   "last_ok": "2026-10-04T08:00:07+09:00",
+   "active_cnt": 51
   },
   "성복역 현대홈타운 24, 30평": {
-   "last_ok": "2026-10-03T18:00:06+09:00",
-   "active_cnt": 44
+   "last_ok": "2026-10-04T08:00:07+09:00",
+   "active_cnt": 27
   },
   "수지구청 신정7단지 24평": {
    "last_ok": "2026-08-01T18:00:25+09:00",
@@ -74287,8 +74365,8 @@
    "active_cnt": 8
   },
   "서원마을3단지아이파크 33, 38평": {
-   "last_ok": "2026-10-03T18:00:06+09:00",
-   "active_cnt": 33
+   "last_ok": "2026-10-04T08:00:07+09:00",
+   "active_cnt": 23
   },
   "진산마을성원상떼빌 32평": {
    "last_ok": "2026-08-11T18:00:07+09:00",
@@ -74299,7 +74377,7 @@
    "active_cnt": 20
   },
   "진산마을성원상떼빌 32, 48평": {
-   "last_ok": "2026-10-03T18:00:06+09:00",
+   "last_ok": "2026-10-04T08:00:07+09:00",
    "active_cnt": 24
   },
   "분당 시범우성 29, 32평": {
@@ -74307,10 +74385,10 @@
    "active_cnt": 130
   },
   "e편한세상광교 39, 41평": {
-   "last_ok": "2026-10-03T18:00:06+09:00",
-   "active_cnt": 44
+   "last_ok": "2026-10-04T08:00:07+09:00",
+   "active_cnt": 39
   }
  },
  "tracking_since": "2026-06-14",
- "last_run": "2026-10-03T18:00:06+09:00"
+ "last_run": "2026-10-04T08:00:07+09:00"
 }
