@@ -42143,7 +42143,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-07T18:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -45115,7 +45115,7 @@
    "relisted_count": 0,
    "relist_of": "2644867388",
    "first_seen": "2026-09-09T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -45977,7 +45977,7 @@
    "relisted_count": 0,
    "relist_of": "2644867388",
    "first_seen": "2026-09-10T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -46956,7 +46956,7 @@
    "relisted_count": 0,
    "relist_of": "2639913191",
    "first_seen": "2026-09-11T08:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -47736,7 +47736,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-11T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -49148,7 +49148,7 @@
    "relisted_count": 0,
    "relist_of": "2631978809",
    "first_seen": "2026-09-11T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -49702,7 +49702,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-12T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -50559,8 +50559,8 @@
    "unit_key": "41117|e편한세상광교 39, 41평|A1|6118|13|101.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-10-07",
    "relisted_count": 0,
    "relist_of": "2645662848",
    "first_seen": "2026-09-12T18:00:07+09:00",
@@ -50642,7 +50642,7 @@
    "relisted_count": 0,
    "relist_of": "2643202220",
    "first_seen": "2026-09-12T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -50837,7 +50837,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-14T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -51032,7 +51032,7 @@
    "relisted_count": 0,
    "relist_of": "2644588006",
    "first_seen": "2026-09-14T18:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -51075,7 +51075,7 @@
    "relisted_count": 0,
    "relist_of": "2639072702",
    "first_seen": "2026-09-14T18:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -51309,7 +51309,7 @@
    "relisted_count": 0,
    "relist_of": "2644588006",
    "first_seen": "2026-09-15T14:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -51898,7 +51898,7 @@
    "relisted_count": 0,
    "relist_of": "2643141259",
    "first_seen": "2026-09-15T14:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -51937,7 +51937,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-15T14:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -51976,7 +51976,7 @@
    "relisted_count": 0,
    "relist_of": "2641126203",
    "first_seen": "2026-09-15T14:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -53029,7 +53029,7 @@
    "relisted_count": 0,
    "relist_of": "2639913191",
    "first_seen": "2026-09-15T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -53653,7 +53653,7 @@
    "relisted_count": 0,
    "relist_of": "2644384063",
    "first_seen": "2026-09-16T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -54121,7 +54121,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-16T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -54160,7 +54160,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-16T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -54589,7 +54589,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-16T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -54706,7 +54706,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-09-17T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -54862,7 +54862,7 @@
    "relisted_count": 0,
    "relist_of": "2635945811",
    "first_seen": "2026-09-17T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -55408,7 +55408,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-17T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -56539,7 +56539,7 @@
    "relisted_count": 0,
    "relist_of": "2639615937",
    "first_seen": "2026-09-18T14:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -56578,7 +56578,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-18T14:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -56617,7 +56617,7 @@
    "relisted_count": 0,
    "relist_of": "2639356646",
    "first_seen": "2026-09-18T14:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -56656,7 +56656,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-18T14:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -57982,7 +57982,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-09-18T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -58177,7 +58177,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-18T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -58372,7 +58372,7 @@
    "relisted_count": 0,
    "relist_of": "2639913191",
    "first_seen": "2026-09-19T08:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -59308,7 +59308,7 @@
    "relisted_count": 0,
    "relist_of": "2635614547",
    "first_seen": "2026-09-19T14:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -59581,7 +59581,7 @@
    "relisted_count": 0,
    "relist_of": "2640895857",
    "first_seen": "2026-09-19T14:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -59893,7 +59893,7 @@
    "relisted_count": 0,
    "relist_of": "2644588006",
    "first_seen": "2026-09-19T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60209,7 +60209,7 @@
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-09-21T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60291,7 +60291,7 @@
    "relisted_count": 0,
    "relist_of": "2635945811",
    "first_seen": "2026-09-21T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60330,7 +60330,7 @@
    "relisted_count": 0,
    "relist_of": "2636111405",
    "first_seen": "2026-09-21T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60369,7 +60369,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-21T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60529,7 +60529,7 @@
    "relisted_count": 0,
    "relist_of": "2635945811",
    "first_seen": "2026-09-22T08:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60568,7 +60568,7 @@
    "relisted_count": 0,
    "relist_of": "2635945811",
    "first_seen": "2026-09-22T08:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60685,7 +60685,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-22T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60763,7 +60763,7 @@
    "relisted_count": 0,
    "relist_of": "2646737476",
    "first_seen": "2026-09-22T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60841,7 +60841,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-09-22T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60880,7 +60880,7 @@
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-09-22T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -60919,7 +60919,7 @@
    "relisted_count": 0,
    "relist_of": "2635945811",
    "first_seen": "2026-09-22T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -62011,7 +62011,7 @@
    "relisted_count": 0,
    "relist_of": "2644969436",
    "first_seen": "2026-09-22T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -62089,7 +62089,7 @@
    "relisted_count": 0,
    "relist_of": "2644969436",
    "first_seen": "2026-09-22T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -63103,7 +63103,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-22T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -63142,7 +63142,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-09-22T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -63731,7 +63731,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-09-23T14:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -63848,7 +63848,7 @@
    "relisted_count": 0,
    "relist_of": "2644867388",
    "first_seen": "2026-09-23T14:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -63887,7 +63887,7 @@
    "relisted_count": 0,
    "relist_of": "2646737476",
    "first_seen": "2026-09-23T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -63965,7 +63965,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-09-23T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -65018,7 +65018,7 @@
    "relisted_count": 0,
    "relist_of": "2639723831",
    "first_seen": "2026-09-28T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -65057,7 +65057,7 @@
    "relisted_count": 0,
    "relist_of": "2639781076",
    "first_seen": "2026-09-28T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -65100,7 +65100,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-28T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -65139,7 +65139,7 @@
    "relisted_count": 0,
    "relist_of": "2635017501",
    "first_seen": "2026-09-28T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -65529,7 +65529,7 @@
    "relisted_count": 0,
    "relist_of": "2639913191",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -65602,8 +65602,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|206|18|59.0|남",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-10-07",
    "relisted_count": 0,
    "relist_of": "2648544595",
    "first_seen": "2026-09-29T14:00:07+09:00",
@@ -66153,7 +66153,7 @@
    "relisted_count": 0,
    "relist_of": "2642907420",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66196,7 +66196,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66274,7 +66274,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66313,7 +66313,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66430,7 +66430,7 @@
    "relisted_count": 0,
    "relist_of": "2647368925",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66469,7 +66469,7 @@
    "relisted_count": 0,
    "relist_of": "2640895857",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66625,7 +66625,7 @@
    "relisted_count": 0,
    "relist_of": "2641044980",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -66737,8 +66737,8 @@
    "unit_key": "41465|서원마을3단지아이파크 33, 38평|B1|304|15|127.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-10-07",
    "relisted_count": 0,
    "relist_of": "2643017411",
    "first_seen": "2026-09-29T14:00:07+09:00",
@@ -67405,7 +67405,7 @@
    "relisted_count": 0,
    "relist_of": "2645691069",
    "first_seen": "2026-09-29T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -68848,7 +68848,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-30T14:00:09+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69433,7 +69433,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-09-30T18:00:11+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69472,7 +69472,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-09-30T18:00:11+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69550,7 +69550,7 @@
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-10-01T14:00:09+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69667,7 +69667,7 @@
    "relisted_count": 0,
    "relist_of": "2639074407",
    "first_seen": "2026-10-01T14:00:09+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -69706,7 +69706,7 @@
    "relisted_count": 0,
    "relist_of": "2639913191",
    "first_seen": "2026-10-01T14:00:09+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -70564,7 +70564,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-10-01T18:00:10+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -70642,7 +70642,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-02T08:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -70993,7 +70993,7 @@
    "relisted_count": 0,
    "relist_of": "2636057719",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71110,7 +71110,7 @@
    "relisted_count": 0,
    "relist_of": "2642492592",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71149,7 +71149,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71266,7 +71266,7 @@
    "relisted_count": 0,
    "relist_of": "2641045282",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71344,7 +71344,7 @@
    "relisted_count": 0,
    "relist_of": "2641045372",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71539,7 +71539,7 @@
    "relisted_count": 0,
    "relist_of": "2645662848",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71851,7 +71851,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71929,7 +71929,7 @@
    "relisted_count": 0,
    "relist_of": "2645744322",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -71968,7 +71968,7 @@
    "relisted_count": 0,
    "relist_of": "2645823676",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72186,8 +72186,8 @@
    "floor_total": "37",
    "direction": "남서",
    "building_name": "6116",
-   "price": 220000,
-   "price_raw": "22억",
+   "price": 230000,
+   "price_raw": "23억",
    "rent_man": 0,
    "realtor": "대림스카이(e편한세상 정문 단지내)공인중개사사무소",
    "cp_name": "매경부동산",
@@ -72202,12 +72202,16 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-02T14:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-10-02",
      "price": 220000
+    },
+    {
+     "date": "2026-10-07",
+     "price": 230000
     }
    ]
   },
@@ -72436,7 +72440,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-02T18:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72514,7 +72518,7 @@
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-10-02T18:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72553,7 +72557,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-02T18:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -72943,7 +72947,7 @@
    "relisted_count": 0,
    "relist_of": "2635722713",
    "first_seen": "2026-10-03T08:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73138,7 +73142,7 @@
    "relisted_count": 0,
    "relist_of": "2651204591",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -73723,7 +73727,7 @@
    "relisted_count": 0,
    "relist_of": "2649479105",
    "first_seen": "2026-10-03T14:00:08+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -74191,7 +74195,7 @@
    "relisted_count": 0,
    "relist_of": "2647095753",
    "first_seen": "2026-10-03T18:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -74386,7 +74390,7 @@
    "relisted_count": 0,
    "relist_of": "2635722713",
    "first_seen": "2026-10-05T08:00:02+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -74425,7 +74429,7 @@
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-10-05T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -74464,7 +74468,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-10-05T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -74620,7 +74624,7 @@
    "relisted_count": 0,
    "relist_of": "2647344467",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -74698,7 +74702,7 @@
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -74971,7 +74975,7 @@
    "relisted_count": 0,
    "relist_of": "2643923857",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -75088,7 +75092,7 @@
    "relisted_count": 0,
    "relist_of": "2635613416",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -75127,7 +75131,7 @@
    "relisted_count": 0,
    "relist_of": "2635611879",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -75166,7 +75170,7 @@
    "relisted_count": 0,
    "relist_of": "2643923857",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -75244,7 +75248,7 @@
    "relisted_count": 0,
    "relist_of": "2638038600",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -75317,8 +75321,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|206|고|59.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-10-07",
    "relisted_count": 0,
    "relist_of": "2635976683",
    "first_seen": "2026-10-06T14:00:06+09:00",
@@ -75400,7 +75404,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -75673,7 +75677,7 @@
    "relisted_count": 0,
    "relist_of": "2641048355",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -75751,7 +75755,7 @@
    "relisted_count": 0,
    "relist_of": "2643017411",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -75829,7 +75833,7 @@
    "relisted_count": 0,
    "relist_of": "2643104985",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -75868,7 +75872,7 @@
    "relisted_count": 0,
    "relist_of": "2645662848",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -75907,7 +75911,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -75946,7 +75950,7 @@
    "relisted_count": 0,
    "relist_of": "2645662848",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -75985,7 +75989,7 @@
    "relisted_count": 0,
    "relist_of": "2645657128",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76024,7 +76028,7 @@
    "relisted_count": 0,
    "relist_of": "2645823676",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76063,7 +76067,7 @@
    "relisted_count": 0,
    "relist_of": "2650522436",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76102,7 +76106,7 @@
    "relisted_count": 0,
    "relist_of": "2645744322",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76141,7 +76145,7 @@
    "relisted_count": 0,
    "relist_of": "2650522436",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76219,7 +76223,7 @@
    "relisted_count": 0,
    "relist_of": "2645742857",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76258,7 +76262,7 @@
    "relisted_count": 0,
    "relist_of": "2652956552",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76297,7 +76301,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76336,7 +76340,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76375,7 +76379,7 @@
    "relisted_count": 0,
    "relist_of": "2652956552",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76414,7 +76418,7 @@
    "relisted_count": 0,
    "relist_of": "2645691069",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76453,7 +76457,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76492,7 +76496,7 @@
    "relisted_count": 0,
    "relist_of": "2645742271",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76531,7 +76535,7 @@
    "relisted_count": 0,
    "relist_of": "2650522436",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76570,7 +76574,7 @@
    "relisted_count": 0,
    "relist_of": "2645744322",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76609,7 +76613,7 @@
    "relisted_count": 0,
    "relist_of": "2645691069",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76648,7 +76652,7 @@
    "relisted_count": 0,
    "relist_of": "2645691069",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76687,7 +76691,7 @@
    "relisted_count": 0,
    "relist_of": "2650522436",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76726,7 +76730,7 @@
    "relisted_count": 0,
    "relist_of": "2645823676",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76765,7 +76769,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76804,7 +76808,7 @@
    "relisted_count": 0,
    "relist_of": "2651305967",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76843,7 +76847,7 @@
    "relisted_count": 0,
    "relist_of": "2651305967",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -76882,7 +76886,7 @@
    "relisted_count": 0,
    "relist_of": "2651305967",
    "first_seen": "2026-10-06T14:00:06+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77038,7 +77042,7 @@
    "relisted_count": 0,
    "relist_of": "2639072702",
    "first_seen": "2026-10-06T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77077,7 +77081,7 @@
    "relisted_count": 0,
    "relist_of": "2642907420",
    "first_seen": "2026-10-06T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77116,7 +77120,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-06T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77155,7 +77159,7 @@
    "relisted_count": 0,
    "relist_of": null,
    "first_seen": "2026-10-06T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77198,7 +77202,7 @@
    "relisted_count": 0,
    "relist_of": "2644946015",
    "first_seen": "2026-10-06T18:00:07+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77237,7 +77241,7 @@
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-10-07T08:00:02+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77276,7 +77280,7 @@
    "relisted_count": 0,
    "relist_of": "2638978838",
    "first_seen": "2026-10-07T08:00:02+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77315,7 +77319,7 @@
    "relisted_count": 0,
    "relist_of": "2645823776",
    "first_seen": "2026-10-07T08:00:02+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77354,7 +77358,7 @@
    "relisted_count": 0,
    "relist_of": "2650024760",
    "first_seen": "2026-10-07T08:00:02+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77393,7 +77397,7 @@
    "relisted_count": 0,
    "relist_of": "2644591838",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77432,7 +77436,7 @@
    "relisted_count": 0,
    "relist_of": "2644384063",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77471,7 +77475,7 @@
    "relisted_count": 0,
    "relist_of": "2639074407",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77510,7 +77514,7 @@
    "relisted_count": 0,
    "relist_of": "2635722713",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77549,7 +77553,7 @@
    "relisted_count": 0,
    "relist_of": "2635722713",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77588,7 +77592,7 @@
    "relisted_count": 0,
    "relist_of": "2650745894",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77627,7 +77631,7 @@
    "relisted_count": 0,
    "relist_of": "2643643546",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77661,8 +77665,8 @@
    "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|206|고|59.0|남동",
    "unit_key_confident": true,
    "status": "active",
-   "miss_count": 0,
-   "last_miss_date": null,
+   "miss_count": 1,
+   "last_miss_date": "2026-10-07",
    "relisted_count": 0,
    "relist_of": "2635976683",
    "first_seen": "2026-10-07T14:00:05+09:00",
@@ -77705,7 +77709,7 @@
    "relisted_count": 0,
    "relist_of": "2647656588",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77744,7 +77748,7 @@
    "relisted_count": 0,
    "relist_of": "2643899248",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77783,7 +77787,7 @@
    "relisted_count": 0,
    "relist_of": "2643923857",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77822,7 +77826,7 @@
    "relisted_count": 0,
    "relist_of": "2636057719",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77861,7 +77865,7 @@
    "relisted_count": 0,
    "relist_of": "2635976683",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77900,7 +77904,7 @@
    "relisted_count": 0,
    "relist_of": "2647368925",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77939,7 +77943,7 @@
    "relisted_count": 0,
    "relist_of": "2640895857",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -77978,7 +77982,7 @@
    "relisted_count": 0,
    "relist_of": "2640895857",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -78017,7 +78021,7 @@
    "relisted_count": 0,
    "relist_of": "2641045282",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -78056,7 +78060,7 @@
    "relisted_count": 0,
    "relist_of": "2641044980",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -78095,7 +78099,7 @@
    "relisted_count": 0,
    "relist_of": "2653309645",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -78134,7 +78138,7 @@
    "relisted_count": 0,
    "relist_of": "2641044980",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -78173,7 +78177,7 @@
    "relisted_count": 0,
    "relist_of": "2641048355",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -78212,7 +78216,7 @@
    "relisted_count": 0,
    "relist_of": "2641045200",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
@@ -78251,12 +78255,168 @@
    "relisted_count": 0,
    "relist_of": "2641045372",
    "first_seen": "2026-10-07T14:00:05+09:00",
-   "last_seen": "2026-10-07T14:00:05+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
    "gone_date": null,
    "price_history": [
     {
      "date": "2026-10-07",
      "price": 119800
+    }
+   ]
+  },
+  "2654011527": {
+   "article_no": "2654011527",
+   "complex": "성복역 현대홈타운 24, 30평",
+   "apt_nm": "성복역현대홈타운",
+   "lawd_cd": "41465",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 81.0,
+   "area": 59.0,
+   "area_name": "81",
+   "floor_self": "고",
+   "floor_total": "18",
+   "direction": "남동",
+   "building_name": "206",
+   "price": 100000,
+   "price_raw": "10억",
+   "rent_man": 0,
+   "realtor": "포레나공인중개사사무소",
+   "cp_name": "부동산포스",
+   "feature": "추천,24형,최근올수리,깨끗하고 관리잘된집,세안고",
+   "confirm_ymd": "20261007",
+   "same_addr_cnt": 3,
+   "unit_key": "41465|성복역 현대홈타운 24, 30평|A1|206|고|59.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2635976683",
+   "first_seen": "2026-10-07T18:00:07+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-10-07",
+     "price": 100000
+    }
+   ]
+  },
+  "2654008402": {
+   "article_no": "2654008402",
+   "complex": "진산마을성원상떼빌 32, 48평",
+   "apt_nm": "진산마을성원상떼빌",
+   "lawd_cd": "41465",
+   "trade_type": "전세",
+   "trade_code": "B1",
+   "area_supply": 108.0,
+   "area": 84.0,
+   "area_name": "108",
+   "floor_self": "6",
+   "floor_total": "20",
+   "direction": "남동",
+   "building_name": "104",
+   "price": 57000,
+   "price_raw": "5억 7,000",
+   "rent_man": 0,
+   "realtor": "고려(진산마을262-2400) 공인중개사사무소",
+   "cp_name": "부동산써브",
+   "feature": "정상입주,  수리깨끗, 전망좋음,명문학군,신분당선도보이용",
+   "confirm_ymd": "20261007",
+   "same_addr_cnt": 1,
+   "unit_key": "41465|진산마을성원상떼빌 32, 48평|B1|104|6|84.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": null,
+   "first_seen": "2026-10-07T18:00:07+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-10-07",
+     "price": 57000
+    }
+   ]
+  },
+  "2653843351": {
+   "article_no": "2653843351",
+   "complex": "서원마을3단지아이파크 33, 38평",
+   "apt_nm": "서원마을3단지아이파크",
+   "lawd_cd": "41465",
+   "trade_type": "전세",
+   "trade_code": "B1",
+   "area_supply": 159.0,
+   "area": 127.0,
+   "area_name": "159",
+   "floor_self": "15",
+   "floor_total": "17",
+   "direction": "남동",
+   "building_name": "304",
+   "price": 75000,
+   "price_raw": "7억 5,000",
+   "rent_man": 0,
+   "realtor": "가나(266-1155)공인중개사사무소",
+   "cp_name": "부동산렛츠",
+   "feature": "전체수리해드려요 성복역롯데몰도보8분 초품아",
+   "confirm_ymd": "20261007",
+   "same_addr_cnt": 2,
+   "unit_key": "41465|서원마을3단지아이파크 33, 38평|B1|304|15|127.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2643017411",
+   "first_seen": "2026-10-07T18:00:07+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-10-07",
+     "price": 75000
+    }
+   ]
+  },
+  "2653982575": {
+   "article_no": "2653982575",
+   "complex": "e편한세상광교 39, 41평",
+   "apt_nm": "e편한세상광교",
+   "lawd_cd": "41117",
+   "trade_type": "매매",
+   "trade_code": "A1",
+   "area_supply": 136.0,
+   "area": 101.0,
+   "area_name": "136G",
+   "floor_self": "13",
+   "floor_total": "37",
+   "direction": "남동",
+   "building_name": "6118",
+   "price": 220000,
+   "price_raw": "22억",
+   "rent_man": 0,
+   "realtor": "스마트공인중개사사무소",
+   "cp_name": "부동산뱅크",
+   "feature": "",
+   "confirm_ymd": "20261007",
+   "same_addr_cnt": 6,
+   "unit_key": "41117|e편한세상광교 39, 41평|A1|6118|13|101.0|남동",
+   "unit_key_confident": true,
+   "status": "active",
+   "miss_count": 0,
+   "last_miss_date": null,
+   "relisted_count": 0,
+   "relist_of": "2645662848",
+   "first_seen": "2026-10-07T18:00:07+09:00",
+   "last_seen": "2026-10-07T18:00:07+09:00",
+   "gone_date": null,
+   "price_history": [
+    {
+     "date": "2026-10-07",
+     "price": 220000
     }
    ]
   }
@@ -78319,12 +78479,12 @@
    "active_cnt": 14
   },
   "시흥목감 리벤티움 24평": {
-   "last_ok": "2026-10-07T14:00:05+09:00",
+   "last_ok": "2026-10-07T18:00:07+09:00",
    "active_cnt": 55
   },
   "성복역 현대홈타운 24, 30평": {
-   "last_ok": "2026-10-07T14:00:05+09:00",
-   "active_cnt": 41
+   "last_ok": "2026-10-07T18:00:07+09:00",
+   "active_cnt": 42
   },
   "수지구청 신정7단지 24평": {
    "last_ok": "2026-08-01T18:00:25+09:00",
@@ -78351,8 +78511,8 @@
    "active_cnt": 8
   },
   "서원마을3단지아이파크 33, 38평": {
-   "last_ok": "2026-10-07T14:00:05+09:00",
-   "active_cnt": 33
+   "last_ok": "2026-10-07T18:00:07+09:00",
+   "active_cnt": 34
   },
   "진산마을성원상떼빌 32평": {
    "last_ok": "2026-08-11T18:00:07+09:00",
@@ -78363,18 +78523,18 @@
    "active_cnt": 20
   },
   "진산마을성원상떼빌 32, 48평": {
-   "last_ok": "2026-10-07T14:00:05+09:00",
-   "active_cnt": 27
+   "last_ok": "2026-10-07T18:00:07+09:00",
+   "active_cnt": 28
   },
   "분당 시범우성 29, 32평": {
    "last_ok": "2026-08-25T18:00:07+09:00",
    "active_cnt": 130
   },
   "e편한세상광교 39, 41평": {
-   "last_ok": "2026-10-07T14:00:05+09:00",
-   "active_cnt": 42
+   "last_ok": "2026-10-07T18:00:07+09:00",
+   "active_cnt": 43
   }
  },
  "tracking_since": "2026-06-14",
- "last_run": "2026-10-07T14:00:05+09:00"
+ "last_run": "2026-10-07T18:00:07+09:00"
 }
