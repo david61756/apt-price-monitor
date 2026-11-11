@@ -21,7 +21,7 @@ import requests
 
 import monitor
 from monitor import KST, STATE_PATH, fmt_money, load_env
-from quotes import QUOTES_PATH
+from quotes import QUOTES_PATH, retag_quotes
 
 # 요약에 단지별로 나열할 최대 항목 수(초과분은 '외 N건'으로 축약)
 MAX_ITEMS_PER_SECTION = 8
@@ -83,15 +83,87 @@ def diff_quotes(before, after):
 
 # ----------------------------------------------------------------- 메시지 구성
 
-def _q_label(q):
-    floor = q.get("floor_self") or "?"
+def _unit_id(q):
+    """같은 세대 식별자. 동·층·향이 확인되면 unit_key(여러 중개사 중복 등록을 하나로), 아니면 매물번호."""
+    if q.get("unit_key_confident") and q.get("unit_key"):
+        return q["unit_key"]
+    return "article:" + str(q.get("article_no"))
+
+
+def _active_units(quotes):
+    """활성 매물을 세대 단위로 묶는다 → {unit_id: [매물, ...]}"""
+    units = {}
+    for q in quotes.values():
+        if q.get("status") == "active":
+            units.setdefault(_unit_id(q), []).append(q)
+    return units
+
+
+def diff_units(before, after):
+    """호가 변동을 '세대' 단위로 가린다 — 중개사 광고 갱신(재등록)·중복 등록은 변동이 아니다.
+
+    - 신규: 처음 보는 세대가 나옴 (재등록·같은 매물 재등장은 제외)
+    - 인하/인상: 실제 가격 수정(같은 매물의 가격 변경, 재등록하며 바꾼 가격)이 있고
+      그 결과 세대 최저 호가가 달라졌을 때만. 중개사 한 곳이 광고를 내렸거나, 다른 중개사가
+      여전히 더 싸게 내놓고 있는 상태에서 한 곳만 값을 올린 것은 알리지 않는다.
+    - 소멸: 그 세대 매물이 모두 내려감 (관심단지에서 빠져 정리된 건 제외)
+    반환 (new, down, up, gone) — new/gone: [(대표매물, 매물수)], down/up: [(대표매물, 이전가, 현재가, 매물수)]
+    """
+    bu, au = _active_units(before), _active_units(after)
+    new, down, up, gone = [], [], [], []
+    for uid, qs in au.items():
+        fresh, srcs, moved = uid not in bu, [], False
+        for q in qs:
+            src = before.get(q["article_no"])     # 이미 알던 매물(재등장 포함)
+            if src is None and q.get("relist_of"):
+                src = after.get(q["relist_of"]) or before.get(q["relist_of"])   # 재등록 원본
+            if src is None:
+                continue
+            fresh = False
+            srcs.append(src)
+            moved = moved or src["price"] != q["price"]
+        rep = min(qs, key=lambda q: q["price"])
+        if fresh:
+            new.append((rep, len(qs)))
+            continue
+        if not moved:
+            continue
+        old = min(q["price"] for q in bu[uid]) if uid in bu else min(x["price"] for x in srcs)
+        if rep["price"] < old:
+            down.append((rep, old, rep["price"], len(qs)))
+        elif rep["price"] > old:
+            up.append((rep, old, rep["price"], len(qs)))
+    for uid, qs in bu.items():
+        if uid not in au and any(q["article_no"] in after for q in qs):
+            gone.append((min(qs, key=lambda q: q["price"]), len(qs)))
+    return new, down, up, gone
+
+
+def _q_label(q, cx, n=1):
+    """'성복역 현대홈타운 32평(84㎡) 202동 12층 남동향 [전세] · 중개 3곳'"""
+    dong, facing = q.get("building_name"), q.get("direction")
+    where = ((f"{dong}동 " if dong and dong != "?" else "") + f"{q.get('floor_self') or '?'}층"
+             + (f" {facing}향" if facing else ""))     # 같은 층 다른 집(향)이 같은 집처럼 보이지 않게
     tt = "" if q.get("trade_code", "A1") == "A1" else f" [{q.get('trade_type', '전세')}]"
-    return f"{q.get('complex', q.get('apt_nm', '?'))} · {q.get('area', '?')}㎡ {floor}층{tt}"
+    many = f" · 중개 {n}곳" if n > 1 else ""
+    area = monitor.area_label(cx.get(q.get("complex")), q.get("area"))
+    return f"{q.get('complex', q.get('apt_nm', '?'))} {area} {where}{tt}{many}"
 
 
-def _d_label(d):
-    return (f"{d.get('complex', d.get('apt_nm', '?'))} 전용{d.get('area', '?')}㎡ "
-            f"{d.get('floor') or '?'}층")
+def _d_label(d, cx):
+    area = monitor.area_label(cx.get(d.get("complex")), d.get("area"))
+    return f"{d.get('complex', d.get('apt_nm', '?'))} {area} {d.get('floor') or '?'}층"
+
+
+def _vs_prev(d, deals):
+    """직전 같은 평형(면적대) 거래 대비 등락 — monitor.find_prev_deal과 같은 기준."""
+    prev = monitor.find_prev_deal(deals, d)
+    if not prev:
+        return ""
+    diff = d["amount"] - prev["amount"]
+    pct = diff / prev["amount"] * 100
+    arrow = "⏸ 보합" if diff == 0 else (f"🔺+{pct:.1f}%" if diff > 0 else f"🔻{pct:.1f}%")
+    return f" · 직전 {fmt_money(prev['amount'])}({prev['date'][5:]}) 대비 {arrow}"
 
 
 def _bullets(items, render):
@@ -102,78 +174,84 @@ def _bullets(items, render):
 
 
 def _load_alert_rules():
-    """config에서 목표가({(단지,면적):만원})와 관심 매물번호(set)를 읽는다. 실패 시 빈 값."""
+    """config에서 (단지명→설정, 목표가{(단지,면적):만원}, 관심 매물번호 set)를 읽는다. 실패 시 빈 값."""
     try:
         cfg = monitor.load_config()
     except SystemExit:
-        return {}, set()
-    targets, watch = {}, set()
+        return {}, {}, set()
+    cx, targets, watch = {}, {}, set()
     for c in cfg.get("complexes", []):
+        cx[c["name"]] = c
         for area, price in (c.get("targets") or {}).items():
             targets[(c["name"], int(area))] = int(price)
         watch.update(c.get("watch") or [])
-    return targets, watch
+    return cx, targets, watch
 
 
-def build_summary(now, deal_diff, quote_diff, failures):
+def build_summary(now, deal_diff, quote_diff, unit_diff, failures, deals=()):
     new_d, cancel_d = deal_diff
-    new_q, down_q, up_q, gone_q = quote_diff
+    new_q, down_q, up_q, gone_q = quote_diff      # 매물 단위 — 📌 관심 매물(매물번호 지정) 추적용
+    new_u, down_u, up_u, gone_u = unit_diff       # 세대 단위 — 일반 호가 알림
     out = [f"📊 **부동산 업데이트 — {now.strftime('%Y-%m-%d %H:%M')} KST**"]
 
     if failures:
         out.append("⚠ " + " / ".join(failures))
 
-    targets, watch = _load_alert_rules()
+    cx, targets, watch = _load_alert_rules()
+
+    def _target_of(q):
+        return targets.get((q.get("complex"), int(float(q.get("area") or 0))))
 
     def _hits_target(q):
-        t = targets.get((q.get("complex"), int(q.get("area") or 0)))
+        t = _target_of(q)
         return (t is not None and q.get("trade_code", "A1") == "A1"
                 and q.get("price") is not None and q["price"] <= t)
 
-    # 🎯 목표가 도달 — 신규 등록 또는 인하로 목표 이하가 된 매매 매물 (최우선 섹션)
-    hit = [q for q in new_q if _hits_target(q)] + \
-          [t[0] for t in down_q if _hits_target(t[0])]
+    # 🎯 목표가 도달 — 새로 나왔거나 인하로 목표 이하가 된 매매 세대 (최우선 섹션)
+    hit = [(q, n) for q, n in new_u if _hits_target(q)] + \
+          [(q, n) for q, _old, _cur, n in down_u if _hits_target(q)]
     if hit:
         out.append("\n🎯 **목표가 도달**")
-        out += _bullets(hit, lambda q: f"{_q_label(q)} — {fmt_money(q['price'])}원 "
-                        f"(목표 {fmt_money(targets[(q['complex'], int(q['area']))])})")
+        out += _bullets(hit, lambda t: f"{_q_label(t[0], cx, t[1])} — {fmt_money(t[0]['price'])}원 "
+                        f"(목표 {fmt_money(_target_of(t[0]))})")
 
-    # 📌 관심 매물(워치) 변동 — 축약 없이 전부 표기
+    # 📌 관심 매물(워치) 변동 — 지정한 매물번호 그대로 추적, 축약 없이 전부 표기
     if watch:
         wlines = []
         for q in new_q:
             if q.get("article_no") in watch:
-                wlines.append(f"• 📌 {_q_label(q)} — 신규 {fmt_money(q['price'])}원")
+                wlines.append(f"• 📌 {_q_label(q, cx)} — 신규 {fmt_money(q['price'])}원")
         for q, pp, cp in down_q + up_q:
             if q.get("article_no") in watch:
                 arrow = "🔻" if cp < pp else "🔺"
-                wlines.append(f"• 📌 {arrow} {_q_label(q)} — {fmt_money(pp)}→{fmt_money(cp)}원")
+                wlines.append(f"• 📌 {arrow} {_q_label(q, cx)} — {fmt_money(pp)}→{fmt_money(cp)}원")
         for q in gone_q:
             if q.get("article_no") in watch:
-                wlines.append(f"• 📌 ⬇️ {_q_label(q)} — {fmt_money(q['price'])}원 내려감")
+                wlines.append(f"• 📌 ⬇️ {_q_label(q, cx)} — {fmt_money(q['price'])}원 내려감")
         if wlines:
             out.append("\n📌 **관심 매물**")
             out += wlines
 
-    changed = any([new_d, cancel_d, new_q, down_q, up_q, gone_q])
+    changed = any([new_d, cancel_d, new_u, down_u, up_u, gone_u])
     if not changed:
         out.append("\n변동 없음 — 신규/해제/호가 변동이 없습니다.")
         return "\n".join(out)
 
-    # 실거래
+    # 실거래 — 평형 표기 + 직전 같은 평형 거래 대비 등락
     if new_d or cancel_d:
         out.append(f"\n🏠 **실거래** (신규 {len(new_d)} · 해제 {len(cancel_d)})")
-        out += _bullets(new_d, lambda d: f"🆕 {_d_label(d)} — {fmt_money(d['amount'])}원 ({d['date']})")
-        out += _bullets(cancel_d, lambda d: f"❌ {_d_label(d)} — {fmt_money(d['amount'])}원 해제")
+        out += _bullets(new_d, lambda d: f"🆕 {_d_label(d, cx)} — {fmt_money(d['amount'])}원 "
+                        f"({d['date']}){_vs_prev(d, deals)}")
+        out += _bullets(cancel_d, lambda d: f"❌ {_d_label(d, cx)} — {fmt_money(d['amount'])}원 해제")
 
-    # 호가
-    if new_q or down_q or up_q or gone_q:
-        out.append(f"\n🏷️ **호가** (신규 {len(new_q)} · 인하 {len(down_q)} · "
-                   f"인상 {len(up_q)} · 내려감 {len(gone_q)})")
-        out += _bullets(new_q, lambda q: f"🆕 {_q_label(q)} — {fmt_money(q['price'])}원")
-        out += _bullets(down_q, lambda t: f"🔻 {_q_label(t[0])} — {fmt_money(t[1])}→{fmt_money(t[2])}원")
-        out += _bullets(up_q, lambda t: f"🔺 {_q_label(t[0])} — {fmt_money(t[1])}→{fmt_money(t[2])}원")
-        out += _bullets(gone_q, lambda q: f"⬇️ {_q_label(q)} — {fmt_money(q['price'])}원 내려감")
+    # 호가 — 세대 기준 (재등록·중복 등록 제외)
+    if new_u or down_u or up_u or gone_u:
+        out.append(f"\n🏷️ **호가** — 세대 기준 (신규 {len(new_u)} · 인하 {len(down_u)} · "
+                   f"인상 {len(up_u)} · 소멸 {len(gone_u)})")
+        out += _bullets(new_u, lambda t: f"🆕 {_q_label(t[0], cx, t[1])} — {fmt_money(t[0]['price'])}원")
+        out += _bullets(down_u, lambda t: f"🔻 {_q_label(t[0], cx, t[3])} — {fmt_money(t[1])}→{fmt_money(t[2])}원")
+        out += _bullets(up_u, lambda t: f"🔺 {_q_label(t[0], cx, t[3])} — {fmt_money(t[1])}→{fmt_money(t[2])}원")
+        out += _bullets(gone_u, lambda t: f"⬇️ {_q_label(t[0], cx, t[1])} — {fmt_money(t[0]['price'])}원 내려감")
 
     return "\n".join(out)
 
@@ -234,10 +312,17 @@ def main():
         failures.append("호가 갱신 실패")
 
     after_deals, after_quotes = snapshot()
+    # 이번 회차에 단지명이 바뀌었어도 직전 스냅샷을 같은 기준(새 이름·unit_key)으로 맞춰 비교
+    try:
+        retag_quotes(before_quotes, monitor.load_config()["complexes"])
+    except SystemExit:
+        pass
     deal_diff = diff_deals(before_deals, after_deals)
     quote_diff = diff_quotes(before_quotes, after_quotes)
+    unit_diff = diff_units(before_quotes, after_quotes)
 
-    summary = build_summary(datetime.now(KST), deal_diff, quote_diff, failures)
+    summary = build_summary(datetime.now(KST), deal_diff, quote_diff, unit_diff, failures,
+                            list(after_deals.values()))
     print("\n" + "=" * 50 + "\n" + summary + "\n" + "=" * 50)
 
     if args.no_notify:

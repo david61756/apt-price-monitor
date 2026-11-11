@@ -145,4 +145,22 @@ q.reconcile(stP, {COMPLEXES[0]["name"]: pf([raw("G0", "13억", floor="0")], COMP
             {COMPLEXES[0]["name"]}, t0 + timedelta(days=1, hours=2))
 chk("같은 날 재실행 miss 그대로 1", stP["quotes"]["G5"]["miss_count"] == 1)
 
+# 10) 단지명 변경(리네임) 시 naver_id로 이력 보존
+OLD = [dict(COMPLEXES[0], naver_id="2493")]
+rec = q.parse_article(raw("R1", "13억"), OLD[0]["name"], OLD[0]["lawd_cd"], OLD[0]["naver_id"])
+chk("parse_article이 naver_id 기록", rec["naver_id"] == "2493")
+legacy = {"L1": dict(rec, article_no="L1", status="gone")}
+legacy["L1"].pop("naver_id")                                   # 이관 전 옛 레코드
+chk("이름 일치 시 naver_id만 채움(재태깅 0)",
+    q.retag_quotes(legacy, OLD) == 0 and legacy["L1"]["naver_id"] == "2493")
+NEW = [dict(OLD[0], name="이매촌삼성")]                         # 이름만 변경
+n = q.retag_quotes(legacy, NEW)
+chk("리네임 → 내려간 매물도 새 이름으로 재연결", n == 1 and legacy["L1"]["complex"] == "이매촌삼성")
+chk("리네임 → unit_key도 새 이름 기준", "|이매촌삼성|" in legacy["L1"]["unit_key"])
+chk("리네임 후 prune에서 살아남음", "L1" in q.prune_quotes(legacy, NEW))
+amb = {"M1": dict(rec, article_no="M1", complex="옛이름")}
+TWO = [dict(NEW[0], name="X"), dict(NEW[0], name="Y")]         # 같은 naver_id·면적 → 모호
+chk("naver_id가 모호하면 건드리지 않음",
+    q.retag_quotes(amb, TWO) == 0 and amb["M1"]["complex"] == "옛이름")
+
 print("\n✅ 모든 테스트 통과")

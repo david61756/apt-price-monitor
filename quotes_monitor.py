@@ -92,6 +92,10 @@ def main():
             sys.exit("Playwright가 없습니다. 'pip install playwright && python -m playwright "
                      "install chromium' 후 다시 시도하거나, --curl 방식을 쓰세요.")
         fetched, scanned = naver_playwright.fetch_all_playwright(cfg, headless=not args.headful)
+    # 단지명 변경 시 이력 보존: 수집 결과와 합치기 전에 naver_id로 새 이름에 재연결
+    retagged = Q.retag_quotes(qstate.setdefault("quotes", {}), cfg["complexes"])
+    if retagged:
+        print(f"재태깅: 단지명 변경분 매물 {retagged}건을 현재 이름으로 연결")
     quotes, events = Q.reconcile(qstate, fetched, scanned, now)
 
     # 차단 의심 → 저장 스킵, 경고만

@@ -21,11 +21,13 @@ venv 없음. 스크립트는 시스템 `python3`(= /opt/anaconda3/bin, 셸 스�
 - `matching.py`(단지 매칭 공유) / `lawd.py`(시군구명→법정동코드) / `sgg_codes.json`(전국 매핑)
 - `config.yaml` — 관심 단지(match/areas/naver_id) + `targets`(면적대별 목표가, 도달 시 🎯 알림·강조)
   · `watch`(관심 매물번호 목록, 📌 개별 추적). 매물번호는 대시보드 호가 목록의 펼침 행에 `#번호`로 표시된다.
+  · `pyeong`({전용면적: 평}, 공급면적 기준) — 알림·대시보드 표기를 `32평(84㎡)`로. 단지명엔 평형을 넣지 않는다.
   `state.json`(매매)·`quotes_state.json`(호가) 자동 생성·커밋
 - `run_quotes.sh`(수집→커밋→푸시) / `sync_quotes.sh`(원격 config 변경 시 호가 동기화) — launchd가 호출
 
 ## 테스트
-`python3 test_quotes.py` — quotes.py 순수 로직을 네트워크 없이 검증(가격 파싱·재등록·차단 가드 등).
+`python3 test_quotes.py` — quotes.py 순수 로직을 네트워크 없이 검증(가격 파싱·재등록·차단 가드·리네임 재연결 등).
+`python3 test_update.py` — Discord 요약 로직(세대 단위 diff·평형 라벨·직전 거래 대비) 검증.
 
 ## 스케줄러 / 주의·함정
 - LaunchAgent 2개: `com.aptmonitor.quotes`(run_quotes.sh, **매일 08:00/14:00/18:00 KST**) / `com.aptmonitor.sync`(sync_quotes.sh, **900초=15분 주기**로 원격 config 변경 감지 시에만 호가 동기화). 확인: `launchctl list | grep aptmonitor`.
@@ -40,3 +42,8 @@ venv 없음. 스크립트는 시스템 `python3`(= /opt/anaconda3/bin, 셸 스�
 - data.go.kr는 기본 curl/스크립트 User-Agent 차단 → 코드가 브라우저 UA로 호출.
 - git push 인증은 `.env`의 `GITHUB_TOKEN`을 extraheader로 주입(리모트 URL/.git/config에 토큰 안 남김). 키: `.env`(MOLIT_API_KEY, DISCORD_WEBHOOK_URL, GITHUB_TOKEN, NAVER_AUTH/COOKIE).
 - run_quotes ↔ sync_quotes 는 `logs/.run.lock` 으로 상호배제(동일 .naver_profile/Chromium·push 경쟁 방지).
+- Discord 호가 알림은 **세대(unit_key=동·층·향·면적) 단위**: 같은 집을 여러 중개사가 올린 중복(활성의 ~59%)과
+  광고 갱신 재등록(`relist_of`)은 신규/내려감으로 보지 않는다. 인하·인상은 실제 가격 수정으로 세대 최저가가 바뀔 때만.
+  📌 watch만 매물번호 단위. (2026-11-11 실측: 기존 방식 94건 → 세대 기준 4건)
+- 호가는 단지를 이름으로 구분하므로, 단지명 변경 시 `quotes.retag_quotes`가 레코드의 `naver_id`로 새 이름에
+  재연결한다(수집 전 실행). 이게 없으면 내려간 매물 이력이 prune에서 삭제된다(당시 3,146건 중 2,953건).

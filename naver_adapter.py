@@ -178,7 +178,7 @@ def fetch_all(cfg, session, log=print):
         raws, ok = fetch_articles(str(nid), trade_types, session, log=log)
         recs = []
         for raw in raws:
-            rec = parse_article(raw, c["name"], c["lawd_cd"])
+            rec = parse_article(raw, c["name"], c["lawd_cd"], c.get("naver_id"))
             # naver_id로 이미 단지를 특정했으므로 단지명 매칭은 불필요(네이버 등록명이 매매와 다름).
             # 전용면적(areas)만 필터해 원하는 평형만 남긴다.
             if rec and (not c["areas"] or int(rec["area"]) in c["areas"]):

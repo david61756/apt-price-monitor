@@ -61,7 +61,7 @@ def make_unit_key(rec):
     return key, confident
 
 
-def parse_article(raw, complex_name, lawd_cd):
+def parse_article(raw, complex_name, lawd_cd, naver_id=""):
     """네이버 article(raw dict) -> 내부 호가 레코드. 가격 파싱 실패 시 None."""
     price = parse_price(raw.get("dealOrWarrantPrc"))
     if price is None:
@@ -71,6 +71,7 @@ def parse_article(raw, complex_name, lawd_cd):
     rec = {
         "article_no": str(raw.get("articleNo") or "").strip(),
         "complex": complex_name,
+        "naver_id": str(naver_id or ""),    # 단지명이 바뀌어도 이력을 잇는 불변 키(retag_quotes)
         "apt_nm": (raw.get("articleName") or "").strip(),
         "lawd_cd": str(lawd_cd),
         "trade_type": raw.get("tradeTypeName") or "",
@@ -234,6 +235,37 @@ def quote_in_config(q, complexes):
             if not c["areas"] or int(float(q.get("area") or 0)) in c["areas"]:
                 return c["name"]
     return None
+
+
+def retag_quotes(quotes, complexes):
+    """config 단지명이 바뀌어도 호가 이력이 끊기지 않도록 naver_id로 새 이름에 재연결.
+
+    reconcile은 다시 수집된 매물만 새 이름으로 바꾸므로, 내려간 매물은 옛 이름으로 남아
+    prune에서 삭제되고 unit_key도 옛 이름 기준이라 재등록 판정이 어긋난다. 그래서 수집 전에 호출한다.
+    - naver_id가 없는 옛 레코드: 이름이 일치하는 단지의 naver_id를 채운다(1회성 이관).
+    - 이름이 config에 없지만 naver_id(+면적)가 한 단지와 일치: 그 이름으로 바꾸고 unit_key 재생성.
+    반환: 재연결한 매물 수.
+    """
+    by_name = {c["name"]: c for c in complexes}
+    n = 0
+    for q in quotes.values():
+        c = by_name.get(q.get("complex"))
+        if c is not None:
+            if not q.get("naver_id") and c.get("naver_id"):
+                q["naver_id"] = str(c["naver_id"])
+            continue
+        nid = str(q.get("naver_id") or "")
+        if not nid:
+            continue
+        area = int(float(q.get("area") or 0))
+        cands = [c for c in complexes if str(c.get("naver_id") or "") == nid
+                 and (not c["areas"] or area in c["areas"])]
+        if len(cands) != 1:                  # 같은 naver_id를 여러 단지가 쓰면 모호 → 건드리지 않음
+            continue
+        q["complex"] = cands[0]["name"]
+        q["unit_key"], q["unit_key_confident"] = make_unit_key(q)
+        n += 1
+    return n
 
 
 def prune_quotes(quotes, complexes):

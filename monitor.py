@@ -42,7 +42,10 @@ HTTP_HEADERS = {
 }
 KST = timezone(timedelta(hours=9))
 PAGE_SIZE = 1000
-MAX_RETRIES = 3
+# GitHub Actions(해외 러너)→data.go.kr 연결이 간헐적으로 시간초과(2026-10 실측 93회 중 10회).
+# 순간 장애를 넘기도록 재시도를 늘리고 대기 간격을 넓힌다: 5·10·20·40초(최대 대기 75초).
+MAX_RETRIES = 5
+RETRY_BASE_SEC = 5
 
 
 # ---------------------------------------------------------------- env/config
@@ -82,6 +85,8 @@ def load_config():
         # 목표가({전용면적:만원})·관심 매물번호 목록 — 없으면 빈 값으로 정규화
         c["targets"] = {int(k): int(v) for k, v in (c.get("targets") or {}).items()}
         c["watch"] = [str(w).strip() for w in (c.get("watch") or [])]
+        # 평형 표기({전용면적: 평}) — 알림·대시보드에서 '32평(84㎡)'처럼 보여줄 때 사용
+        c["pyeong"] = {int(k): int(v) for k, v in (c.get("pyeong") or {}).items()}
     cfg["options"] = cfg.get("options") or {}
     naver = cfg.get("naver") or {}
     naver.setdefault("trade_types", ["A1"])
@@ -140,7 +145,7 @@ def _request_with_retry(params):
         except (requests.RequestException, ET.ParseError, RuntimeError) as e:
             last_err = e
             if attempt < MAX_RETRIES:
-                wait = 2 ** attempt
+                wait = RETRY_BASE_SEC * 2 ** (attempt - 1)
                 print(f"  ! 호출 실패({e}), {wait}초 후 재시도 {attempt}/{MAX_RETRIES}")
                 time.sleep(wait)
     raise RuntimeError(f"API 호출 {MAX_RETRIES}회 실패: {last_err}")
@@ -219,6 +224,13 @@ def fmt_money(man):
     if eok:
         return f"{sign}{eok}억"
     return f"{sign}{rest:,}만"
+
+
+def area_label(complex_cfg, area):
+    """전용면적 → 표기. config pyeong 매핑이 있으면 '32평(84㎡)', 없으면 '84㎡'."""
+    band = int(float(area or 0))
+    py = ((complex_cfg or {}).get("pyeong") or {}).get(band)
+    return f"{py}평({band}㎡)" if py else f"{band}㎡"
 
 
 def build_message(complex_name, rec, prev):

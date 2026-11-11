@@ -170,7 +170,7 @@ _TEMPLATE = """<!DOCTYPE html>
       <span class="cnt" id="rowCnt"></span>
     </div>
     <table>
-      <thead><tr><th>계약일</th><th>단지</th><th>전용(㎡)</th><th>층</th>
+      <thead><tr><th>계약일</th><th>단지</th><th>평형·전용(㎡)</th><th>층</th>
                  <th>거래금액</th><th>직전대비</th><th>비고</th></tr></thead>
       <tbody id="rows"></tbody>
     </table>
@@ -192,7 +192,7 @@ _TEMPLATE = """<!DOCTYPE html>
     <div class="section" id="watchSec" style="display:none">
       <h2>📌 관심 매물 <span class="legend">(config의 watch 매물번호 — 가격변동·소멸 개별 알림)</span></h2>
       <table>
-        <thead><tr><th>상태</th><th>단지</th><th>전용(㎡)</th><th>동·층</th>
+        <thead><tr><th>상태</th><th>단지</th><th>평형·전용(㎡)</th><th>동·층</th>
                    <th>현재호가</th><th>변동이력</th><th>매물번호</th></tr></thead>
         <tbody id="watchRows"></tbody>
       </table>
@@ -219,7 +219,7 @@ _TEMPLATE = """<!DOCTYPE html>
         <span class="cnt" id="qRowCnt"></span>
       </div>
       <table>
-        <thead><tr><th>확인일</th><th>단지</th><th>전용(㎡)</th><th>동·층</th>
+        <thead><tr><th>확인일</th><th>단지</th><th>평형·전용(㎡)</th><th>동·층</th>
                    <th>호가</th><th>직전대비</th><th>비고</th></tr></thead>
         <tbody id="qRows"></tbody>
       </table>
@@ -240,7 +240,7 @@ _TEMPLATE = """<!DOCTYPE html>
     <h2>관심 단지 편집</h2>
     <div class="cfg-row cfg-head" style="border-bottom:1px solid var(--line)">
       <div>표시 이름</div><div>지역 (시군구명 또는 코드 5자리)</div>
-      <div>단지명 키워드 (쉼표 구분)</div><div>전용면적 ㎡ (쉼표)</div>
+      <div>단지명 키워드 (쉼표 구분)</div><div>전용면적 ㎡ (쉼표) · 평형 표기</div>
       <div>네이버 단지번호 (호가)</div><div></div>
     </div>
     <div id="cfgRows"></div>
@@ -298,12 +298,19 @@ const regionOf = c => REGION_MAP[c] || "기타 지역";
 // 거래유형 분리 — 전세(B1) 수집 도입 후 매매 최저호가·차트에 전세가 섞이지 않도록 전 구간에서 구분해 쓴다
 const SALE_Q = QUOTES.filter(q => (q.trade_code || "A1") === "A1");
 const JEONSE_Q = QUOTES.filter(q => q.trade_code === "B1");
-// 목표가("단지명|면적대"→만원)·관심 매물번호(📌) 룩업
-const TARGETS = {}, WATCH = new Set();
+// 목표가("단지명|면적대"→만원)·관심 매물번호(📌)·평형 표기("단지명|면적대"→평) 룩업
+const TARGETS = {}, WATCH = new Set(), PYEONG = {};
 (CONFIG.complexes || []).forEach(c => {
   Object.entries(c.targets || {}).forEach(([a, p]) => { TARGETS[c.name + "|" + a] = p; });
   (c.watch || []).forEach(w => WATCH.add(String(w)));
+  Object.entries(c.pyeong || {}).forEach(([a, p]) => { PYEONG[c.name + "|" + a] = p; });
 });
+// 평형 표기 — config pyeong이 있으면 '32평(84㎡)', 없으면 '84㎡' (같은 단지 평형 혼동 방지)
+const pyOf = (complex, area) => PYEONG[complex + "|" + Math.floor(area)];
+const areaLabel = (complex, area) => {
+  const a = Math.floor(area), p = pyOf(complex, a);
+  return p ? `${p}평(${a}㎡)` : `${a}㎡`;
+};
 
 // ============================== 공통 유틸 ==============================
 function fmtMoney(man) {
@@ -316,6 +323,8 @@ function fmtMoney(man) {
 const groupKey = d => d.apt_nm + " " + Math.floor(d.area) + "㎡";
 // 전용면적 표시: 소수 2자리까지, 불필요한 0 제거 (74.1285 → 74.13, 73 → 73)
 const fmtArea = a => (+a || 0).toFixed(2).replace(/\\.?0+$/, "");
+// 표 셀용: '32평 · 84.85' (매핑 없으면 '84.85')
+const areaCell = (complex, area) => { const p = pyOf(complex, area); return p ? `${p}평 · ${fmtArea(area)}` : fmtArea(area); };
 
 // HTML 이스케이프 — 외부 문자열(네이버 단지명·중개사명 등)을 innerHTML에 넣기 전 적용(XSS 방지)
 function esc(s) {
@@ -509,7 +518,7 @@ Object.entries(groups)
   cardsEl.insertAdjacentHTML("beforeend", `
     <div class="card" data-key="${esc(key)}" data-apt="${esc(last.apt_nm)}" data-complex="${esc(last.complex)}" data-region="${esc(__region)}">
       <h3>${esc(last.apt_nm)} ${recBadge}</h3>
-      <div class="band">전용 ${Math.floor(last.area)}㎡대 · ${esc(last.umd_nm)} · 기록 ${act.length}건</div>
+      <div class="band">${pyOf(last.complex, last.area) ? pyOf(last.complex, last.area) + "평 · " : ""}전용 ${Math.floor(last.area)}㎡대 · ${esc(last.umd_nm)} · 기록 ${act.length}건</div>
       <div class="price">${fmtMoney(last.amount)}원 <span class="meta">실거래</span></div>
       <div>${diffHtml}</div>
       ${pyeongHtml}
@@ -645,7 +654,7 @@ function rowHtml(d) {
   }
   return `
     <tr class="${d.cancelled ? "cancelled" : ""}">
-      <td>${d.date}</td><td>${esc(d.apt_nm)}</td><td>${fmtArea(d.area)}</td>
+      <td>${d.date}</td><td>${esc(d.apt_nm)}</td><td>${areaCell(d.complex, d.area)}</td>
       <td>${d.floor || "?"}</td><td><b>${fmtMoney(d.amount)}</b></td>
       <td>${diff}</td>
       <td>${d.cancelled ? '<span class="badge">해제</span>' : (d.dealing_gbn || "")}</td>
@@ -750,7 +759,7 @@ renderTable();
     if (dl) {
       const gap = minP - dl.amount, pct = (gap / dl.amount * 100).toFixed(1);
       const cls = gap > 0 ? "diff-up" : gap < 0 ? "diff-down" : "";
-      gapHtml = `<div class="meta">${Math.floor(cheap.area)}㎡ 최근 실거래 ${fmtMoney(dl.amount)} (${dl.date})` +
+      gapHtml = `<div class="meta">${areaLabel(cheap.complex, cheap.area)} 최근 실거래 ${fmtMoney(dl.amount)} (${dl.date})` +
         ` → 최저호가 <span class="${cls}">${gap >= 0 ? "+" : ""}${fmtMoney(gap)} (${pct > 0 ? "+" : ""}${pct}%)</span></div>`;
     } else {
       gapHtml = `<div class="meta">해당 면적대 실거래 기록 없음</div>`;
@@ -765,8 +774,8 @@ renderTable();
       if (!cand.length) return;
       const lo = Math.min(...cand);
       qTargetHtml += lo <= tgt
-        ? `<div class="meta" style="color:#15803d;font-weight:700">🎯 ${area}㎡ 목표가 도달! ${fmtMoney(lo)} ≤ ${fmtMoney(tgt)}</div>`
-        : `<div class="meta">🎯 ${area}㎡ 목표 ${fmtMoney(tgt)} — 최저호가와 <b>${fmtMoney(lo - tgt)}</b> 차이</div>`;
+        ? `<div class="meta" style="color:#15803d;font-weight:700">🎯 ${areaLabel(name, area)} 목표가 도달! ${fmtMoney(lo)} ≤ ${fmtMoney(tgt)}</div>`
+        : `<div class="meta">🎯 ${areaLabel(name, area)} 목표 ${fmtMoney(tgt)} — 최저호가와 <b>${fmtMoney(lo - tgt)}</b> 차이</div>`;
     });
 
     // 📦 수급(재고개월) — 매물 ÷ 최근 6개월 월평균 실거래. 협상력 판단 지표
@@ -792,18 +801,18 @@ renderTable();
       const sameAreaSale = act.filter(q => Math.floor(q.area) === ca).map(q => q.price);
       if (js.length && sameAreaSale.length) {
         const jlo = Math.min(...js.map(q => q.price)), slo = Math.min(...sameAreaSale);
-        jeonseHtml = `<div class="meta">🔑 ${ca}㎡ 전세 최저 ${fmtMoney(jlo)} · 전세가율 `
+        jeonseHtml = `<div class="meta">🔑 ${areaLabel(name, ca)} 전세 최저 ${fmtMoney(jlo)} · 전세가율 `
           + `<b>${(jlo / slo * 100).toFixed(0)}%</b> <span style="color:#9ca3af">(갭 ${fmtMoney(slo - jlo)})</span></div>`;
       }
     }
     // 면적대가 2개 이상이면 '최저호가'가 어느 평형인지 밝혀 오독을 막는다
     const areasIn = [...new Set(act.map(q => Math.floor(q.area)))].sort((a, b) => a - b);
     const minAreaLabel = areasIn.length > 1
-      ? ` <span style="color:#9ca3af;font-size:12px">(${Math.floor(cheap.area)}㎡ 기준)</span>` : "";
+      ? ` <span style="color:#9ca3af;font-size:12px">(${areaLabel(cheap.complex, cheap.area)} 기준)</span>` : "";
     const areaBreak = areasIn.length > 1
       ? `<div class="meta">면적대별 최저: ` + areasIn.map(a => {
           const lo = Math.min(...act.filter(q => Math.floor(q.area) === a).map(q => q.price));
-          return `${a}㎡ <b>${fmtMoney(lo)}</b>`;
+          return `${areaLabel(name, a)} <b>${fmtMoney(lo)}</b>`;
         }).join(" · ") + `</div>` : "";
 
     qCardsEl.insertAdjacentHTML("beforeend", `
@@ -977,7 +986,7 @@ renderTable();
         tbody.insertAdjacentHTML("beforeend", `
           <tr class="${rep.status === "gone" ? "cancelled" : ""}" ${n > 1 ? `style="cursor:pointer" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'"` : ""}>
             <td>${fmtYmd(rep.confirm_ymd)}</td><td>${esc(rep.complex)}</td>
-            <td>${fmtArea(rep.area)}</td><td>${dongFloor}</td>
+            <td>${areaCell(rep.complex, rep.area)}</td><td>${dongFloor}</td>
             <td><b>${fmtMoney(rep.price)}</b></td><td>${qChangeBadge(rep) || "—"}</td>
             <td>${note}</td>
           </tr>`);
@@ -1056,7 +1065,7 @@ renderTable();
         const dongFloor = `${q.building_name !== "?" ? esc(q.building_name) + "동 " : ""}${esc(q.floor_self) || "?"}층`;
         tb.insertAdjacentHTML("beforeend", `
           <tr class="${q.status === "gone" ? "cancelled" : ""}">
-            <td>${st}</td><td>${esc(q.complex)}</td><td>${fmtArea(q.area)}</td><td>${dongFloor}</td>
+            <td>${st}</td><td>${esc(q.complex)}</td><td>${areaCell(q.complex, q.area)}</td><td>${dongFloor}</td>
             <td><b>${fmtMoney(q.price)}</b></td><td>${trail}</td>
             <td><code style="font-size:11px">#${esc(q.article_no)}</code></td>
           </tr>`);
@@ -1091,7 +1100,7 @@ renderTable();
     }
     hb.insertAdjacentHTML("beforeend", `
       <tr><td>${e.date}</td><td>${esc(q.apt_nm)}</td><td>${dongFloor}</td>
-          <td>${q.area}</td><td>${change}</td><td>${note}</td></tr>`);
+          <td>${areaCell(q.complex, q.area)}</td><td>${change}</td><td>${note}</td></tr>`);
   });
   if (!hist.length) hb.insertAdjacentHTML("beforeend",
     `<tr><td colspan="6" class="legend">아직 변동·소멸 이력이 없습니다 (스냅샷이 2회 이상 쌓이면 표시).</td></tr>`);
@@ -1300,12 +1309,14 @@ function addCfgRow(c) {
   const region = c.region || c.lawd_cd || "";
   const div = document.createElement("div");
   div.className = "cfg-row";
+  div.dataset.extra = JSON.stringify({targets: c.targets || {}, watch: c.watch || []});  // 편집 UI에 없는 설정 보존
   div.innerHTML = `
     <div><input type="text" class="f-name" value="${(c.name||"").replace(/"/g,'&quot;')}" placeholder="예: 송도더샵 (전용 84)"></div>
     <div><input type="text" class="f-region" value="${String(region).replace(/"/g,'&quot;')}" placeholder="예: 인천 연수구">
          <div class="hint f-hint"></div></div>
     <div><input type="text" class="f-match" value="${(c.match||[]).join(", ").replace(/"/g,'&quot;')}" placeholder="예: 송도더샵 (비우면 표시이름으로 매칭)"></div>
-    <div><input type="text" class="f-areas" value="${(c.areas||[]).join(", ")}" placeholder="예: 84 (비우면 전체)"></div>
+    <div><input type="text" class="f-areas" value="${(c.areas||[]).join(", ")}" placeholder="예: 84 (비우면 전체)">
+         <input type="text" class="f-pyeong" value="${Object.entries(c.pyeong||{}).map(([a, p]) => a + "=" + p).join(", ")}" placeholder="평형 표기 예: 84=32, 59=24" style="margin-top:4px"></div>
     <div><div class="naver-cell">
            <input type="text" class="f-naver" value="${(c.naver_id||"").replace(/"/g,'&quot;')}" placeholder="예: 166117 (호가 수집용)">
            <button class="btn" type="button" onclick="lookupNaverId(this)" title="네이버에서 단지번호 찾기">🔍 찾기</button>
@@ -1403,6 +1414,17 @@ function gatherCfg() {
     if (/^\\d{5}$/.test(region)) entry.lawd_cd = region; else entry.region = region;
     const naverEl = row.querySelector(".f-naver");      // 호가 단지번호 보존(편집 UI엔 없지만 유지)
     if (naverEl && naverEl.value.trim()) entry.naver_id = naverEl.value.trim();
+    const pyeong = {};
+    row.querySelector(".f-pyeong").value.split(",").map(s => s.trim()).filter(Boolean).forEach(t => {
+      const [a, p] = t.split("=").map(s => Number(s.trim()));
+      if (!Number.isInteger(a) || !Number.isInteger(p) || a <= 0 || p <= 0)
+        errors.push(`${i + 1}번째 행(${name || "?"}): 평형 표기는 '84=32'처럼 입력하세요`);
+      else pyeong[a] = p;
+    });
+    if (Object.keys(pyeong).length) entry.pyeong = pyeong;
+    const extra = JSON.parse(row.dataset.extra || "{}");   // 목표가·관심매물 — 편집 UI엔 없지만 보존
+    if (Object.keys(extra.targets || {}).length) entry.targets = extra.targets;
+    if ((extra.watch || []).length) entry.watch = extra.watch;
     complexes.push(entry);
   });
   if (!complexes.length) errors.push("단지가 하나도 없습니다");
@@ -1423,6 +1445,10 @@ function buildYaml(complexes) {
     if (c.match.length) out += `    match: [${c.match.map(yamlStr).join(", ")}]\\n`;
     if (c.areas.length) out += `    areas: [${c.areas.join(", ")}]\\n`;
     if (c.naver_id) out += `    naver_id: ${yamlStr(c.naver_id)}\\n`;
+    const kv = o => Object.entries(o).map(([k, v]) => `${k}: ${v}`).join(", ");
+    if (c.pyeong) out += `    pyeong: {${kv(c.pyeong)}}\\n`;
+    if (c.targets) out += `    targets: {${kv(c.targets)}}\\n`;
+    if (c.watch) out += `    watch: [${c.watch.map(yamlStr).join(", ")}]\\n`;
   }
   out += `\\noptions:\\n  months_back: ${opt.months_back ?? 1}\\n`;
   out += `  notify_cancellations: ${opt.notify_cancellations ?? true}\\n`;
@@ -1514,6 +1540,7 @@ def render_dashboard(state, cfg, out_path, quotes_state=None):
              "areas": c.get("areas") or [],
              "targets": {str(k): v for k, v in (c.get("targets") or {}).items()},
              "watch": c.get("watch") or [],
+             "pyeong": {str(k): v for k, v in (c.get("pyeong") or {}).items()},
              **({"naver_id": c["naver_id"]} if c.get("naver_id") else {})}
             for c in complexes
         ],

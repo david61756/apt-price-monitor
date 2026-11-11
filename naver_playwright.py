@@ -99,7 +99,7 @@ def fetch_all_playwright(cfg, headless=True, log=print):
                     log("    ! 토큰/조회 실패 — 로그인이 필요하면: python naver_playwright.py login")
                 recs = []
                 for raw in raws:
-                    r = parse_article(raw, c["name"], c["lawd_cd"])
+                    r = parse_article(raw, c["name"], c["lawd_cd"], c.get("naver_id"))
                     if r and (not c["areas"] or int(r["area"]) in c["areas"]):
                         recs.append(r)
                 fetched[c["name"]] = recs
