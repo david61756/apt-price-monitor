@@ -10106,8 +10106,8 @@
    "date": "2026-11-11",
    "build_year": "2017",
    "dealing_gbn": "중개거래",
-   "cancelled": false,
-   "cancel_date": "",
+   "cancelled": true,
+   "cancel_date": "26.11.26",
    "lawd_cd": "41390",
    "complex": "시흥목감 리벤티움",
    "first_seen": "2026-11-17T04:24:34+09:00"
@@ -10161,5 +10161,5 @@
    "first_seen": "2026-11-25T05:01:43+09:00"
   }
  },
- "last_run": "2026-11-27T03:53:14+09:00"
+ "last_run": "2026-11-27T08:00:22+09:00"
 }
